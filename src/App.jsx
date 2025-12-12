@@ -23,6 +23,8 @@ const loadState = () => {
     longestStreak: 0,
     habitHistory: {}, // { habitId: ['2024-12-08', '2024-12-09', ...] }
     friends: [], // { id, name }
+    unlockedAchievements: [], // achievement IDs that user has earned
+    profileBadges: [null, null, null], // 3 slots for displaying badges on profile
   }
 }
 
@@ -170,6 +172,45 @@ function App() {
     }))
   }
 
+  const setProfileBadge = (slotIndex, achievementId) => {
+    setState(prev => {
+      const newBadges = [...(prev.profileBadges || [null, null, null])]
+      newBadges[slotIndex] = achievementId
+      return { ...prev, profileBadges: newBadges }
+    })
+  }
+
+  const unlockAchievement = (achievementId) => {
+    setState(prev => {
+      if (prev.unlockedAchievements?.includes(achievementId)) return prev
+      return {
+        ...prev,
+        unlockedAchievements: [...(prev.unlockedAchievements || []), achievementId],
+      }
+    })
+  }
+
+  // Check and unlock achievements based on total points
+  useEffect(() => {
+    // Calculate total points (10 points per completed habit, cumulative)
+    const totalCompletions = Object.values(state.habitHistory || {}).reduce(
+      (sum, dates) => sum + dates.length, 0
+    )
+    const totalPoints = totalCompletions * 10
+
+    // Points-based achievements
+    if (totalPoints >= 5) unlockAchievement('starter')
+    if (totalPoints >= 10) unlockAchievement('rising-star')
+    if (totalPoints >= 15) unlockAchievement('go-getter')
+    if (totalPoints >= 25) unlockAchievement('dedicated')
+    if (totalPoints >= 40) unlockAchievement('champion')
+    if (totalPoints >= 60) unlockAchievement('legend')
+    if (totalPoints >= 80) unlockAchievement('master')
+    if (totalPoints >= 100) unlockAchievement('elite')
+    if (totalPoints >= 150) unlockAchievement('mythic')
+    if (totalPoints >= 200) unlockAchievement('immortal')
+  }, [state.habitHistory])
+
   // Find ALL habits that need check-in (past end time, not completed, not paid)
   const getHabitsNeedingCheckIn = () => {
     const now = new Date()
@@ -293,6 +334,9 @@ function App() {
           friends={state.friends || []}
           onAddFriend={addFriend}
           onRemoveFriend={removeFriend}
+          unlockedAchievements={state.unlockedAchievements || []}
+          profileBadges={state.profileBadges || [null, null, null]}
+          onSetProfileBadge={setProfileBadge}
         />
       )}
       
@@ -312,7 +356,7 @@ function App() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </button>
-              {/* Heart */}
+              {/* Clipboard with Pencil (Habits) */}
               <button 
                 onClick={() => {
                   setScreen('home')
@@ -321,7 +365,8 @@ function App() {
                 className="p-2"
               >
                 <svg className={`w-6 h-6 ${screen === 'home' && habitsExpanded ? 'text-orange-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
                 </svg>
               </button>
               {/* Social/Friends */}
