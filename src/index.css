@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Hide scrollbars but keep scrolling */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html, body, #root {
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+  background: #fcfcfc;
+  overscroll-behavior: none;
+}
+
+/* Desktop preview mode */
+@media (min-width: 501px) {
+  html, body, #root {
+    height: auto;
+    overflow: visible;
+  }
+  body {
+    background: #1a1a1a;
+    padding: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.tap-bounce {
+  transition: transform 0.12s ease-out;
+}
+
+.tap-bounce:active {
+  transform: scale(0.92);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+/* Habits widget expand animation */
+.habits-widget {
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), 
+              height 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+              margin-bottom 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  z-index: 40;
+}
+
+/* Habits card expand animation */
+@keyframes expandCard {
+  from {
+    border-radius: 1rem;
+    margin: 0;
+    transform: scale(1);
+  }
+  to {
+    border-radius: 0;
+    margin: 0;
+    transform: scale(1);
+  }
+}
+
+.habits-card-base {
+  transition: all 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.habits-expanded {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 50;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding-top: max(1rem, env(safe-area-inset-top)) !important;
+}
+
+.habits-expanding {
+  animation: habitsExpand 0.35s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+.habits-collapsing {
+  animation: habitsCollapse 0.35s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes habitsExpand {
+  0% {
+    border-radius: 1rem;
+  }
+  100% {
+    border-radius: 0;
+  }
+}
+
+@keyframes habitsCollapse {
+  0% {
+    border-radius: 0;
+  }
+  100% {
+    border-radius: 1rem;
+  }
+}
+
+/* Fade out home content when habits expand */
+.home-fading-out {
+  animation: fadeOut 0.2s ease-out forwards;
+}
+
+.home-fading-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes toastSlide {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}

@@ -1,0 +1,9 @@
+{
+  "appId": "com.accountability.app",
+  "appName": "Accountability",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "iosScheme": "capacitor"
+  }
+}
