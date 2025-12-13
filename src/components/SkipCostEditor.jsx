@@ -51,8 +51,8 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         {/* Quick Select */}
         <div className="bg-white border border-gray-200 rounded-2xl p-5">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-100 to-pink-100 flex items-center justify-center">
-              <svg className="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+              <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
@@ -66,7 +66,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
                 onClick={() => setAmount(val.toString())}
                 className={`py-3 rounded-xl font-semibold transition-all active:scale-95 ${
                   parseFloat(amount) === val
-                    ? 'glossy-btn text-white'
+                    ? 'bg-orange-500 text-white'
                     : 'bg-white text-gray-700 border border-gray-200'
                 }`}
               >
@@ -79,8 +79,8 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         {/* Custom Amount */}
         <div className="bg-white border border-gray-200 rounded-2xl p-5">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-100 to-pink-100 flex items-center justify-center">
-              <svg className="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+              <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
             </div>
@@ -105,7 +105,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
               <button
                 type="button"
                 onClick={handleCustomSubmit}
-                className="px-4 py-3 glossy-btn text-white rounded-xl font-semibold active:scale-95 transition-transform"
+                className="px-4 py-3 bg-orange-500 text-white rounded-xl font-semibold active:scale-95 transition-transform"
               >
                 Set
               </button>
@@ -140,7 +140,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
       <button
         type="button"
         onClick={handleSave}
-        className="w-full glossy-btn text-white font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform mt-6"
+        className="w-full bg-orange-500 text-white font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform mt-6"
       >
         Save Changes
       </button>

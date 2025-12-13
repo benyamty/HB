@@ -65,8 +65,8 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
           {/* Habit Name */}
           <div className="bg-white border border-gray-200 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-100 to-pink-100 flex items-center justify-center">
-                <svg className="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
               </div>
@@ -77,15 +77,15 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g., Wake up, Exercise, Read..."
-              className="w-full bg-gray-50 text-gray-800 placeholder-gray-400 rounded-xl p-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all"
+              className="w-full bg-gray-50 text-gray-800 placeholder-gray-400 rounded-xl p-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
             />
           </div>
 
           {/* Time Frame */}
           <div className="bg-white border border-gray-200 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-100 to-pink-100 flex items-center justify-center">
-                <svg className="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -97,12 +97,12 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
               type="button"
               onClick={() => setAllDay(!allDay)}
               className={`w-full flex items-center justify-between p-3 rounded-xl mb-4 transition-all ${
-                allDay ? 'bg-pink-50 border border-pink-200' : 'bg-gray-50 border border-transparent'
+                allDay ? 'bg-orange-50 border border-orange-200' : 'bg-gray-50 border border-transparent'
               }`}
             >
               <div className="flex items-center gap-3">
                 <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                  allDay ? 'bg-pink-500' : 'bg-gray-300'
+                  allDay ? 'bg-orange-500' : 'bg-gray-300'
                 }`}>
                   {allDay && (
                     <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,7 +110,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
                     </svg>
                   )}
                 </div>
-                <span className={`font-medium text-sm ${allDay ? 'text-pink-700' : 'text-gray-600'}`}>All Day</span>
+                <span className={`font-medium text-sm ${allDay ? 'text-orange-700' : 'text-gray-600'}`}>All Day</span>
               </div>
               <span className="text-xs text-gray-400">No specific time</span>
             </button>
@@ -135,7 +135,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
                         const newEnd = `${endHours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`
                         setEndTime(newEnd)
                       }}
-                      className="w-full bg-gray-50 text-gray-800 rounded-xl p-3 text-lg font-bold text-center focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all"
+                      className="w-full bg-gray-50 text-gray-800 rounded-xl p-3 text-lg font-bold text-center focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
                     />
                   </div>
                   <div>
@@ -144,7 +144,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
                       type="time"
                       value={endTime}
                       onChange={(e) => setEndTime(e.target.value)}
-                      className="w-full bg-gray-50 text-gray-800 rounded-xl p-3 text-lg font-bold text-center focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all"
+                      className="w-full bg-gray-50 text-gray-800 rounded-xl p-3 text-lg font-bold text-center focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
                     />
                   </div>
                 </div>
@@ -155,8 +155,8 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
           {/* Stakes */}
           <div className="bg-white border border-gray-200 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-100 to-pink-100 flex items-center justify-center">
-                <svg className="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -179,7 +179,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
                       }}
                       className={`py-2.5 rounded-xl font-semibold text-sm transition-all active:scale-95 ${
                         skipCost === val && !isCustomValue
-                          ? 'glossy-btn text-white'
+                          ? 'bg-orange-500 text-white'
                           : 'bg-gray-50 text-gray-700 border border-gray-200'
                       }`}
                     >
@@ -198,7 +198,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
                       }}
                       className={`py-2.5 rounded-xl font-semibold text-sm transition-all active:scale-95 ${
                         skipCost === val && !isCustomValue
-                          ? 'glossy-btn text-white'
+                          ? 'bg-orange-500 text-white'
                           : 'bg-gray-50 text-gray-700 border border-gray-200'
                       }`}
                     >
@@ -215,7 +215,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
                     }}
                     className={`py-2.5 rounded-xl font-semibold text-sm transition-all active:scale-95 ${
                       isCustomValue
-                        ? 'glossy-btn text-white'
+                        ? 'bg-orange-500 text-white'
                         : 'bg-gray-50 text-gray-700 border border-gray-200'
                     }`}
                   >
@@ -254,7 +254,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
                       setShowCustomInput(false)
                     }
                   }}
-                  className="px-4 py-3 glossy-btn text-white font-semibold rounded-xl active:scale-95 transition-transform"
+                  className="px-4 py-3 bg-orange-500 text-white font-semibold rounded-xl active:scale-95 transition-transform"
                 >
                   Set
                 </button>
@@ -269,7 +269,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
             )}
             
             {skipCost === null && !showCustomInput && (
-              <p className="text-pink-500 text-xs mt-3 text-center font-medium">
+              <p className="text-orange-500 text-xs mt-3 text-center font-medium">
                 Please select your stakes to continue
               </p>
             )}
@@ -283,7 +283,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
           <button
             onClick={handleSubmit}
             disabled={!name.trim() || skipCost === null}
-            className="w-full glossy-btn text-white py-4 rounded-xl font-bold text-base active:scale-[0.98] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-orange-500 text-white py-4 rounded-xl font-bold text-base active:scale-[0.98] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {habit ? 'Save Changes' : 'Add Habit'}
           </button>

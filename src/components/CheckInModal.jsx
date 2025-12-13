@@ -108,8 +108,8 @@ function CheckInModal({ habitName, skipCost, onYes, onNo }) {
   // Question view
   return (
     <div className="fixed inset-0 bg-gray-900/95 flex flex-col items-center justify-center z-50 px-6">
-      <div className="w-16 h-16 rounded-full bg-pink-500/20 flex items-center justify-center mb-6">
-        <svg className="w-8 h-8 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="w-16 h-16 rounded-full bg-orange-500/20 flex items-center justify-center mb-6">
+        <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
@@ -117,7 +117,7 @@ function CheckInModal({ habitName, skipCost, onYes, onNo }) {
       <h1 className="text-2xl font-bold text-white mb-2 text-center">
         Did you complete this habit?
       </h1>
-      <p className="text-xl text-pink-300 font-medium mb-8">
+      <p className="text-xl text-orange-300 font-medium mb-8">
         "{habitName}"
       </p>
 

@@ -37,8 +37,8 @@ function HabitEducation({ habit, onDone }) {
       {/* Main Content */}
       <div className="flex-1 space-y-4">
         {/* YOUR CUE - The main focus */}
-        <div className="bg-gradient-to-br from-orange-50 to-pink-50 border-2 border-pink-200 rounded-2xl p-5">
-          <p className="text-pink-600 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-5">
+          <p className="text-orange-600 text-xs font-bold uppercase tracking-wider mb-2">
             Your Cue
           </p>
           <p className="text-gray-900 text-2xl font-bold mb-1">
@@ -97,7 +97,7 @@ function HabitEducation({ habit, onDone }) {
       {/* CTA Button */}
       <button
         onClick={onDone}
-        className="w-full glossy-btn text-white font-bold py-4 rounded-2xl active:scale-[0.98] transition-transform"
+        className="w-full bg-orange-500 text-white font-bold py-4 rounded-2xl active:scale-[0.98] transition-transform"
       >
         I'm Ready
       </button>
