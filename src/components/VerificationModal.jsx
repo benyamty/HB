@@ -91,17 +91,17 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
             {/* Number box with glow */}
             <div className="relative mb-6">
               {/* Glow effect */}
-              <div className="absolute inset-0 bg-orange-500/30 blur-3xl rounded-full scale-150" />
+              <div className="absolute inset-0 bg-pink-500/30 blur-3xl rounded-full scale-150" />
               
               {/* Number container */}
               <div className="relative w-40 h-40 rounded-3xl bg-gray-100 border border-gray-200 flex items-center justify-center">
-                <span className="text-8xl font-bold text-orange-400">{challengeNumber}</span>
+                <span className="text-8xl font-bold gradient-text">{challengeNumber}</span>
               </div>
             </div>
 
             {/* Sparkle icon */}
             <div className="mb-6">
-              <svg className="w-8 h-8 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3zm4.5 12l.75 2.25L20 18l-2.75.75L16.5 21l-.75-2.25L13 18l2.75-.75.75-2.25zM6 15l.75 2.25L9 18l-2.25.75L6 21l-.75-2.25L3 18l2.25-.75L6 15z" />
               </svg>
             </div>
@@ -109,7 +109,7 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
             {/* Take Photo button */}
             <button
               onClick={startCamera}
-              className="w-full max-w-xs py-4 rounded-2xl bg-orange-500 text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
+              className="w-full max-w-xs py-4 rounded-2xl glossy-btn text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -122,7 +122,7 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
 
         {cameraActive && (
           <div className="w-full max-w-md flex flex-col items-center">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Show the number: <span className="text-orange-500">{challengeNumber}</span></h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Show the number: <span className="gradient-text">{challengeNumber}</span></h2>
             <div className="relative rounded-3xl overflow-hidden bg-black aspect-[3/4] w-full mb-4">
               <video
                 ref={videoRef}
@@ -134,7 +134,7 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
             </div>
             <button
               onClick={takePhoto}
-              className="w-full py-4 rounded-2xl bg-orange-500 text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
+              className="w-full py-4 rounded-2xl glossy-btn text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -164,7 +164,7 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
               </button>
               <button
                 onClick={confirmVerification}
-                className="flex-1 py-4 rounded-2xl bg-orange-500 text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
+                className="flex-1 py-4 rounded-2xl glossy-btn text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
