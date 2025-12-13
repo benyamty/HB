@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import HomeScreen from './screens/HomeScreen'
 import EditHabitScreen from './screens/EditHabitScreen'
 import EditWalletScreen from './screens/EditWalletScreen'
@@ -326,19 +327,30 @@ function App() {
           onBack={() => setScreen('home')}
         />
       )}
-      {screen === 'social' && (
-        <SocialScreen
-          completedToday={state.completedToday}
-          habits={state.habits}
-          currentStreak={state.currentStreak || 0}
-          friends={state.friends || []}
-          onAddFriend={addFriend}
-          onRemoveFriend={removeFriend}
-          unlockedAchievements={state.unlockedAchievements || []}
-          profileBadges={state.profileBadges || [null, null, null]}
-          onSetProfileBadge={setProfileBadge}
-        />
-      )}
+      <AnimatePresence>
+        {screen === 'social' && (
+          <motion.div
+            key="social-screen"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+            className="fixed inset-0 z-40 bg-gray-50"
+          >
+            <SocialScreen
+              completedToday={state.completedToday}
+              habits={state.habits}
+              currentStreak={state.currentStreak || 0}
+              friends={state.friends || []}
+              onAddFriend={addFriend}
+              onRemoveFriend={removeFriend}
+              unlockedAchievements={state.unlockedAchievements || []}
+              profileBadges={state.profileBadges || [null, null, null]}
+              onSetProfileBadge={setProfileBadge}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       
         {/* Global Bottom Nav - Outside all screen transitions */}
         {showMainNav && (
