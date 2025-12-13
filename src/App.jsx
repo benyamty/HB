@@ -249,30 +249,41 @@ function App() {
 
   return (
     <div className="h-full w-full">
-        <div style={{ display: screen === 'home' ? 'contents' : 'none' }}>
-          <HomeScreen
-            wallet={state.wallet}
-            habits={state.habits}
-            completedToday={state.completedToday}
-            paidToday={state.paidToday || []}
-            currentStreak={state.currentStreak || 0}
-            longestStreak={state.longestStreak || 0}
-            habitHistory={state.habitHistory || {}}
-            habitsExpanded={habitsExpanded}
-                        onAddHabit={() => {
-              setPreviousHabitsExpanded(habitsExpanded)
-              setEditingHabit(null)
-              setScreen('habit-adder')
-            }}
-            onEditHabit={(habit) => {
-              setPreviousHabitsExpanded(habitsExpanded)
-              setEditingHabit(habit)
-              setScreen('habit-adder')
-            }}
-            onMarkDone={markHabitDone}
-            onToggleHabits={() => setHabitsExpanded(!habitsExpanded)}
-          />
-        </div>
+      <AnimatePresence>
+        {screen === 'home' && (
+          <motion.div
+            key="home-screen"
+            initial={{ y: 0 }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+            className="fixed inset-0 z-30 bg-gray-50"
+          >
+            <HomeScreen
+              wallet={state.wallet}
+              habits={state.habits}
+              completedToday={state.completedToday}
+              paidToday={state.paidToday || []}
+              currentStreak={state.currentStreak || 0}
+              longestStreak={state.longestStreak || 0}
+              habitHistory={state.habitHistory || {}}
+              habitsExpanded={habitsExpanded}
+              onAddHabit={() => {
+                setPreviousHabitsExpanded(habitsExpanded)
+                setEditingHabit(null)
+                setScreen('habit-adder')
+              }}
+              onEditHabit={(habit) => {
+                setPreviousHabitsExpanded(habitsExpanded)
+                setEditingHabit(habit)
+                setScreen('habit-adder')
+              }}
+              onMarkDone={markHabitDone}
+              onToggleHabits={() => setHabitsExpanded(!habitsExpanded)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       {screen === 'habit-adder' && (
         <EditHabitScreen
           habit={editingHabit}
