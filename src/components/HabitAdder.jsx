@@ -63,7 +63,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
       <div className="flex-1 overflow-y-auto min-h-0 pb-36">
         <form onSubmit={handleSubmit} className="space-y-3">
           {/* Habit Name */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4">
+          <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-8 h-8 rounded-lg accent-chip flex items-center justify-center">
                 <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +82,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
           </div>
 
           {/* Time Frame */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4">
+          <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg accent-chip flex items-center justify-center">
                 <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -153,7 +153,7 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
           </div>
 
           {/* Stakes */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4">
+          <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 rounded-lg accent-chip flex items-center justify-center">
                 <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

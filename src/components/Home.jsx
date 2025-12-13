@@ -298,7 +298,7 @@ function Home({
               const tasksDone = completedToday.length
               const points = tasksDone * 10
               return (
-                <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-6 mb-4">
+                <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-6 mb-4 accent-card-outline">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
@@ -343,7 +343,7 @@ function Home({
                   <div className="flex justify-around items-center py-2">
                     {/* Tasks Done */}
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mb-2">
+                      <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mb-2 accent-stat">
                         <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
@@ -354,7 +354,7 @@ function Home({
 
                     {/* Streak */}
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full accent-chip flex items-center justify-center mb-2">
+                      <div className="w-12 h-12 rounded-full accent-chip flex items-center justify-center mb-2 accent-stat">
                         <svg className="w-6 h-6 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
@@ -366,7 +366,7 @@ function Home({
 
                     {/* Points */}
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center mb-2">
+                      <div className="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center mb-2 accent-stat">
                         <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 15a4 4 0 004-4V4H8v7a4 4 0 004 4zm6-11h2a1 1 0 011 1v2a4 4 0 01-3 3.874V10a6 6 0 00-.17-1.418A3 3 0 0018 6V4zM6 4v2a3 3 0 00.17 2.582A6 6 0 006 10v.874A4 4 0 013 7V5a1 1 0 011-1h2zm3 17v-2h6v2a1 1 0 01-1 1h-4a1 1 0 01-1-1z" />
                         </svg>
@@ -380,7 +380,7 @@ function Home({
             })()}
 
             {/* Achievements Card - Collapsible */}
-            <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5">
+            <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 accent-card">
               {/* Header - Clickable to expand/collapse */}
               <button 
                 onClick={(e) => {
@@ -485,7 +485,7 @@ function Home({
       {/* Today's Habits Card */}
       <motion.div 
         layout
-        className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget shadow-sm"
+        className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget accent-card"
         onClick={() => { if (!habitsExpanded) onToggleHabits() }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >

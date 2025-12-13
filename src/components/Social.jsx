@@ -44,7 +44,7 @@ function Social({
       </div>
 
       {/* Leaderboard Card */}
-      <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 mb-4">
+      <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 mb-4 accent-card">
         {/* Header with toggle */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
@@ -105,7 +105,7 @@ function Social({
                     index === 1 ? 'bg-gray-200 text-gray-600' :
                     index === 2 ? 'bg-[color:var(--accent-orange)]/20 text-[color:var(--accent-solid)]' :
                     'bg-gray-100 text-gray-500'
-                  }`}>
+                  } accent-stat`}>
                     {index + 1}
                   </div>
                   
@@ -141,7 +141,7 @@ function Social({
                   index === 1 ? 'bg-gray-200 text-gray-600' :
                   index === 2 ? 'bg-[color:var(--accent-orange)]/20 text-[color:var(--accent-solid)]' :
                   'bg-gray-100 text-gray-500'
-                }`}>
+                } accent-stat`}>
                   {index + 1}
                 </div>
                 
@@ -169,7 +169,7 @@ function Social({
       </div>
 
       {/* Friends Card */}
-      <div className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0">
+      <div className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 accent-card">
         {/* Header */}
         <div className="flex items-center justify-between mb-3 flex-shrink-0 w-full">
           <div className="flex items-center gap-3">
@@ -242,7 +242,7 @@ function Social({
       {/* Add Friend Modal */}
       {showAddFriend && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-sm">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm accent-card-outline">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Add Friend</h3>
             <input
               type="text"

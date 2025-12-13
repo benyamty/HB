@@ -41,7 +41,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
       {/* Main Content */}
       <div className="flex-1 space-y-4">
         {/* Current Amount Display */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-6 text-center">
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 text-center accent-card">
           <p className="text-gray-500 text-sm mb-2">Cost per missed habit</p>
           <div className="flex items-center justify-center">
             <span className="text-4xl font-bold text-gray-900">${parseFloat(amount).toFixed(2)}</span>
@@ -49,7 +49,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         </div>
 
         {/* Quick Select */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-5">
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 accent-card">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-full accent-chip flex items-center justify-center">
               <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +77,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         </div>
 
         {/* Custom Amount */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-5">
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 accent-card">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-full accent-chip flex items-center justify-center">
               <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,7 +129,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         </div>
 
         {/* Tip */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-4">
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
           <p className="text-gray-500 text-sm text-center">
             💡 Higher stakes = stronger motivation. Start small and increase as you build consistency.
           </p>

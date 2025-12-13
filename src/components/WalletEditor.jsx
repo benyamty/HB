@@ -54,7 +54,7 @@ function WalletEditor({ wallet, onSave, onBack }) {
         </div>
 
         {/* Quick Add Buttons */}
-        <div className="bg-white rounded-3xl p-6 border border-gray-200">
+        <div className="bg-white rounded-3xl p-6 border border-gray-200 accent-card">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
               <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,7 +78,7 @@ function WalletEditor({ wallet, onSave, onBack }) {
         </div>
 
         {/* Info */}
-        <div className="bg-white rounded-3xl p-6 border border-gray-200">
+        <div className="bg-white rounded-3xl p-6 border border-gray-200 accent-card">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
               <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

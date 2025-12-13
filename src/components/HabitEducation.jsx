@@ -50,7 +50,7 @@ function HabitEducation({ habit, onDone }) {
         </div>
 
         {/* YOUR STAKES */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-5">
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 accent-card">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-3">
             Your Stakes
           </p>
