@@ -268,6 +268,9 @@ function App() {
               longestStreak={state.longestStreak || 0}
               habitHistory={state.habitHistory || {}}
               habitsExpanded={habitsExpanded}
+              unlockedAchievements={state.unlockedAchievements || []}
+              profileBadges={state.profileBadges || [null, null, null]}
+              onSetProfileBadge={setProfileBadge}
               onAddHabit={() => {
                 setPreviousHabitsExpanded(habitsExpanded)
                 setEditingHabit(null)
@@ -349,15 +352,9 @@ function App() {
             className="fixed inset-0 z-40 bg-gray-50"
           >
             <SocialScreen
-              completedToday={state.completedToday}
-              habits={state.habits}
-              currentStreak={state.currentStreak || 0}
               friends={state.friends || []}
               onAddFriend={addFriend}
               onRemoveFriend={removeFriend}
-              unlockedAchievements={state.unlockedAchievements || []}
-              profileBadges={state.profileBadges || [null, null, null]}
-              onSetProfileBadge={setProfileBadge}
             />
           </motion.div>
         )}
