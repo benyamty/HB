@@ -169,7 +169,7 @@ const ACHIEVEMENTS = [
   { id: 'legend', name: 'Legend', icon: '👑', color: 'bg-purple-100', borderColor: 'border-purple-400', pointsRequired: 60, description: 'Earn 60 points' },
   { id: 'master', name: 'Master', icon: '🔥', color: 'bg-amber-100', borderColor: 'border-amber-400', pointsRequired: 80, description: 'Earn 80 points' },
   { id: 'elite', name: 'Elite', icon: '💎', color: 'bg-cyan-100', borderColor: 'border-cyan-400', pointsRequired: 100, description: 'Earn 100 points' },
-  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'bg-pink-100', borderColor: 'border-pink-400', pointsRequired: 150, description: 'Earn 150 points' },
+  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'bg-purple-100', borderColor: 'border-purple-400', pointsRequired: 150, description: 'Earn 150 points' },
   { id: 'immortal', name: 'Immortal', icon: '🚀', color: 'bg-indigo-100', borderColor: 'border-indigo-400', pointsRequired: 200, description: 'Earn 200 points' },
 ]
 
@@ -291,7 +291,7 @@ function Home({
             exit={{ height: 0, opacity: 0, marginBottom: 0 }}
             animate={{ height: 'auto', opacity: 1, marginBottom: '1rem' }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="flex-shrink-0 flex flex-col overflow-hidden"
+            className="flex-shrink-0 flex flex-col overflow-visible"
           >
             {/* Your Profile Card */}
             {(() => {
@@ -380,7 +380,7 @@ function Home({
             })()}
 
             {/* Achievements Card - Collapsible */}
-            <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 accent-card">
+            <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 accent-card mb-4">
               {/* Header - Clickable to expand/collapse */}
               <button 
                 onClick={(e) => {
