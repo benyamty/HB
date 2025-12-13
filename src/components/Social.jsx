@@ -1,5 +1,19 @@
 import { useState } from 'react'
 
+// Mock world leaderboard data
+const WORLD_LEADERBOARD = [
+  { id: 'w1', name: 'Alex Champion', points: 2450, streak: 45 },
+  { id: 'w2', name: 'Sarah Star', points: 2280, streak: 38 },
+  { id: 'w3', name: 'Mike Legend', points: 2150, streak: 42 },
+  { id: 'w4', name: 'Emma Pro', points: 1980, streak: 35 },
+  { id: 'w5', name: 'Chris Elite', points: 1850, streak: 30 },
+  { id: 'w6', name: 'Lisa Master', points: 1720, streak: 28 },
+  { id: 'w7', name: 'David Hero', points: 1650, streak: 25 },
+  { id: 'w8', name: 'Anna Swift', points: 1580, streak: 22 },
+  { id: 'w9', name: 'Tom Ace', points: 1490, streak: 20 },
+  { id: 'w10', name: 'Kate Rise', points: 1420, streak: 18 },
+]
+
 function Social({ 
   friends,
   onAddFriend,
@@ -7,6 +21,7 @@ function Social({
 }) {
   const [showAddFriend, setShowAddFriend] = useState(false)
   const [friendName, setFriendName] = useState('')
+  const [leaderboardTab, setLeaderboardTab] = useState('friends') // 'friends' or 'world'
 
   const handleAddFriend = () => {
     if (friendName.trim()) {
@@ -26,6 +41,131 @@ function Social({
           </svg>
         </div>
         <span className="ml-3 text-lg font-semibold text-gray-900">Social</span>
+      </div>
+
+      {/* Leaderboard Card */}
+      <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 mb-4">
+        {/* Header with toggle */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-yellow-50 flex items-center justify-center">
+              <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+            </div>
+            <span className="text-gray-500 text-sm font-medium">Leaderboard</span>
+          </div>
+          
+          {/* Toggle Buttons */}
+          <div className="flex bg-gray-100 rounded-full p-1">
+            <button
+              onClick={() => setLeaderboardTab('friends')}
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+                leaderboardTab === 'friends'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500'
+              }`}
+            >
+              Friends
+            </button>
+            <button
+              onClick={() => setLeaderboardTab('world')}
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+                leaderboardTab === 'world'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500'
+              }`}
+            >
+              World
+            </button>
+          </div>
+        </div>
+        
+        {/* Leaderboard List */}
+        <div className="space-y-2 max-h-48 overflow-y-auto">
+          {leaderboardTab === 'friends' ? (
+            friends.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-6 text-center">
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <p className="text-gray-500 text-sm">Add friends to see rankings</p>
+              </div>
+            ) : (
+              friends.map((friend, index) => (
+                <div
+                  key={friend.id || index}
+                  className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"
+                >
+                  {/* Rank */}
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+                    index === 0 ? 'bg-yellow-100 text-yellow-700' :
+                    index === 1 ? 'bg-gray-200 text-gray-600' :
+                    index === 2 ? 'bg-orange-100 text-orange-700' :
+                    'bg-gray-100 text-gray-500'
+                  }`}>
+                    {index + 1}
+                  </div>
+                  
+                  {/* Avatar */}
+                  <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                    <span className="text-orange-600 font-semibold text-xs">
+                      {friend.name.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  
+                  {/* Name */}
+                  <span className="flex-1 font-medium text-gray-900 text-sm truncate">{friend.name}</span>
+                  
+                  {/* Points */}
+                  <div className="flex items-center gap-1 text-xs text-gray-500">
+                    <svg className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 15a4 4 0 004-4V4H8v7a4 4 0 004 4zm6-11h2a1 1 0 011 1v2a4 4 0 01-3 3.874V10a6 6 0 00-.17-1.418A3 3 0 0018 6V4zM6 4v2a3 3 0 00.17 2.582A6 6 0 006 10v.874A4 4 0 013 7V5a1 1 0 011-1h2zm3 17v-2h6v2a1 1 0 01-1 1h-4a1 1 0 01-1-1z" />
+                    </svg>
+                    <span>{friend.points || Math.floor(Math.random() * 500) + 100}</span>
+                  </div>
+                </div>
+              ))
+            )
+          ) : (
+            WORLD_LEADERBOARD.map((player, index) => (
+              <div
+                key={player.id}
+                className="flex items-center gap-3 p-3 rounded-xl bg-gray-50"
+              >
+                {/* Rank */}
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+                  index === 0 ? 'bg-yellow-100 text-yellow-700' :
+                  index === 1 ? 'bg-gray-200 text-gray-600' :
+                  index === 2 ? 'bg-orange-100 text-orange-700' :
+                  'bg-gray-100 text-gray-500'
+                }`}>
+                  {index + 1}
+                </div>
+                
+                {/* Avatar */}
+                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                  <span className="text-purple-600 font-semibold text-xs">
+                    {player.name.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+                
+                {/* Name */}
+                <span className="flex-1 font-medium text-gray-900 text-sm truncate">{player.name}</span>
+                
+                {/* Points */}
+                <div className="flex items-center gap-1 text-xs text-gray-500">
+                  <svg className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 15a4 4 0 004-4V4H8v7a4 4 0 004 4zm6-11h2a1 1 0 011 1v2a4 4 0 01-3 3.874V10a6 6 0 00-.17-1.418A3 3 0 0018 6V4zM6 4v2a3 3 0 00.17 2.582A6 6 0 006 10v.874A4 4 0 013 7V5a1 1 0 011-1h2zm3 17v-2h6v2a1 1 0 01-1 1h-4a1 1 0 01-1-1z" />
+                  </svg>
+                  <span>{player.points.toLocaleString()}</span>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
 
       {/* Friends Card */}
