@@ -165,37 +165,37 @@ body {
 }
 
  :root {
-   --accent-pink: #ff4d9d;
-   --accent-orange: #ff8a3d;
-   --accent-yellow: #ffd84a;
-   --accent-solid: #ff7a2f;
+   --accent-pink: #ff2f98;
+   --accent-orange: #ff6a1a;
+   --accent-yellow: #ffe11a;
+   --accent-solid: #ff6a1a;
  }
 
  .accent-gradient {
-   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 45%, var(--accent-yellow) 100%);
+   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
  }
 
  .accent-gradient-soft {
    background: linear-gradient(90deg,
-     color-mix(in srgb, var(--accent-pink) 16%, white) 0%,
-     color-mix(in srgb, var(--accent-orange) 16%, white) 45%,
-     color-mix(in srgb, var(--accent-yellow) 16%, white) 100%
+     color-mix(in srgb, var(--accent-pink) 10%, white) 0%,
+     color-mix(in srgb, var(--accent-orange) 10%, white) 42%,
+     color-mix(in srgb, var(--accent-yellow) 10%, white) 100%
    );
  }
 
  .accent-text {
-   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 45%, var(--accent-yellow) 100%);
+   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
    -webkit-background-clip: text;
    background-clip: text;
    color: transparent;
  }
 
  .accent-btn {
-   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 45%, var(--accent-yellow) 100%);
+   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
    box-shadow:
-     0 10px 20px rgba(255, 138, 61, 0.18),
-     0 2px 6px rgba(255, 77, 157, 0.10),
-     inset 0 1px 0 rgba(255, 255, 255, 0.28);
+     0 14px 26px rgba(255, 106, 26, 0.26),
+     0 5px 12px rgba(255, 47, 152, 0.18),
+     inset 0 1px 0 rgba(255, 255, 255, 0.36);
    position: relative;
    overflow: hidden;
  }
@@ -206,15 +206,17 @@ body {
    top: 0;
    left: 0;
    right: 0;
-   height: 55%;
-   background: linear-gradient(to bottom, rgba(255,255,255,0.22), transparent);
+   height: 60%;
+   background: linear-gradient(to bottom, rgba(255,255,255,0.30), rgba(255,255,255,0.08), transparent);
    pointer-events: none;
  }
 
  .accent-chip {
    background: linear-gradient(135deg,
-     color-mix(in srgb, var(--accent-pink) 18%, white) 0%,
-     color-mix(in srgb, var(--accent-orange) 18%, white) 55%,
-     color-mix(in srgb, var(--accent-yellow) 18%, white) 100%
+     color-mix(in srgb, var(--accent-pink) 8%, white) 0%,
+     color-mix(in srgb, var(--accent-orange) 8%, white) 55%,
+     color-mix(in srgb, var(--accent-yellow) 8%, white) 100%
    );
+   box-shadow:
+     inset 0 1px 0 rgba(255,255,255,0.55);
  }
