@@ -182,6 +182,7 @@ function Home({
   friends = [],
   sharedPages = [],
   onSendSharedPageInvite,
+  onRenameSharedPage,
   currentStreak,
   longestStreak,
   habitHistory,
@@ -207,6 +208,8 @@ function Home({
   const [selectedAchievement, setSelectedAchievement] = useState(null)
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [returnToBadgePicker, setReturnToBadgePicker] = useState(false)
+  const [renamingSharedPage, setRenamingSharedPage] = useState(null)
+  const [renameSharedPageTitle, setRenameSharedPageTitle] = useState('')
 
   const habitsPageMenuRef = useRef(null)
 
@@ -301,6 +304,14 @@ function Home({
       setInviteFriendId(null)
     }
   }, [showInviteModal])
+
+  useEffect(() => {
+    if (!renamingSharedPage) {
+      setRenameSharedPageTitle('')
+      return
+    }
+    setRenameSharedPageTitle(renamingSharedPage.title || '')
+  }, [renamingSharedPage])
 
   const formatTimeRange = (habit) => {
     if (habit.allDay) return 'All Day'
@@ -590,6 +601,19 @@ function Home({
                           >
                             <span className="text-left truncate">{p.title}</span>
                             <span className="flex items-center flex-shrink-0 ml-3">
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  setShowHabitsPageMenu(false)
+                                  setRenamingSharedPage(p)
+                                }}
+                                className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center mr-2 active:scale-95 transition-transform"
+                              >
+                                <svg className="w-3.5 h-3.5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                              </button>
                               <span className="w-6 h-6 rounded-full overflow-hidden bg-white border border-gray-200 flex items-center justify-center">
                                 {profileImage ? (
                                   <img src={profileImage} alt="You" className="w-full h-full object-cover" />
@@ -826,6 +850,55 @@ function Home({
                 }`}
               >
                 Invite
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {renamingSharedPage && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+          onClick={() => setRenamingSharedPage(null)}
+        >
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-bold text-gray-900">Edit page name</h3>
+            <p className="text-sm text-gray-500 mt-1">Rename your shared page</p>
+
+            <input
+              value={renameSharedPageTitle}
+              onChange={(e) => setRenameSharedPageTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  const next = renameSharedPageTitle.trim()
+                  if (next) onRenameSharedPage?.(renamingSharedPage.id, next)
+                  setRenamingSharedPage(null)
+                }
+                if (e.key === 'Escape') setRenamingSharedPage(null)
+              }}
+              className="mt-4 w-full h-12 rounded-2xl bg-gray-50 border border-gray-200 px-4 text-gray-900 font-semibold focus:outline-none"
+              placeholder="Shared page name"
+              autoFocus
+            />
+
+            <div className="mt-5 flex gap-3">
+              <button
+                type="button"
+                onClick={() => setRenamingSharedPage(null)}
+                className="flex-1 py-3 rounded-xl border border-gray-200 text-gray-600 font-medium"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const next = renameSharedPageTitle.trim()
+                  if (next) onRenameSharedPage?.(renamingSharedPage.id, next)
+                  setRenamingSharedPage(null)
+                }}
+                className="flex-1 py-3 rounded-xl bg-gray-900 text-white font-medium active:scale-95 transition-transform"
+              >
+                Save
               </button>
             </div>
           </div>

@@ -136,6 +136,15 @@ function App() {
     })
   }
 
+  const renameSharedPage = (pageId, title) => {
+    setState(prev => ({
+      ...prev,
+      sharedPages: (prev.sharedPages || []).map(p => (
+        p.id === pageId ? { ...p, title } : p
+      )),
+    }))
+  }
+
   const acceptSharedPageInvite = (inviteId) => {
     setState(prev => {
       const invite = (prev.sharedPageInvites || []).find(i => i.id === inviteId)
@@ -335,6 +344,7 @@ function App() {
               friends={state.friends || []}
               sharedPages={state.sharedPages || []}
               onSendSharedPageInvite={sendSharedPageInvite}
+              onRenameSharedPage={renameSharedPage}
               currentStreak={state.currentStreak || 0}
               longestStreak={state.longestStreak || 0}
               habitHistory={state.habitHistory || {}}
