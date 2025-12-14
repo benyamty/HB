@@ -563,308 +563,302 @@ function Home({
         {habitsExpanded && (
           <motion.div
             key="habits-expanded"
-            layout
-            initial={{ y: '100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '120%', opacity: 0 }}
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
             transition={{ type: 'tween', duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget accent-card"
-            onClick={() => { if (!habitsExpanded) onToggleHabits() }}
+            className="fixed inset-0 z-40 bg-gray-50 px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]"
           >
-          {/* Header */}
-          <div className="flex items-center justify-between mb-3 flex-shrink-0 w-full">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-                <svg className="w-5.5 h-5.5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" strokeWidth={1.3} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
-                </svg>
-              </div>
+            <div className="h-full bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 habits-widget accent-card">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-3 flex-shrink-0 w-full">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
+                    <svg className="w-5.5 h-5.5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" strokeWidth={1.3} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
+                    </svg>
+                  </div>
 
-              <div className="relative" ref={habitsPageMenuRef}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setShowHabitsPageMenu(!showHabitsPageMenu)
-                  }}
-                  className="flex items-center gap-1 text-gray-500 text-sm font-medium"
-                >
-                  {habitsPage === 'shared' && selectedSharedPage ? (
-                    isEditingSharedPageTitle ? (
-                      <span className="relative" onClick={(e) => e.stopPropagation()}>
-                        <span
-                          ref={sharedPageTitleMeasureRef}
-                          className="absolute -left-[9999px] -top-[9999px] text-sm font-medium whitespace-pre"
-                        />
-                        <input
-                          value={sharedPageTitleDraft}
-                          onChange={(e) => {
-                            const v = e.target.value
-                            setSharedPageTitleDraft(v)
-                            recalcSharedPageTitleWidth(v)
-                            requestAnimationFrame(() => {
-                              try { e.target.scrollLeft = 0 } catch (_) {}
-                            })
-                          }}
-                          onFocus={(e) => {
-                            try {
-                              e.target.scrollLeft = 0
-                              e.target.setSelectionRange(0, 0)
-                            } catch (_) {}
-                          }}
-                          onBlur={() => {
-                            commitSharedPageTitle()
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              commitSharedPageTitle()
-                            }
-                            if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
-                          }}
-                          className="text-sm font-medium text-gray-700 text-left bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
-                          style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 320) }}
-                          autoFocus
-                        />
-                      </span>
-                    ) : (
-                      <span className="truncate max-w-[14rem]">{selectedSharedPage.title}</span>
-                    )
-                  ) : (
-                    'Your Habits'
-                  )}
-                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-
-                {showHabitsPageMenu && (
-                  <div
-                    className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-2xl overflow-hidden z-50"
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <div className="relative" ref={habitsPageMenuRef}>
                     <button
                       type="button"
-                      onClick={() => {
-                        setHabitsPage('my')
-                        setInviteFriendId(null)
-                        setShowHabitsPageMenu(false)
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setShowHabitsPageMenu(!showHabitsPageMenu)
                       }}
-                      className={`w-full px-4 py-3 text-left text-sm font-medium ${
-                        habitsPage === 'my' ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
-                      }`}
+                      className="flex items-center gap-1 text-gray-500 text-sm font-medium"
                     >
-                      My Habits
+                      {habitsPage === 'shared' && selectedSharedPage ? (
+                        isEditingSharedPageTitle ? (
+                          <span className="relative" onClick={(e) => e.stopPropagation()}>
+                            <span
+                              ref={sharedPageTitleMeasureRef}
+                              className="absolute -left-[9999px] -top-[9999px] text-sm font-medium whitespace-pre"
+                            />
+                            <input
+                              value={sharedPageTitleDraft}
+                              onChange={(e) => {
+                                const v = e.target.value
+                                setSharedPageTitleDraft(v)
+                                recalcSharedPageTitleWidth(v)
+                                requestAnimationFrame(() => {
+                                  try { e.target.scrollLeft = 0 } catch (_) {}
+                                })
+                              }}
+                              onFocus={(e) => {
+                                try {
+                                  e.target.scrollLeft = 0
+                                  e.target.setSelectionRange(0, 0)
+                                } catch (_) {}
+                              }}
+                              onBlur={() => {
+                                commitSharedPageTitle()
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  commitSharedPageTitle()
+                                }
+                                if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
+                              }}
+                              className="text-sm font-medium text-gray-700 text-left bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
+                              style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 320) }}
+                              autoFocus
+                            />
+                          </span>
+                        ) : (
+                          <span className="truncate max-w-[14rem]">{selectedSharedPage.title}</span>
+                        )
+                      ) : (
+                        'Your Habits'
+                      )}
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
                     </button>
 
-                    {sharedPages.length > 0 && (
-                      <div className="py-1">
-                        {sharedPages.map((p) => (
-                          <button
-                            key={p.id}
-                            type="button"
-                            onClick={() => {
-                              setHabitsPage('shared')
-                              setInviteFriendId(p.friendId)
-                              setShowHabitsPageMenu(false)
-                            }}
-                            className={`w-full px-4 py-2.5 text-sm font-medium flex items-center justify-between ${
-                              habitsPage === 'shared' && inviteFriendId === p.friendId ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
-                            }`}
-                          >
-                            <span className="text-left truncate">{p.title}</span>
-                            <span className="flex items-center flex-shrink-0 ml-3">
-                              <span className="w-6 h-6 rounded-full overflow-hidden bg-white border border-gray-200 flex items-center justify-center">
-                                {profileImage ? (
-                                  <img src={profileImage} alt="You" className="w-full h-full object-cover" />
-                                ) : (
-                                  <div className="w-full h-full flex items-center justify-center accent-chip">
-                                    <svg className="w-3.5 h-3.5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                  </div>
-                                )}
-                              </span>
-                              <span className="w-6 h-6 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center -ml-2">
-                                <span className="text-[10px] font-semibold text-gray-600">
-                                  {(p.friendName || '?').charAt(0).toUpperCase()}
+                    {showHabitsPageMenu && (
+                      <div
+                        className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-2xl overflow-hidden z-50"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setHabitsPage('my')
+                            setInviteFriendId(null)
+                            setShowHabitsPageMenu(false)
+                          }}
+                          className={`w-full px-4 py-3 text-left text-sm font-medium ${
+                            habitsPage === 'my' ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
+                          }`}
+                        >
+                          My Habits
+                        </button>
+
+                        {sharedPages.length > 0 && (
+                          <div className="py-1">
+                            {sharedPages.map((p) => (
+                              <button
+                                key={p.id}
+                                type="button"
+                                onClick={() => {
+                                  setHabitsPage('shared')
+                                  setInviteFriendId(p.friendId)
+                                  setShowHabitsPageMenu(false)
+                                }}
+                                className={`w-full px-4 py-2.5 text-sm font-medium flex items-center justify-between ${
+                                  habitsPage === 'shared' && inviteFriendId === p.friendId ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
+                                }`}
+                              >
+                                <span className="text-left truncate">{p.title}</span>
+                                <span className="flex items-center flex-shrink-0 ml-3">
+                                  <span className="w-6 h-6 rounded-full overflow-hidden bg-white border border-gray-200 flex items-center justify-center">
+                                    {profileImage ? (
+                                      <img src={profileImage} alt="You" className="w-full h-full object-cover" />
+                                    ) : (
+                                      <div className="w-full h-full flex items-center justify-center accent-chip">
+                                        <svg className="w-3.5 h-3.5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                      </div>
+                                    )}
+                                  </span>
+                                  <span className="w-6 h-6 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center -ml-2">
+                                    <span className="text-[10px] font-semibold text-gray-600">
+                                      {(p.friendName || '?').charAt(0).toUpperCase()}
+                                    </span>
+                                  </span>
                                 </span>
-                              </span>
-                            </span>
-                          </button>
-                        ))}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowHabitsPageMenu(false)
+                            setShowInviteModal(true)
+                          }}
+                          className="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 flex items-center justify-between"
+                        >
+                          <span>Shared page</span>
+                          <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                          </span>
+                        </button>
                       </div>
                     )}
+                  </div>
+                </div>
 
+                <div className="flex items-center gap-2">
+                  {habitsPage === 'shared' && selectedSharedPage && (
                     <button
                       type="button"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation()
                         setShowHabitsPageMenu(false)
-                        setShowInviteModal(true)
+                        setIsEditingSharedPageTitle(true)
                       }}
-                      className="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 flex items-center justify-between"
+                      className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center active:scale-95 transition-transform"
                     >
-                      <span>Shared page</span>
-                      <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
-                        <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                      </span>
+                      <svg className="w-4 h-4 text-[color:var(--accent-orange)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
                     </button>
-                  </div>
+                  )}
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setShowHabitsPageMenu(false)
+                      onAddHabit(getNewHabitContext())
+                    }}
+                    className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
+                  >
+                    <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {habitsPage === 'my' && (
+                <div className="flex items-center gap-1.5 bg-gray-100 rounded-full p-1 mb-4 flex-shrink-0 w-full overflow-hidden" onClick={(e) => e.stopPropagation()}>
+                  {WEEKDAYS.map((d) => {
+                    const isActive = selectedHabitsDay === d
+                    const isToday = todayKey === d
+                    return (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => {
+                          setSelectedHabitsDay(d)
+                        }}
+                        className={`relative px-2.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                          isActive ? 'bg-white text-gray-900' : 'text-gray-500'
+                        }`}
+                      >
+                        {d}
+                        {isToday && (
+                          <span className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full ${
+                            isActive ? 'bg-[color:var(--accent-solid)]' : 'bg-gray-400'
+                          }`} />
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
+
+              {/* Habits List */}
+              <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
+                {habits.length === 0 ? (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onAddHabit(getNewHabitContext())
+                    }}
+                    className="flex-1 flex flex-col items-center justify-center w-full"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-white border border-gray-200 flex items-center justify-center mb-4">
+                      <svg className="w-10 h-10 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-500 mb-4 text-center">No habits yet</p>
+                    <div className="bg-white rounded-full px-8 py-3 border border-gray-200">
+                      <span className="accent-text font-medium">Add Your First Habits</span>
+                    </div>
+                  </button>
+                ) : (
+                  [...displayedHabits]
+                    .sort((a, b) => {
+                      const aDone = isHabitDone(a)
+                      const bDone = isHabitDone(b)
+                      if (aDone && !bDone) return 1
+                      if (!aDone && bDone) return -1
+                      const aTime = a.allDay ? 0 : a.startTime
+                      const bTime = b.allDay ? 0 : b.startTime
+                      return aTime - bTime
+                    })
+                    .map((habit) => {
+                      const isDone = isHabitDone(habit)
+                      const isPaid = paidToday?.includes(habit.id)
+                      const isResolved = isDone || isPaid
+
+                      return (
+                        <div
+                          key={habit.id}
+                          className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between ${
+                            isResolved ? 'bg-white/50' : 'bg-white'
+                          } border border-gray-200`}
+                        >
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              onEditHabit(habit)
+                            }}
+                            className="flex-1 min-w-0 text-left"
+                          >
+                            <span className={`font-semibold text-lg block truncate ${
+                              isResolved ? 'text-gray-300' : 'text-gray-900'
+                            }`}>
+                              {habit.name}
+                            </span>
+                            <span className={`text-sm ${
+                              isResolved ? 'text-gray-300' : 'text-gray-500'
+                            }`}>
+                              {formatTimeRange(habit)}
+                            </span>
+                          </button>
+
+                          {isResolved ? (
+                            <span className="text-gray-300 text-lg font-medium ml-4">{isPaid ? 'Paid' : 'Done'}</span>
+                          ) : (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                setVerifyingHabit(habit)
+                              }}
+                              className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm active:scale-95 transition-transform"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                              Done
+                            </button>
+                          )}
+                        </div>
+                      )
+                    })
                 )}
               </div>
             </div>
-
-            <div className="flex items-center gap-2">
-              {habitsPage === 'shared' && selectedSharedPage && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setShowHabitsPageMenu(false)
-                    setIsEditingSharedPageTitle(true)
-                  }}
-                  className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center active:scale-95 transition-transform"
-                >
-                  <svg className="w-4 h-4 text-[color:var(--accent-orange)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                </button>
-              )}
-
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setShowHabitsPageMenu(false)
-                  onAddHabit(getNewHabitContext())
-                }}
-                className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
-              >
-                <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          {habitsPage === 'my' && (
-            <div className="flex items-center gap-1.5 bg-gray-100 rounded-full p-1 mb-4 flex-shrink-0 w-full overflow-hidden" onClick={(e) => e.stopPropagation()}>
-              {WEEKDAYS.map((d) => {
-                const isActive = selectedHabitsDay === d
-                const isToday = todayKey === d
-                return (
-                  <button
-                    key={d}
-                    type="button"
-                    onClick={() => {
-                      setSelectedHabitsDay(d)
-                    }}
-                    className={`relative px-2.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
-                      isActive ? 'bg-white text-gray-900' : 'text-gray-500'
-                    }`}
-                  >
-                    {d}
-                    {isToday && (
-                      <span className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full ${
-                        isActive ? 'bg-[color:var(--accent-solid)]' : 'bg-gray-400'
-                      }`} />
-                    )}
-                  </button>
-                )
-              })}
-            </div>
-          )}
-
-          {/* Habits List */}
-          <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
-            {habits.length === 0 ? (
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onAddHabit(getNewHabitContext())
-                }}
-                className="flex-1 flex flex-col items-center justify-center w-full"
-              >
-                {/* Plus Icon Circle */}
-                <div className="w-20 h-20 rounded-full bg-white border border-gray-200 flex items-center justify-center mb-4">
-                  <svg className="w-10 h-10 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
-                </div>
-                <p className="text-gray-500 mb-4 text-center">No habits yet</p>
-                <div className="bg-white rounded-full px-8 py-3 border border-gray-200">
-                  <span className="accent-text font-medium">Add Your First Habits</span>
-                </div>
-              </button>
-            ) : (
-              // Sort habits: by time, then done habits go to bottom
-              [...displayedHabits]
-                .sort((a, b) => {
-                  const aDone = isHabitDone(a)
-                  const bDone = isHabitDone(b)
-                  // Done habits go to bottom
-                  if (aDone && !bDone) return 1
-                  if (!aDone && bDone) return -1
-                  // Sort by start time
-                  const aTime = a.allDay ? 0 : a.startTime
-                  const bTime = b.allDay ? 0 : b.startTime
-                  return aTime - bTime
-                })
-                .map((habit) => {
-                const isDone = isHabitDone(habit)
-                const isPaid = paidToday?.includes(habit.id)
-                const isResolved = isDone || isPaid
-                
-                return (
-                  <div
-                    key={habit.id}
-                    className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between ${
-                      isResolved ? 'bg-white/50' : 'bg-white'
-                    } border border-gray-200`}
-                  >
-                    {/* Habit Info - Clickable to edit */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        onEditHabit(habit)
-                      }}
-                      className="flex-1 min-w-0 text-left"
-                    >
-                      <span className={`font-semibold text-lg block truncate ${
-                        isResolved ? 'text-gray-300' : 'text-gray-900'
-                      }`}>
-                        {habit.name}
-                      </span>
-                      <span className={`text-sm ${
-                        isResolved ? 'text-gray-300' : 'text-gray-500'
-                      }`}>
-                        {formatTimeRange(habit)}
-                      </span>
-                    </button>
-                    
-                    {/* Done Button / Status */}
-                    {isResolved ? (
-                      <span className="text-gray-300 text-lg font-medium ml-4">{isPaid ? 'Paid' : 'Done'}</span>
-                    ) : (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setVerifyingHabit(habit)
-                        }}
-                        className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm active:scale-95 transition-transform"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Done
-                      </button>
-                    )}
-                  </div>
-                )
-              })
-            )}
-          </div>
           </motion.div>
         )}
       </AnimatePresence>
