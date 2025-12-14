@@ -204,6 +204,7 @@ function Home({
   const [selectedSlot, setSelectedSlot] = useState(null)
   const [achievementsExpanded, setAchievementsExpanded] = useState(false)
   const [selectedAchievement, setSelectedAchievement] = useState(null)
+  const [showProfileModal, setShowProfileModal] = useState(false)
 
   const habitsPageMenuRef = useRef(null)
 
@@ -312,6 +313,9 @@ function Home({
 
   const isHabitDone = (habit) => completedToday.includes(habit.id)
 
+  const tasksDone = completedToday.length
+  const points = tasksDone * 10
+
   // Badge picker handlers
   const handleBadgeSlotClick = (slotIndex) => {
     setSelectedSlot(slotIndex)
@@ -372,6 +376,102 @@ function Home({
 
   return (
     <div className={`h-full flex flex-col bg-[#fcfcfc] px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))] ${habitsExpanded ? 'overflow-hidden' : ''}`}>
+
+      {!habitsExpanded && (
+        <div className="flex items-center justify-start mb-3 flex-shrink-0">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              setShowProfileModal(true)
+            }}
+            className="w-10 h-10 rounded-full accent-chip flex items-center justify-center active:scale-95 transition-transform"
+          >
+            <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {showProfileModal && !habitsExpanded && (
+        <div
+          className="fixed inset-0 bg-black/40 z-50 flex items-start justify-center px-4 pt-[max(2.5rem,env(safe-area-inset-top))]"
+          onClick={() => setShowProfileModal(false)}
+        >
+          <div
+            className="w-full max-w-sm bg-white border border-gray-200 rounded-3xl p-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-9 h-9 rounded-xl accent-chip flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 text-sm font-semibold">Your Profile</span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowProfileModal(false)}
+                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center active:scale-95 transition-transform"
+              >
+                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {profileBadges.map((badgeId, index) => {
+                  const badge = badgeId ? getAchievement(badgeId) : null
+                  return (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleBadgeSlotClick(index)
+                        setShowProfileModal(false)
+                      }}
+                      className={`w-9 h-9 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
+                        badge
+                          ? `${badge.color} ${badge.borderColor} border-solid`
+                          : 'border-gray-300 bg-gray-50 hover:border-[color:var(--accent-solid)] hover:bg-white'
+                      }`}
+                    >
+                      {badge ? (
+                        <span className="text-base">{badge.icon}</span>
+                      ) : (
+                        <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="flex flex-col items-center">
+                  <span className="text-lg font-bold text-gray-900 leading-none">{tasksDone}</span>
+                  <span className="text-[10px] text-gray-500">Done</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-lg font-bold text-gray-900 leading-none">{currentStreak}</span>
+                  <span className="text-[10px] text-gray-500">Streak</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-lg font-bold text-gray-900 leading-none">{points}</span>
+                  <span className="text-[10px] text-gray-500">Points</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* Collapsible Top Section */}
       <AnimatePresence>
@@ -385,8 +485,6 @@ function Home({
           >
             {/* Your Profile Card */}
             {(() => {
-              const tasksDone = completedToday.length
-              const points = tasksDone * 10
               return (
                 <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-6 mb-4 accent-card-outline">
                   <div className="flex items-center justify-between mb-4">
