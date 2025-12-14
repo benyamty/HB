@@ -163,8 +163,8 @@ function getBestHabitStreak(habits, habitHistory) {
 const ACHIEVEMENTS = [
   { id: 'starter', name: 'Starter', icon: '🌱', color: 'circle-green', borderColor: 'border-green-400', pointsRequired: 5, description: 'Earn 5 points' },
   { id: 'rising-star', name: 'Rising Star', icon: '⭐', color: 'circle-yellow', borderColor: 'border-yellow-400', pointsRequired: 10, description: 'Earn 10 points' },
-  { id: 'go-getter', name: 'Go Getter', icon: '💪', color: 'circle-gray', borderColor: 'border-gray-400', pointsRequired: 15, description: 'Earn 15 points' },
-  { id: 'dedicated', name: 'Dedicated', icon: '🎯', color: 'circle-gray', borderColor: 'border-blue-400', pointsRequired: 25, description: 'Earn 25 points' },
+  { id: 'go-getter', name: 'Go Getter', icon: '💪', color: 'circle-pink', borderColor: 'border-pink-400', pointsRequired: 15, description: 'Earn 15 points' },
+  { id: 'dedicated', name: 'Dedicated', icon: '🎯', color: 'circle-blue', borderColor: 'border-blue-400', pointsRequired: 25, description: 'Earn 25 points' },
   { id: 'champion', name: 'Champion', icon: '🏆', color: 'circle-gray', borderColor: 'border-[color:var(--accent-solid)]', pointsRequired: 40, description: 'Earn 40 points' },
   { id: 'legend', name: 'Legend', icon: '👑', color: 'circle-gray', borderColor: 'border-purple-400', pointsRequired: 60, description: 'Earn 60 points' },
   { id: 'master', name: 'Master', icon: '🔥', color: 'circle-gray', borderColor: 'border-amber-400', pointsRequired: 80, description: 'Earn 80 points' },
@@ -428,10 +428,10 @@ function Home({
                           className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-95 ${
                             isUnlocked
                               ? `${achievement.color} shadow-sm`
-                              : 'circle-gray opacity-60'
+                              : 'circle-gray'
                           }`}
                         >
-                          <span className={`text-lg ${isUnlocked ? '' : 'grayscale'}`}>
+                          <span className={`text-lg ${isUnlocked ? '' : 'grayscale opacity-50'}`}>
                             {achievement.icon}
                           </span>
                         </div>
@@ -462,10 +462,10 @@ function Home({
                           className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
                             isUnlocked
                               ? `${achievement.color} shadow-md`
-                              : 'circle-gray opacity-60'
+                              : 'circle-gray'
                           }`}
                         >
-                          <span className={`text-2xl ${isUnlocked ? '' : 'grayscale'}`}>
+                          <span className={`text-2xl ${isUnlocked ? '' : 'grayscale opacity-50'}`}>
                             {achievement.icon}
                           </span>
                         </div>
