@@ -213,6 +213,21 @@ function Home({
   const WEEKDAYS = useMemo(() => (['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']), [])
   const todayKey = WEEKDAYS[new Date().getDay()]
 
+  const getNewHabitContext = () => {
+    // Collapsed home view: treat "Add" as creating a habit for today on My Habits
+    if (!habitsExpanded) {
+      return { daysOfWeek: [todayKey] }
+    }
+
+    // Expanded tasks view: scope to whichever page/day the user is currently viewing
+    if (habitsPage === 'shared') {
+      if (!inviteFriendId) return { isShared: true }
+      return { isShared: true, sharedWith: [inviteFriendId] }
+    }
+
+    return { daysOfWeek: [selectedHabitsDay] }
+  }
+
   const todaysHabits = useMemo(() => {
     return habits.filter(h => {
       const d = h.daysOfWeek
@@ -664,7 +679,7 @@ function Home({
             onClick={(e) => {
               e.stopPropagation()
               setShowHabitsPageMenu(false)
-              onAddHabit()
+              onAddHabit(getNewHabitContext())
             }}
             className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
           >
@@ -715,7 +730,7 @@ function Home({
             <button 
               onClick={(e) => {
                 e.stopPropagation()
-                onAddHabit()
+                onAddHabit(getNewHabitContext())
               }}
               className="flex-1 flex flex-col items-center justify-center w-full"
             >

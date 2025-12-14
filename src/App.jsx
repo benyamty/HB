@@ -35,6 +35,7 @@ function App() {
   const [state, setState] = useState(loadState)
   const [screen, setScreen] = useState('home') // 'home' | 'habit-adder' | 'wallet-editor' | 'skip-cost-editor' | 'social'
   const [editingHabit, setEditingHabit] = useState(null)
+  const [newHabitContext, setNewHabitContext] = useState(null)
   const [previousScreen, setPreviousScreen] = useState('home')
   const [habitsExpanded, setHabitsExpanded] = useState(false)
   const [previousHabitsExpanded, setPreviousHabitsExpanded] = useState(false)
@@ -323,14 +324,16 @@ function App() {
               unlockedAchievements={state.unlockedAchievements || []}
               profileBadges={state.profileBadges || [null, null, null]}
               onSetProfileBadge={setProfileBadge}
-              onAddHabit={() => {
+              onAddHabit={(context = null) => {
                 setPreviousHabitsExpanded(habitsExpanded)
                 setEditingHabit(null)
+                setNewHabitContext(context)
                 setScreen('habit-adder')
               }}
               onEditHabit={(habit) => {
                 setPreviousHabitsExpanded(habitsExpanded)
                 setEditingHabit(habit)
+                setNewHabitContext(null)
                 setScreen('habit-adder')
               }}
               onMarkDone={markHabitDone}
@@ -346,28 +349,32 @@ function App() {
             if (editingHabit) {
               updateHabit(habit)
               setEditingHabit(null)
+              setNewHabitContext(null)
               setScreen(previousScreen)
               setPreviousScreen('home')
             } else {
               // New habit - add it and show education screen
-              const newHabit = { ...habit, id: Date.now() }
+              const newHabit = { ...habit, ...(newHabitContext || {}), id: Date.now() }
               setState(prev => ({
                 ...prev,
                 habits: [...prev.habits, newHabit],
               }))
               setNewlyAddedHabit(newHabit)
               setEditingHabit(null)
+              setNewHabitContext(null)
               setScreen('habit-education')
             }
           }}
           onDelete={editingHabit ? () => {
             deleteHabit(editingHabit.id)
             setEditingHabit(null)
+            setNewHabitContext(null)
             setScreen(previousScreen)
             setPreviousScreen('home')
           } : null}
           onBack={() => {
             setEditingHabit(null)
+            setNewHabitContext(null)
             setScreen(previousScreen)
             setPreviousScreen('home')
             setHabitsExpanded(previousHabitsExpanded)
