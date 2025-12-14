@@ -165,7 +165,7 @@ body {
 }
 
 :root {
-  --accent-purple: #7c3aed;
+  --accent-purple: #5b21b6;
   --accent-orange: #ff4d00;
   --accent-yellow: #ffe600;
   --accent-solid: #ff4d00;
@@ -194,7 +194,7 @@ body {
   background: linear-gradient(90deg, var(--accent-purple) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
   box-shadow:
     0 18px 34px rgba(255, 77, 0, 0.34),
-    0 10px 20px rgba(124, 58, 237, 0.26),
+    0 10px 20px rgba(91, 33, 182, 0.26),
     0 2px 0 rgba(255, 230, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.46);
   position: relative;
