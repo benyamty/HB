@@ -559,15 +559,15 @@ function Home({
         </div>
       )}
       
-      <AnimatePresence>
+      <AnimatePresence initial={false} mode="wait">
         {habitsExpanded && (
           <motion.div
             key="habits-expanded"
             layout
             initial={{ y: '100%', opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '100%', opacity: 0 }}
-            transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+            exit={{ y: '120%', opacity: 0 }}
+            transition={{ type: 'tween', duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget accent-card"
             onClick={() => { if (!habitsExpanded) onToggleHabits() }}
           >
