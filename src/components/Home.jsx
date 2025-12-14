@@ -205,6 +205,7 @@ function Home({
   const [achievementsExpanded, setAchievementsExpanded] = useState(false)
   const [selectedAchievement, setSelectedAchievement] = useState(null)
   const [showProfileModal, setShowProfileModal] = useState(false)
+  const [returnToBadgePicker, setReturnToBadgePicker] = useState(false)
 
   const habitsPageMenuRef = useRef(null)
 
@@ -434,7 +435,6 @@ function Home({
                       onClick={(e) => {
                         e.stopPropagation()
                         handleBadgeSlotClick(index)
-                        setShowProfileModal(false)
                       }}
                       className={`w-10 h-10 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
                         badge
@@ -861,7 +861,13 @@ function Home({
             
             {/* Close button */}
             <button
-              onClick={() => setSelectedAchievement(null)}
+              onClick={() => {
+                setSelectedAchievement(null)
+                if (returnToBadgePicker) {
+                  setShowBadgePicker(true)
+                  setReturnToBadgePicker(false)
+                }
+              }}
               className="w-full py-3 rounded-xl bg-gray-900 text-white font-medium active:scale-95 transition-transform"
             >
               Close
@@ -878,7 +884,7 @@ function Home({
             <p className="text-sm text-gray-500 mb-4">Select an achievement to display on your profile</p>
             
             {/* Scrollable badge list */}
-            <div className="flex-1 overflow-y-auto mb-4">
+            <div className="flex-1 overflow-y-auto mb-4 pt-2 px-1">
               <div className="grid grid-cols-3 gap-3">
                 {ACHIEVEMENTS.map((achievement) => {
                   const isUnlocked = unlockedAchievements.includes(achievement.id)
@@ -889,8 +895,8 @@ function Home({
                       <button
                         key={achievement.id}
                         onClick={() => {
+                          setReturnToBadgePicker(true)
                           setShowBadgePicker(false)
-                          setSelectedSlot(null)
                           setSelectedAchievement(achievement)
                         }}
                         className="flex flex-col items-center p-3 rounded-2xl transition-all hover:bg-gray-50 active:scale-95"
