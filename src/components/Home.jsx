@@ -491,203 +491,6 @@ function Home({
         </div>
       )}
       
-      {/* Collapsible Top Section */}
-      <AnimatePresence>
-        {!habitsExpanded && (
-          <motion.div
-            initial={isFirstMount.current ? { height: 'auto', opacity: 1, marginBottom: '1rem' } : { height: 0, opacity: 0, marginBottom: 0 }}
-            exit={{ height: 0, opacity: 0, marginBottom: 0 }}
-            animate={{ height: 'auto', opacity: 1, marginBottom: '1rem' }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="flex-shrink-0 flex flex-col overflow-visible"
-          >
-            {/* Your Profile Card */}
-            {(() => {
-              return (
-                <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-6 mb-4 accent-card-outline">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-                        <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      </div>
-                      <span className="text-gray-500 text-sm font-medium">Your Profile</span>
-                    </div>
-                    
-                    {/* 3 Profile Badge Slots */}
-                    <div className="flex items-center gap-2">
-                      {profileBadges.map((badgeId, index) => {
-                        const badge = badgeId ? getAchievement(badgeId) : null
-                        return (
-                          <button
-                            key={index}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              handleBadgeSlotClick(index)
-                            }}
-                            className={`w-11 h-11 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
-                              badge 
-                                ? `${badge.color} ${badge.borderColor} border-solid` 
-                                : 'border-gray-300 bg-gray-50 hover:border-[color:var(--accent-solid)] hover:bg-white'
-                            }`}
-                          >
-                            {badge ? (
-                              <span className="text-lg">{badge.icon}</span>
-                            ) : (
-                              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                              </svg>
-                            )}
-                          </button>
-                        )
-                      })}
-                    </div>
-                  </div>
-                  
-                  {/* Stats Row */}
-                  <div className="flex justify-around items-center py-2">
-                    {/* Tasks Done */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mb-2 accent-stat">
-                        <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="text-2xl font-bold text-gray-900">{tasksDone}</span>
-                      <span className="text-xs text-gray-500">Tasks Done</span>
-                    </div>
-
-                    {/* Streak */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full accent-chip flex items-center justify-center mb-2 accent-stat">
-                        <svg className="w-6 h-6 text-[color:var(--accent-orange)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-                        </svg>
-                      </div>
-                      <span className="text-2xl font-bold text-gray-900">{currentStreak}</span>
-                      <span className="text-xs text-gray-500">Streak</span>
-                    </div>
-
-                    {/* Points */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center mb-2 accent-stat">
-                        <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 15a4 4 0 004-4V4H8v7a4 4 0 004 4zm6-11h2a1 1 0 011 1v2a4 4 0 01-3 3.874V10a6 6 0 00-.17-1.418A3 3 0 0018 6V4zM6 4v2a3 3 0 00.17 2.582A6 6 0 006 10v.874A4 4 0 013 7V5a1 1 0 011-1h2zm3 17v-2h6v2a1 1 0 01-1 1h-4a1 1 0 01-1-1z" />
-                        </svg>
-                      </div>
-                      <span className="text-2xl font-bold text-gray-900">{points}</span>
-                      <span className="text-xs text-gray-500">Points</span>
-                    </div>
-                  </div>
-                </div>
-              )
-            })()}
-
-            {/* Achievements Card - Collapsible */}
-            <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 accent-card mb-4">
-              {/* Header - Clickable to expand/collapse */}
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setAchievementsExpanded(!achievementsExpanded)
-                }}
-                className="flex items-center gap-3 w-full"
-              >
-                <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-                  <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                  </svg>
-                </div>
-                <span className="text-gray-500 text-sm font-medium">Achievements</span>
-                <span className="ml-auto text-xs text-gray-400 mr-2">{unlockedAchievements.length}/{ACHIEVEMENTS.length}</span>
-                <svg 
-                  className={`w-4 h-4 text-gray-400 transition-transform ${achievementsExpanded ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              {/* Collapsed view - show first 5 badges in a row */}
-              {!achievementsExpanded && (
-                <div className="flex gap-2 mt-4 justify-center">
-                  {ACHIEVEMENTS.slice(0, 5).map((achievement) => {
-                    const isUnlocked = unlockedAchievements.includes(achievement.id)
-                    return (
-                      <button
-                        key={achievement.id}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setSelectedAchievement(achievement)
-                        }}
-                        className="flex-shrink-0"
-                      >
-                        <div
-                          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-95 ${
-                            isUnlocked
-                              ? `${achievement.color} ${achievement.borderColor} border-solid shadow-sm`
-                              : 'bg-gray-100 border-gray-200 border-dashed opacity-40'
-                          }`}
-                          style={{ borderWidth: '2px' }}
-                        >
-                          <span className={`text-lg ${isUnlocked ? '' : 'grayscale'}`}>
-                            {achievement.icon}
-                          </span>
-                        </div>
-                      </button>
-                    )
-                  })}
-                  <div className="w-10 h-10 rounded-full bg-gray-50 border-2 border-dashed border-gray-200 flex items-center justify-center">
-                    <span className="text-xs text-gray-400 font-medium">+{ACHIEVEMENTS.length - 5}</span>
-                  </div>
-                </div>
-              )}
-              
-              {/* Expanded view - show all badges in grid */}
-              {achievementsExpanded && (
-                <div className="flex flex-wrap gap-3 justify-center mt-4">
-                  {ACHIEVEMENTS.map((achievement) => {
-                    const isUnlocked = unlockedAchievements.includes(achievement.id)
-                    return (
-                      <button
-                        key={achievement.id}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setSelectedAchievement(achievement)
-                        }}
-                        className="flex flex-col items-center active:scale-95 transition-transform"
-                      >
-                        <div
-                          className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
-                            isUnlocked
-                              ? `${achievement.color} ${achievement.borderColor} border-solid shadow-md`
-                              : 'bg-gray-100 border-gray-200 border-dashed opacity-40'
-                          }`}
-                          style={{ borderWidth: '3px' }}
-                        >
-                          <span className={`text-2xl ${isUnlocked ? '' : 'grayscale'}`}>
-                            {achievement.icon}
-                          </span>
-                        </div>
-                        <span className={`text-[10px] mt-1 text-center max-w-[60px] leading-tight ${
-                          isUnlocked ? 'text-gray-700 font-medium' : 'text-gray-400'
-                        }`}>
-                          {achievement.name}
-                        </span>
-                      </button>
-                    )
-                  })}
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Today's Habits Card */}
       <motion.div 
         layout
@@ -1077,8 +880,34 @@ function Home({
             {/* Scrollable badge list */}
             <div className="flex-1 overflow-y-auto mb-4">
               <div className="grid grid-cols-3 gap-3">
-                {ACHIEVEMENTS.filter(a => unlockedAchievements.includes(a.id)).map((achievement) => {
+                {ACHIEVEMENTS.map((achievement) => {
+                  const isUnlocked = unlockedAchievements.includes(achievement.id)
                   const isSelected = profileBadges.includes(achievement.id)
+
+                  if (!isUnlocked) {
+                    return (
+                      <button
+                        key={achievement.id}
+                        onClick={() => {
+                          setShowBadgePicker(false)
+                          setSelectedSlot(null)
+                          setSelectedAchievement(achievement)
+                        }}
+                        className="flex flex-col items-center p-3 rounded-2xl transition-all hover:bg-gray-50 active:scale-95"
+                      >
+                        <div
+                          className="w-14 h-14 rounded-full bg-gray-100 border-gray-200 border-dashed flex items-center justify-center opacity-50"
+                          style={{ borderWidth: '3px' }}
+                        >
+                          <span className="text-2xl grayscale">{achievement.icon}</span>
+                        </div>
+                        <span className="text-[10px] mt-2 text-center text-gray-400 font-medium leading-tight">
+                          {achievement.name}
+                        </span>
+                      </button>
+                    )
+                  }
+
                   return (
                     <button
                       key={achievement.id}
@@ -1107,18 +936,6 @@ function Home({
                   )
                 })}
               </div>
-              
-              {unlockedAchievements.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-8 text-center">
-                  <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-3">
-                    <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                  </div>
-                  <p className="text-gray-500 text-sm">No achievements unlocked yet</p>
-                  <p className="text-gray-400 text-xs mt-1">Complete habits to earn badges!</p>
-                </div>
-              )}
             </div>
             
             {/* Action buttons */}
