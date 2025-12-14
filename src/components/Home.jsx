@@ -590,42 +590,44 @@ function Home({
                   }}
                   className="flex items-center gap-1 text-gray-500 text-sm font-medium"
                 >
-                  {habitsPage === 'shared' && selectedSharedPage ? selectedSharedPage.title : 'Your Habits'}
+                  {habitsPage === 'shared' && selectedSharedPage ? (
+                    isEditingSharedPageTitle ? (
+                      <span className="relative" onClick={(e) => e.stopPropagation()}>
+                        <span
+                          ref={sharedPageTitleMeasureRef}
+                          className="absolute -left-[9999px] -top-[9999px] text-sm font-medium whitespace-pre"
+                        />
+                        <input
+                          value={sharedPageTitleDraft}
+                          onChange={(e) => {
+                            const v = e.target.value
+                            setSharedPageTitleDraft(v)
+                            recalcSharedPageTitleWidth(v)
+                          }}
+                          onBlur={() => {
+                            commitSharedPageTitle()
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              commitSharedPageTitle()
+                            }
+                            if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
+                          }}
+                          className="text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
+                          style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 224) }}
+                          autoFocus
+                        />
+                      </span>
+                    ) : (
+                      <span className="truncate max-w-[14rem]">{selectedSharedPage.title}</span>
+                    )
+                  ) : (
+                    'Your Habits'
+                  )}
                   <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-
-                {habitsPage === 'shared' && selectedSharedPage && isEditingSharedPageTitle && (
-                  <div className="mt-1">
-                    <div className="relative">
-                      <span
-                        ref={sharedPageTitleMeasureRef}
-                        className="absolute -left-[9999px] -top-[9999px] text-sm font-semibold whitespace-pre"
-                      />
-                      <input
-                        value={sharedPageTitleDraft}
-                        onChange={(e) => {
-                          const v = e.target.value
-                          setSharedPageTitleDraft(v)
-                          recalcSharedPageTitleWidth(v)
-                        }}
-                        onBlur={() => {
-                          commitSharedPageTitle()
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            commitSharedPageTitle()
-                          }
-                          if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
-                        }}
-                        className="text-sm font-semibold text-gray-800 bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
-                        style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 224) }}
-                        autoFocus
-                      />
-                    </div>
-                  </div>
-                )}
 
                 {showHabitsPageMenu && (
                   <div
