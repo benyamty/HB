@@ -312,6 +312,16 @@ function Home({
   }, [habitsPage, inviteFriendId, sharedPages])
 
   useEffect(() => {
+    setIsEditingSharedPageTitle(false)
+  }, [habitsPage, inviteFriendId])
+
+  const commitSharedPageTitle = () => {
+    const next = sharedPageTitleDraft.trim()
+    if (next && selectedSharedPage) onRenameSharedPage?.(selectedSharedPage.id, next)
+    setIsEditingSharedPageTitle(false)
+  }
+
+  useEffect(() => {
     if (!isEditingSharedPageTitle) return
     setSharedPageTitleDraft(selectedSharedPage?.title || '')
   }, [isEditingSharedPageTitle, selectedSharedPage])
@@ -421,7 +431,7 @@ function Home({
             }}
             className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center active:scale-95 transition-transform"
           >
-            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-[color:var(--accent-orange)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -579,11 +589,12 @@ function Home({
                       <input
                         value={sharedPageTitleDraft}
                         onChange={(e) => setSharedPageTitleDraft(e.target.value)}
+                        onBlur={() => {
+                          commitSharedPageTitle()
+                        }}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
-                            const next = sharedPageTitleDraft.trim()
-                            if (next) onRenameSharedPage?.(selectedSharedPage.id, next)
-                            setIsEditingSharedPageTitle(false)
+                            commitSharedPageTitle()
                           }
                           if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
                         }}
@@ -687,7 +698,7 @@ function Home({
                   }}
                   className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center active:scale-95 transition-transform"
                 >
-                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-[color:var(--accent-orange)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </button>
