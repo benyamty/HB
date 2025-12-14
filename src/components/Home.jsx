@@ -201,6 +201,7 @@ function Home({
   const [verifyingHabit, setVerifyingHabit] = useState(null)
   const [swipedHabitId, setSwipedHabitId] = useState(null)
   const swipeStartXRef = useRef(0)
+  const swipeStartYRef = useRef(0)
   const swipeStartOffsetRef = useRef(0)
   const [swipeOffsetById, setSwipeOffsetById] = useState({})
   const [selectedHabitsDay, setSelectedHabitsDay] = useState(() => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()])
@@ -864,13 +865,27 @@ function Home({
                               style={{ transform: `translateX(${swipeOffsetById[habit.id] || 0}px)` }}
                               onTouchStart={(e) => {
                                 swipeStartXRef.current = e.touches[0].clientX
+                                swipeStartYRef.current = e.touches[0].clientY
                                 swipeStartOffsetRef.current = swipeOffsetById[habit.id] || 0
                                 setSwipedHabitId(habit.id)
                               }}
                               onTouchMove={(e) => {
                                 if (swipedHabitId !== habit.id) return
                                 const dx = e.touches[0].clientX - swipeStartXRef.current
+                                const dy = e.touches[0].clientY - swipeStartYRef.current
+
+                                // If the user is clearly swiping horizontally, don't let vertical scroll steal the gesture.
+                                if (Math.abs(dx) > Math.abs(dy)) {
+                                  try { e.preventDefault() } catch (_) {}
+                                }
+
                                 let next = swipeStartOffsetRef.current + dx
+
+                                // Support "swipe right" (dx > 0) from a closed state by treating it as an open gesture.
+                                if (swipeStartOffsetRef.current === 0 && dx > 0) {
+                                  next = -dx
+                                }
+
                                 if (next > 0) next = 0
                                 if (next < -110) next = -110
                                 setSwipeOffsetById(prev => ({ ...prev, [habit.id]: next }))
