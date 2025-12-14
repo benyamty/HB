@@ -103,7 +103,7 @@ function Social({
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
                     index === 0 ? 'bg-yellow-100 text-yellow-700' :
                     index === 1 ? 'bg-gray-200 text-gray-600' :
-                    index === 2 ? 'bg-[color:var(--accent-orange)]/20 text-[color:var(--accent-solid)]' :
+                    index === 2 ? 'bg-[color:var(--accent-solid)]/15 text-[color:var(--accent-solid)]' :
                     'bg-gray-100 text-gray-500'
                   } accent-stat`}>
                     {index + 1}
@@ -139,7 +139,7 @@ function Social({
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
                   index === 0 ? 'bg-yellow-100 text-yellow-700' :
                   index === 1 ? 'bg-gray-200 text-gray-600' :
-                  index === 2 ? 'bg-[color:var(--accent-orange)]/20 text-[color:var(--accent-solid)]' :
+                  index === 2 ? 'bg-[color:var(--accent-solid)]/15 text-[color:var(--accent-solid)]' :
                   'bg-gray-100 text-gray-500'
                 } accent-stat`}>
                   {index + 1}
