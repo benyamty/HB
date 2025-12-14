@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen'
 import EditHabitScreen from './screens/EditHabitScreen'
 import EditWalletScreen from './screens/EditWalletScreen'
 import SocialScreen from './screens/SocialScreen'
+import ProfileScreen from './screens/ProfileScreen'
 // EditSkipCostScreen removed - skip cost is now per-habit
 import HabitEducation from './components/HabitEducation'
 import CheckInModal from './components/CheckInModal'
@@ -26,6 +27,8 @@ const loadState = () => {
     friends: [], // { id, name }
     sharedPageInvites: [], // { id, friendId, friendName, createdAt }
     sharedPages: [], // { id, friendId, friendName, title, createdAt }
+    userId: 'Ben10',
+    profileImage: null,
     unlockedAchievements: [], // achievement IDs that user has earned
     profileBadges: [null, null, null], // 3 slots for displaying badges on profile
   }
@@ -241,6 +244,20 @@ function App() {
     })
   }
 
+  const updateUserId = (nextId) => {
+    setState(prev => ({
+      ...prev,
+      userId: nextId,
+    }))
+  }
+
+  const updateProfileImage = (dataUrl) => {
+    setState(prev => ({
+      ...prev,
+      profileImage: dataUrl,
+    }))
+  }
+
   // Check and unlock achievements based on total points
   useEffect(() => {
     // Calculate total points (10 points per completed habit, cumulative)
@@ -295,7 +312,7 @@ function App() {
   }, [screen, newlyAddedHabit])
 
   // Check if we should show the main nav bar (not on editor screens)
-  const showMainNav = screen === 'home' || screen === 'social'
+  const showMainNav = screen === 'home' || screen === 'social' || screen === 'profile'
 
   return (
     <div className="h-full w-full">
@@ -421,11 +438,36 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <AnimatePresence>
+        {screen === 'profile' && (
+          <motion.div
+            key="profile-screen"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+            className="fixed inset-0 z-40 bg-gray-50"
+          >
+            <ProfileScreen
+              userId={state.userId}
+              profileImage={state.profileImage}
+              completedToday={state.completedToday}
+              currentStreak={state.currentStreak || 0}
+              unlockedAchievements={state.unlockedAchievements || []}
+              profileBadges={state.profileBadges || [null, null, null]}
+              onSetProfileBadge={setProfileBadge}
+              onUpdateUserId={updateUserId}
+              onUpdateProfileImage={updateProfileImage}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       
         {/* Global Bottom Nav - Outside all screen transitions */}
         {showMainNav && (
           <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] z-50">
-            <div className="max-w-md mx-auto flex justify-center items-center gap-12">
+            <div className="max-w-md mx-auto flex justify-center items-center gap-10">
               {/* Home */}
               <button 
                 onClick={() => {
@@ -458,6 +500,16 @@ function App() {
               >
                 <svg className={`w-6 h-6 ${screen === 'social' ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </button>
+
+              {/* Profile */}
+              <button
+                onClick={() => setScreen('profile')}
+                className={`p-2 ${screen === 'profile' ? 'accent-btn w-11 h-11 rounded-full flex items-center justify-center' : ''}`}
+              >
+                <svg className={`w-6 h-6 ${screen === 'profile' ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </button>
             </div>
