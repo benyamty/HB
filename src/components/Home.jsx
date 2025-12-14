@@ -533,13 +533,18 @@ function Home({
         </div>
       )}
       
-      {habitsExpanded && (
-        <motion.div 
-          layout
-          className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget accent-card"
-          onClick={() => { if (!habitsExpanded) onToggleHabits() }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        >
+      <AnimatePresence>
+        {habitsExpanded && (
+          <motion.div
+            key="habits-expanded"
+            layout
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '100%', opacity: 0 }}
+            transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+            className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget accent-card"
+            onClick={() => { if (!habitsExpanded) onToggleHabits() }}
+          >
           {/* Header */}
           <div className="flex items-center justify-between mb-3 flex-shrink-0 w-full">
             <div className="flex items-center gap-3">
@@ -787,8 +792,9 @@ function Home({
               })
             )}
           </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {showInviteModal && (
         <div
