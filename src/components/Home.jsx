@@ -178,6 +178,7 @@ function Home({
   habits, 
   completedToday,
   paidToday,
+  friends = [],
   currentStreak,
   longestStreak,
   habitHistory,
@@ -195,6 +196,10 @@ function Home({
   const [selectedHabitsDay, setSelectedHabitsDay] = useState(() => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()])
   const [habitsPage, setHabitsPage] = useState('my')
   const [showHabitsPageMenu, setShowHabitsPageMenu] = useState(false)
+  const [showInviteModal, setShowInviteModal] = useState(false)
+  const [inviteFriendId, setInviteFriendId] = useState(null)
+  const [pendingSharedInvites, setPendingSharedInvites] = useState([])
+  const [sharedPages, setSharedPages] = useState([])
   const [showBadgePicker, setShowBadgePicker] = useState(false)
   const [selectedSlot, setSelectedSlot] = useState(null)
   const [achievementsExpanded, setAchievementsExpanded] = useState(false)
@@ -210,7 +215,13 @@ function Home({
 
   const filteredHabits = useMemo(() => {
     if (habitsPage === 'shared') {
-      return habits.filter(h => (h.sharedWith?.length || 0) > 0 || h.isShared)
+      return habits.filter(h => {
+        const isAnyShared = (h.sharedWith?.length || 0) > 0 || h.isShared
+        if (!isAnyShared) return false
+        if (!inviteFriendId) return true
+        if (Array.isArray(h.sharedWith)) return h.sharedWith.includes(inviteFriendId)
+        return true
+      })
     }
 
     return habits.filter(h => {
@@ -218,7 +229,7 @@ function Home({
       if (!Array.isArray(d) || d.length === 0) return true
       return d.includes(selectedHabitsDay)
     })
-  }, [habits, habitsPage, selectedHabitsDay])
+  }, [habits, habitsPage, selectedHabitsDay, inviteFriendId])
   useEffect(() => {
     isFirstMount.current = false
   }, [])
@@ -246,6 +257,12 @@ function Home({
       document.removeEventListener('touchstart', handleOutside)
     }
   }, [showHabitsPageMenu])
+
+  useEffect(() => {
+    if (!showInviteModal) {
+      setInviteFriendId(null)
+    }
+  }, [showInviteModal])
 
   const formatTimeRange = (habit) => {
     if (habit.allDay) return 'All Day'
@@ -560,29 +577,41 @@ function Home({
                   className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-2xl overflow-hidden z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
+                  {sharedPages.length > 0 && (
+                    <div className="py-1">
+                      {sharedPages.map((p) => (
+                        <button
+                          key={p.id}
+                          type="button"
+                          onClick={() => {
+                            setHabitsPage('shared')
+                            setInviteFriendId(p.friendId)
+                            setShowHabitsPageMenu(false)
+                          }}
+                          className={`w-full px-4 py-2.5 text-left text-sm font-medium ${
+                            habitsPage === 'shared' && inviteFriendId === p.friendId ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
+                          }`}
+                        >
+                          {p.title}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
                   <button
                     type="button"
                     onClick={() => {
-                      setHabitsPage('my')
                       setShowHabitsPageMenu(false)
+                      setShowInviteModal(true)
                     }}
-                    className={`w-full px-4 py-3 text-left text-sm font-medium ${
-                      habitsPage === 'my' ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
-                    }`}
+                    className="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 flex items-center justify-between"
                   >
-                    My Habits
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setHabitsPage('shared')
-                      setShowHabitsPageMenu(false)
-                    }}
-                    className={`w-full px-4 py-3 text-left text-sm font-medium ${
-                      habitsPage === 'shared' ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
-                    }`}
-                  >
-                    Shared Habits
+                    <span>Create shared page</span>
+                    <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
+                      <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </span>
                   </button>
                 </div>
               )}
@@ -633,17 +662,7 @@ function Home({
 
         {/* Habits List */}
         <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
-          {habitsPage === 'shared' && filteredHabits.length === 0 ? (
-            <div className="flex-1 flex flex-col items-center justify-center w-full text-center">
-              <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
-                <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <p className="text-gray-500 mb-2 font-medium">No shared habits yet</p>
-              <p className="text-gray-400 text-sm">You’ll be able to open a shared habit page with a friend later.</p>
-            </div>
-          ) : habits.length === 0 ? (
+          {habits.length === 0 ? (
             <button 
               onClick={(e) => {
                 e.stopPropagation()
@@ -731,6 +750,76 @@ function Home({
           )}
         </div>
       </motion.div>
+
+      {showInviteModal && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+          onClick={() => setShowInviteModal(false)}
+        >
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-bold text-gray-900">
+              Which one of your friends would you like to create a shared habit page with
+            </h3>
+
+            <div className="mt-4 space-y-2 max-h-72 overflow-y-auto">
+              {friends.length === 0 ? (
+                <div className="text-center py-10">
+                  <p className="text-gray-500 font-medium">No friends yet</p>
+                  <p className="text-gray-400 text-sm mt-1">Add a friend on the Social page first.</p>
+                </div>
+              ) : (
+                friends.map((f) => (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => setInviteFriendId(f.id)}
+                    className={`w-full p-4 rounded-2xl border flex items-center justify-between ${
+                      inviteFriendId === f.id ? 'border-[color:var(--accent-solid)] bg-white' : 'border-gray-200 bg-gray-50'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0">
+                        <span className="text-[color:var(--accent-solid)] font-semibold text-sm">
+                          {f.name.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                      <span className="font-semibold text-gray-900 truncate">{f.name}</span>
+                    </div>
+                    {inviteFriendId === f.id && (
+                      <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </button>
+                ))
+              )}
+            </div>
+
+            <div className="mt-5 flex justify-end">
+              <button
+                type="button"
+                disabled={!inviteFriendId}
+                onClick={() => {
+                  const friend = friends.find(f => f.id === inviteFriendId)
+                  if (!friend) return
+
+                  setPendingSharedInvites(prev => {
+                    if (prev.some(i => i.friendId === friend.id)) return prev
+                    return [...prev, { id: Date.now(), friendId: friend.id, friendName: friend.name }]
+                  })
+
+                  setShowInviteModal(false)
+                }}
+                className={`px-6 py-3 rounded-full font-semibold text-sm transition-colors ${
+                  inviteFriendId ? 'accent-btn text-white' : 'bg-gray-200 text-gray-400'
+                }`}
+              >
+                Invite
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Verification Modal */}
       {verifyingHabit && (

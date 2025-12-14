@@ -264,6 +264,7 @@ function App() {
               habits={state.habits}
               completedToday={state.completedToday}
               paidToday={state.paidToday || []}
+              friends={state.friends || []}
               currentStreak={state.currentStreak || 0}
               longestStreak={state.longestStreak || 0}
               habitHistory={state.habitHistory || {}}
