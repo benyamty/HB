@@ -94,13 +94,13 @@ export default function Profile({
     <div className="h-full flex flex-col bg-[#fcfcfc] px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]">
       <div className="flex-1 overflow-y-auto min-h-0">
         <div className="flex flex-col items-center pt-4">
-          <div className="w-full flex items-start justify-start">
+          <div className="w-full flex items-start justify-start pl-2 pt-1">
             <button
               type="button"
               onClick={() => setShowHabitHistory(true)}
-              className="text-sm font-semibold text-gray-600 active:opacity-70"
+              className="text-sm font-semibold text-[color:var(--accent-solid)] bg-[color:var(--accent-orange)]/15 border border-[color:var(--accent-orange)]/25 px-3 py-1.5 rounded-full active:scale-95 transition-transform"
             >
-              History
+              Habits History
             </button>
           </div>
           <button
