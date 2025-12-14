@@ -94,6 +94,15 @@ export default function Profile({
     <div className="h-full flex flex-col bg-[#fcfcfc] px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]">
       <div className="flex-1 overflow-y-auto min-h-0">
         <div className="flex flex-col items-center pt-4">
+          <div className="w-full flex items-start justify-start">
+            <button
+              type="button"
+              onClick={() => setShowHabitHistory(true)}
+              className="text-sm font-semibold text-gray-600 active:opacity-70"
+            >
+              History
+            </button>
+          </div>
           <button
             type="button"
             onClick={openFilePicker}
@@ -214,33 +223,6 @@ export default function Profile({
                 <span className="text-2xl font-bold text-gray-900">{points}</span>
                 <span className="text-xs text-gray-500">Points</span>
               </div>
-            </div>
-
-            <div className="mt-6">
-              <button
-                type="button"
-                onClick={() => setShowHabitHistory(true)}
-                className="w-full bg-white border border-gray-200 rounded-2xl px-4 py-4 flex items-center justify-between active:scale-[0.99] transition-transform"
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6" />
-                    </svg>
-                  </div>
-                  <div className="min-w-0">
-                    <div className="font-semibold text-gray-900 truncate">Habit History</div>
-                    <div className="text-sm text-gray-500 truncate">Cleared habits you undid</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <span className="text-sm text-gray-400 font-semibold">{clearedHabitHistory.length}</span>
-                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </button>
             </div>
           </div>
         </div>
