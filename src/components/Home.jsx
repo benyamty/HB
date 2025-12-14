@@ -210,6 +210,8 @@ function Home({
   const [returnToBadgePicker, setReturnToBadgePicker] = useState(false)
   const [isEditingSharedPageTitle, setIsEditingSharedPageTitle] = useState(false)
   const [sharedPageTitleDraft, setSharedPageTitleDraft] = useState('')
+  const sharedPageTitleMeasureRef = useRef(null)
+  const [sharedPageTitleInputWidth, setSharedPageTitleInputWidth] = useState(0)
 
   const habitsPageMenuRef = useRef(null)
 
@@ -321,9 +323,20 @@ function Home({
     setIsEditingSharedPageTitle(false)
   }
 
+  const recalcSharedPageTitleWidth = (value) => {
+    if (!sharedPageTitleMeasureRef.current) return
+    const text = value && value.length ? value : ' '
+    sharedPageTitleMeasureRef.current.textContent = text
+    const w = Math.ceil(sharedPageTitleMeasureRef.current.offsetWidth) + 18
+    setSharedPageTitleInputWidth(w)
+  }
+
   useEffect(() => {
     if (!isEditingSharedPageTitle) return
     setSharedPageTitleDraft(selectedSharedPage?.title || '')
+    setTimeout(() => {
+      recalcSharedPageTitleWidth(selectedSharedPage?.title || '')
+    }, 0)
   }, [isEditingSharedPageTitle, selectedSharedPage])
 
   const formatTimeRange = (habit) => {
@@ -586,9 +599,18 @@ function Home({
                 {habitsPage === 'shared' && selectedSharedPage && (
                   <div className="mt-1">
                     {isEditingSharedPageTitle ? (
-                      <input
-                        value={sharedPageTitleDraft}
-                        onChange={(e) => setSharedPageTitleDraft(e.target.value)}
+                      <div className="relative">
+                        <span
+                          ref={sharedPageTitleMeasureRef}
+                          className="absolute -left-[9999px] -top-[9999px] text-sm font-semibold whitespace-pre"
+                        />
+                        <input
+                          value={sharedPageTitleDraft}
+                          onChange={(e) => {
+                            const v = e.target.value
+                            setSharedPageTitleDraft(v)
+                            recalcSharedPageTitleWidth(v)
+                          }}
                         onBlur={() => {
                           commitSharedPageTitle()
                         }}
@@ -598,9 +620,11 @@ function Home({
                           }
                           if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
                         }}
-                        className="w-full max-w-[14rem] h-8 rounded-xl bg-gray-50 border border-gray-200 px-3 text-gray-800 text-sm font-semibold focus:outline-none"
-                        autoFocus
-                      />
+                          className="text-sm font-semibold text-gray-800 bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
+                          style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 224) }}
+                          autoFocus
+                        />
+                      </div>
                     ) : (
                       <div className="text-xs text-gray-500 font-semibold truncate max-w-[14rem]">
                         {selectedSharedPage.title}
