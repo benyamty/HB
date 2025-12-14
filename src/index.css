@@ -248,222 +248,190 @@ body {
 
 /* ===== DREAMY CLOUD UI SYSTEM ===== */
 
-/* ===== PUFFY CLOUD BACKGROUND ===== */
+/* ===== CLOUD BACKGROUND - MATCHING REFERENCE ===== */
 
-/* Cloud background wrapper */
 .cloud-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  /* Soft lavender/blue/pink gradient base */
   background: linear-gradient(180deg, 
-    #e0d4f0 0%,
-    #d0e0f8 20%,
-    #e8d8f0 40%,
-    #c8d8f8 60%,
-    #e0d0e8 80%,
-    #d8e0f0 100%
+    #e8e0f0 0%,
+    #dde8f8 15%,
+    #e8ddf0 30%,
+    #d8e4f8 45%,
+    #e5d8ec 60%,
+    #d5e0f5 75%,
+    #e0d8e8 90%,
+    #dce5f2 100%
   );
 }
 
-/* Puffy cloud - made of multiple overlapping circles */
-.puffy-cloud {
+/* Large puffy cloud shapes */
+.cloud {
   position: absolute;
-  filter: blur(1px);
-}
-
-.puffy-cloud::before,
-.puffy-cloud::after,
-.puffy-cloud span {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
+  border-radius: 100px;
   background: linear-gradient(180deg, 
-    rgba(255,255,255,0.98) 0%,
-    rgba(255,255,255,0.95) 40%,
-    rgba(240,235,250,0.9) 70%,
-    rgba(220,215,240,0.85) 100%
+    #ffffff 0%,
+    #fefefe 30%,
+    #f8f6fc 60%,
+    #f0ecf8 100%
   );
-  box-shadow: 
-    inset 0 -15px 30px rgba(200,190,220,0.3),
-    inset 0 5px 15px rgba(255,255,255,0.8),
-    0 8px 20px rgba(180,170,200,0.25);
+  box-shadow:
+    0 20px 60px rgba(180, 160, 200, 0.25),
+    0 10px 30px rgba(160, 140, 190, 0.15),
+    inset 0 -20px 40px rgba(200, 180, 220, 0.2),
+    inset 0 10px 30px rgba(255, 255, 255, 0.9);
 }
 
-/* Cloud 1 - Top left large cloud */
+/* Cloud 1 - Top left - large white/cream */
 .cloud-1 {
-  top: 2%;
-  left: -8%;
-  width: 280px;
-  height: 120px;
-  animation: driftCloud 30s ease-in-out infinite;
+  width: 350px;
+  height: 180px;
+  top: -40px;
+  left: -80px;
+  border-radius: 90px;
 }
-.cloud-1::before { width: 100px; height: 100px; top: 20px; left: 30px; }
-.cloud-1::after { width: 130px; height: 110px; top: 10px; left: 80px; }
-.cloud-1 span { display: block; width: 90px; height: 90px; top: 30px; left: 150px; }
 
 /* Cloud 2 - Top right */
 .cloud-2 {
-  top: 8%;
-  right: -5%;
-  width: 220px;
-  height: 100px;
-  animation: driftCloud 25s ease-in-out infinite reverse;
+  width: 280px;
+  height: 150px;
+  top: 20px;
+  right: -60px;
+  border-radius: 75px;
 }
-.cloud-2::before { width: 80px; height: 80px; top: 20px; left: 20px; }
-.cloud-2::after { width: 100px; height: 90px; top: 10px; left: 60px; }
-.cloud-2 span { display: block; width: 70px; height: 70px; top: 25px; left: 120px; }
 
-/* Cloud 3 - Middle area pink-tinted */
+/* Cloud 3 - Middle left - pink tinted */
 .cloud-3 {
-  top: 35%;
-  left: -12%;
-  width: 300px;
-  height: 130px;
-  animation: driftCloud 35s ease-in-out infinite;
-}
-.cloud-3::before,
-.cloud-3::after,
-.cloud-3 span {
+  width: 380px;
+  height: 200px;
+  top: 30%;
+  left: -100px;
+  border-radius: 100px;
   background: linear-gradient(180deg, 
-    rgba(255,250,255,0.98) 0%,
-    rgba(250,240,255,0.95) 40%,
-    rgba(240,220,245,0.9) 70%,
-    rgba(225,200,235,0.85) 100%
+    #ffffff 0%,
+    #fefcff 30%,
+    #f8f0f8 60%,
+    #f0e4f0 100%
   );
-  box-shadow: 
-    inset 0 -15px 30px rgba(210,180,220,0.35),
-    inset 0 5px 15px rgba(255,255,255,0.8),
-    0 8px 20px rgba(200,170,210,0.25);
+  box-shadow:
+    0 25px 70px rgba(200, 160, 200, 0.3),
+    0 12px 35px rgba(180, 140, 180, 0.2),
+    inset 0 -25px 50px rgba(220, 180, 210, 0.25),
+    inset 0 12px 35px rgba(255, 255, 255, 0.9);
 }
-.cloud-3::before { width: 110px; height: 110px; top: 20px; left: 40px; }
-.cloud-3::after { width: 140px; height: 120px; top: 5px; left: 100px; }
-.cloud-3 span { display: block; width: 100px; height: 100px; top: 25px; left: 180px; }
 
-/* Cloud 4 - Bottom right blue-tinted */
+/* Cloud 4 - Bottom right - blue tinted */
 .cloud-4 {
-  bottom: 15%;
-  right: -10%;
-  width: 320px;
-  height: 140px;
-  animation: driftCloud 28s ease-in-out infinite;
-}
-.cloud-4::before,
-.cloud-4::after,
-.cloud-4 span {
+  width: 400px;
+  height: 220px;
+  bottom: 5%;
+  right: -120px;
+  border-radius: 110px;
   background: linear-gradient(180deg, 
-    rgba(255,255,255,0.98) 0%,
-    rgba(245,250,255,0.95) 40%,
-    rgba(220,235,250,0.9) 70%,
-    rgba(200,220,245,0.85) 100%
+    #ffffff 0%,
+    #fcfeff 30%,
+    #f4f8fc 60%,
+    #e8f0f8 100%
   );
-  box-shadow: 
-    inset 0 -15px 30px rgba(180,200,230,0.35),
-    inset 0 5px 15px rgba(255,255,255,0.8),
-    0 8px 20px rgba(170,190,220,0.25);
+  box-shadow:
+    0 25px 70px rgba(160, 180, 210, 0.3),
+    0 12px 35px rgba(140, 160, 200, 0.2),
+    inset 0 -25px 50px rgba(180, 200, 230, 0.25),
+    inset 0 12px 35px rgba(255, 255, 255, 0.9);
 }
-.cloud-4::before { width: 120px; height: 120px; top: 20px; left: 50px; }
-.cloud-4::after { width: 150px; height: 130px; top: 5px; left: 110px; }
-.cloud-4 span { display: block; width: 110px; height: 110px; top: 25px; left: 200px; }
 
 /* Cloud 5 - Bottom left */
 .cloud-5 {
-  bottom: 5%;
-  left: -5%;
-  width: 260px;
-  height: 110px;
-  animation: driftCloud 32s ease-in-out infinite reverse;
+  width: 320px;
+  height: 170px;
+  bottom: -30px;
+  left: -50px;
+  border-radius: 85px;
 }
-.cloud-5::before { width: 90px; height: 90px; top: 20px; left: 25px; }
-.cloud-5::after { width: 120px; height: 100px; top: 10px; left: 75px; }
-.cloud-5 span { display: block; width: 85px; height: 85px; top: 25px; left: 150px; }
 
-/* Cloud 6 - Middle right */
+/* Cloud 6 - Middle right small */
 .cloud-6 {
-  top: 55%;
-  right: 5%;
   width: 200px;
-  height: 90px;
-  animation: driftCloud 22s ease-in-out infinite;
+  height: 120px;
+  top: 50%;
+  right: 10px;
+  border-radius: 60px;
+  background: linear-gradient(180deg, 
+    #ffffff 0%,
+    #fefcff 30%,
+    #f6f2f8 60%,
+    #ece4f0 100%
+  );
 }
-.cloud-6::before { width: 70px; height: 70px; top: 20px; left: 20px; }
-.cloud-6::after { width: 90px; height: 80px; top: 10px; left: 55px; }
-.cloud-6 span { display: block; width: 65px; height: 65px; top: 25px; left: 110px; }
 
-@keyframes driftCloud {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  50% { transform: translateX(20px) translateY(-10px); }
-}
-
-/* Dreamy bg class for modals etc */
+/* Dreamy bg for modals */
 .dreamy-bg {
   background: linear-gradient(180deg, 
-    #e0d4f0 0%,
-    #d0e0f8 30%,
-    #e8d8f0 50%,
-    #c8d8f8 70%,
-    #e0d0e8 100%
+    #e8e0f0 0%,
+    #dde8f8 30%,
+    #e8ddf0 50%,
+    #d8e4f8 70%,
+    #e5d8ec 100%
   );
   min-height: 100%;
 }
 
-/* ===== FROSTED GLASS CARDS ===== */
+/* ===== CARDS - WHITE/CREAM OPAQUE ===== */
 
-/* Frosted glass card - soft and subtle */
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 24px;
   box-shadow:
-    0 10px 40px rgba(180, 170, 200, 0.15),
-    0 4px 15px rgba(160, 180, 210, 0.1);
+    0 8px 32px rgba(180, 170, 200, 0.18),
+    0 4px 16px rgba(160, 150, 190, 0.12);
 }
 
-/* ===== SOFT MATTE STAT CIRCLES ===== */
+/* ===== SOFT PASTEL STAT CIRCLES ===== */
 
-/* Soft matte green circle (Tasks Done) */
+/* Mint green circle (Tasks Done) - soft pastel */
 .stat-circle-green {
-  background: linear-gradient(160deg, #b8f0d0 0%, #6ee7b7 30%, #34d399 70%, #10b981 100%);
+  background: linear-gradient(180deg, #c8f7e0 0%, #86efac 40%, #4ade80 100%);
   box-shadow:
-    0 6px 20px rgba(52, 211, 153, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 6px rgba(16, 185, 129, 0.2);
+    0 8px 24px rgba(74, 222, 128, 0.3),
+    inset 0 2px 6px rgba(255, 255, 255, 0.5),
+    inset 0 -4px 10px rgba(34, 197, 94, 0.15);
 }
 
-/* Soft matte orange circle (Streak) */
+/* Soft orange circle (Streak) */
 .stat-circle-orange {
-  background: linear-gradient(160deg, #fed7aa 0%, #fdba74 30%, #fb923c 70%, #f97316 100%);
+  background: linear-gradient(180deg, #fed7aa 0%, #fdba74 40%, #fb923c 100%);
   box-shadow:
-    0 6px 20px rgba(251, 146, 60, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 6px rgba(234, 88, 12, 0.2);
+    0 8px 24px rgba(251, 146, 60, 0.3),
+    inset 0 2px 6px rgba(255, 255, 255, 0.5),
+    inset 0 -4px 10px rgba(234, 88, 12, 0.15);
 }
 
-/* Soft matte yellow circle (Points) */
+/* Golden yellow circle (Points) */
 .stat-circle-yellow {
-  background: linear-gradient(160deg, #fef9c3 0%, #fde047 30%, #facc15 70%, #eab308 100%);
+  background: linear-gradient(180deg, #fef08a 0%, #fde047 40%, #facc15 100%);
   box-shadow:
-    0 6px 20px rgba(250, 204, 21, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.5),
-    inset 0 -2px 6px rgba(202, 138, 4, 0.15);
+    0 8px 24px rgba(250, 204, 21, 0.3),
+    inset 0 2px 6px rgba(255, 255, 255, 0.6),
+    inset 0 -4px 10px rgba(202, 138, 4, 0.12);
 }
 
-/* Soft matte orange profile circle */
+/* Orange profile circle */
 .stat-circle-profile {
-  background: linear-gradient(160deg, #fed7aa 0%, #fdba74 30%, #fb923c 70%, #f97316 100%);
+  background: linear-gradient(180deg, #fed7aa 0%, #fdba74 40%, #fb923c 100%);
   box-shadow:
-    0 6px 20px rgba(251, 146, 60, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 6px rgba(234, 88, 12, 0.2);
+    0 8px 24px rgba(251, 146, 60, 0.3),
+    inset 0 2px 6px rgba(255, 255, 255, 0.5),
+    inset 0 -4px 10px rgba(234, 88, 12, 0.15);
 }
 
-/* Soft pill counter (like 2/10) */
+/* Pill counter (2/10 style) */
 .pill-counter {
-  background: linear-gradient(160deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
-  box-shadow:
-    0 4px 12px rgba(148, 163, 184, 0.2),
-    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  background: #f1f5f9;
+  box-shadow: 0 2px 8px rgba(148, 163, 184, 0.15);
 }
 
 /* Achievement circle - unlocked */
@@ -501,19 +469,24 @@ body {
     inset 0 -2px 6px rgba(22, 101, 52, 0.15);
 }
 
-/* Bottom nav - rainbow ring with glow */
+/* Bottom nav - rainbow RING around icon (not filled) */
 .nav-pill-active {
-  background: conic-gradient(from 180deg at 50% 50%, 
-    #ec4899 0deg,
-    #f97316 90deg,
-    #eab308 180deg,
-    #22c55e 270deg,
-    #ec4899 360deg
-  );
+  background: white;
+  border: 3px solid transparent;
+  background-image: 
+    linear-gradient(white, white),
+    conic-gradient(from 180deg at 50% 50%, 
+      #ec4899 0deg,
+      #f97316 90deg,
+      #eab308 180deg,
+      #22c55e 270deg,
+      #ec4899 360deg
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
   box-shadow:
-    0 0 25px rgba(236, 72, 153, 0.4),
-    0 0 15px rgba(249, 115, 22, 0.3),
-    0 6px 20px rgba(236, 72, 153, 0.25);
+    0 0 20px rgba(236, 72, 153, 0.35),
+    0 0 12px rgba(249, 115, 22, 0.25);
 }
 
 /* Small soft colored circles for achievements */
