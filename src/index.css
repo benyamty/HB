@@ -169,6 +169,9 @@ body {
   --accent-orange: #ff4d00;
   --accent-yellow: #ffe600;
   --accent-solid: #5b21b6;
+
+  --black-purple-black: linear-gradient(135deg, #000000 0%, var(--accent-purple) 55%, #000000 100%);
+  --black-purple: linear-gradient(135deg, #000000 0%, var(--accent-purple) 100%);
 }
 
 .accent-gradient {
@@ -185,6 +188,21 @@ body {
 
 .accent-text {
   background: linear-gradient(90deg, var(--accent-purple) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.black-purple-gradient {
+  background: var(--black-purple);
+}
+
+.black-purple-gradient-3stop {
+  background: var(--black-purple-black);
+}
+
+.black-purple-text {
+  background: var(--black-purple);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
