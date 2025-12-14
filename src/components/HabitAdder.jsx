@@ -42,12 +42,12 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
   }
 
   return (
-    <div className="h-full flex flex-col bg-[#fcfcfc] px-4 pb-0 animate-slideUp pt-[max(1rem,env(safe-area-inset-top))] relative">
+    <div className="h-full flex flex-col px-4 pb-0 animate-slideUp pt-[max(1rem,env(safe-area-inset-top))] relative">
       {/* Header */}
       <div className="flex items-center justify-between py-3 mb-2 flex-shrink-0">
         <button 
           onClick={onBack}
-          className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center tap-bounce"
+          className="w-10 h-10 rounded-full pill-counter flex items-center justify-center tap-bounce"
         >
           <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -63,14 +63,14 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
       <div className="flex-1 overflow-y-auto min-h-0 pb-36">
         <form onSubmit={handleSubmit} className="space-y-3">
           {/* Habit Name */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
+          <div className="glass-card rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg accent-chip flex items-center justify-center">
-                <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              <div className="w-9 h-9 rounded-full stat-circle-orange flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
               </div>
-              <span className="text-gray-500 text-xs font-bold uppercase tracking-wider">Habit Name</span>
+              <span className="text-gray-700 text-sm font-semibold">Habit Name</span>
             </div>
             <input
               type="text"
@@ -82,14 +82,14 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
           </div>
 
           {/* Time Frame */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
+          <div className="glass-card rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg accent-chip flex items-center justify-center">
-                <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div className="w-9 h-9 rounded-full stat-circle-green flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="text-gray-500 text-xs font-bold uppercase tracking-wider">Time Window</span>
+              <span className="text-gray-700 text-sm font-semibold">Time Window</span>
             </div>
             
             {/* All Day Toggle */}
@@ -153,14 +153,14 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
           </div>
 
           {/* Stakes */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
+          <div className="glass-card rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 rounded-lg accent-chip flex items-center justify-center">
-                <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div className="w-9 h-9 rounded-full stat-circle-yellow flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
                 </svg>
               </div>
-              <span className="text-gray-500 text-xs font-bold uppercase tracking-wider">What's at stake?</span>
+              <span className="text-gray-700 text-sm font-semibold">What's at stake?</span>
             </div>
             <p className="text-gray-400 text-xs mb-4 ml-10">
               What should be the cost of skipping this habit?
@@ -278,12 +278,12 @@ function HabitAdder({ habit, onSave, onDelete, onBack }) {
       </div>
 
       {/* Fixed Bottom Actions */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] z-50">
+      <div className="absolute bottom-0 left-0 right-0 glass-card border-t-0 rounded-t-3xl p-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] z-50">
         <div className="max-w-md mx-auto space-y-3">
           <button
             onClick={handleSubmit}
             disabled={!name.trim() || skipCost === null}
-            className="w-full accent-btn text-white py-4 rounded-xl font-bold text-base active:scale-[0.98] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full btn-done text-white py-4 rounded-xl font-bold text-base active:scale-[0.98] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {habit ? 'Save Changes' : 'Add Habit'}
           </button>

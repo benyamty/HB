@@ -25,7 +25,14 @@ html, body, #root {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
-  background: #fcfcfc;
+  background: linear-gradient(180deg, 
+    #e8d5f0 0%,
+    #d4e5f7 25%,
+    #f0e6f5 50%,
+    #dbe8f4 75%,
+    #e8d5f0 100%
+  );
+  background-attachment: fixed;
   overscroll-behavior: none;
 }
 
@@ -245,3 +252,142 @@ body {
      0 8px 14px rgba(124, 58, 237, 0.14),
      inset 0 1px 0 rgba(255, 255, 255, 0.55);
  }
+
+/* ===== DREAMY CLOUD UI SYSTEM ===== */
+
+/* Dreamy pastel cloud background */
+.dreamy-bg {
+  background: linear-gradient(180deg, 
+    #e8d5f0 0%,
+    #d4e5f7 25%,
+    #f0e6f5 50%,
+    #dbe8f4 75%,
+    #e8d5f0 100%
+  );
+  min-height: 100%;
+}
+
+/* Frosted glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 32px rgba(180, 160, 200, 0.25),
+    0 4px 16px rgba(150, 180, 220, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* 3D circular stat icon - green (Tasks Done) */
+.stat-circle-green {
+  background: linear-gradient(145deg, #a8f0c0 0%, #4ade80 50%, #22c55e 100%);
+  box-shadow:
+    0 8px 20px rgba(34, 197, 94, 0.35),
+    0 4px 8px rgba(34, 197, 94, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 3D circular stat icon - orange (Streak) */
+.stat-circle-orange {
+  background: linear-gradient(145deg, #ffd4a8 0%, #fb923c 50%, #f97316 100%);
+  box-shadow:
+    0 8px 20px rgba(249, 115, 22, 0.35),
+    0 4px 8px rgba(249, 115, 22, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 3D circular stat icon - yellow (Points) */
+.stat-circle-yellow {
+  background: linear-gradient(145deg, #fef3a0 0%, #facc15 50%, #eab308 100%);
+  box-shadow:
+    0 8px 20px rgba(234, 179, 8, 0.35),
+    0 4px 8px rgba(234, 179, 8, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 3D circular icon - purple/pink profile */
+.stat-circle-profile {
+  background: linear-gradient(145deg, #fdc8a0 0%, #fb923c 50%, #ea580c 100%);
+  box-shadow:
+    0 8px 20px rgba(234, 88, 12, 0.35),
+    0 4px 8px rgba(234, 88, 12, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Small 3D pill button (like the 2/10 counter) */
+.pill-counter {
+  background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+  box-shadow:
+    0 4px 12px rgba(148, 163, 184, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Achievement circle - unlocked */
+.achievement-unlocked {
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Achievement circle - locked */
+.achievement-locked {
+  background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+  box-shadow:
+    0 4px 12px rgba(148, 163, 184, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Habit item card inside the glass card */
+.habit-item {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 2px 8px rgba(148, 163, 184, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Green done button */
+.btn-done {
+  background: linear-gradient(145deg, #86efac 0%, #22c55e 50%, #16a34a 100%);
+  box-shadow:
+    0 6px 16px rgba(22, 163, 74, 0.35),
+    0 3px 6px rgba(22, 163, 74, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Bottom nav gradient pill */
+.nav-pill-active {
+  background: linear-gradient(135deg, 
+    #f472b6 0%,
+    #fb923c 35%,
+    #fbbf24 70%,
+    #a3e635 100%
+  );
+  box-shadow:
+    0 8px 24px rgba(251, 146, 60, 0.4),
+    0 4px 12px rgba(244, 114, 182, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Small colored circle icons for achievements */
+.circle-green {
+  background: linear-gradient(145deg, #bbf7d0 0%, #4ade80 100%);
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+}
+.circle-yellow {
+  background: linear-gradient(145deg, #fef08a 0%, #facc15 100%);
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+}
+.circle-gray {
+  background: linear-gradient(145deg, #f1f5f9 0%, #cbd5e1 100%);
+  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.2), inset 0 1px 2px rgba(255,255,255,0.5);
+}

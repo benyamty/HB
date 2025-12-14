@@ -69,11 +69,11 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
   }, [])
 
   return (
-    <div className="fixed inset-0 bg-white flex flex-col z-50">
+    <div className="fixed inset-0 dreamy-bg flex flex-col z-50">
       {/* Close button */}
       <button 
         onClick={handleCancel}
-        className="absolute top-[max(1rem,env(safe-area-inset-top))] right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center z-10"
+        className="absolute top-[max(1rem,env(safe-area-inset-top))] right-4 w-10 h-10 rounded-full pill-counter flex items-center justify-center z-10"
       >
         <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -91,11 +91,11 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
             {/* Number box with glow */}
             <div className="relative mb-6">
               {/* Glow effect */}
-              <div className="absolute inset-0 bg-[color:var(--accent-orange)]/30 blur-3xl rounded-full scale-150" />
+              <div className="absolute inset-0 bg-green-400/30 blur-3xl rounded-full scale-150" />
               
               {/* Number container */}
-              <div className="relative w-40 h-40 rounded-3xl bg-gray-100 border border-gray-200 flex items-center justify-center">
-                <span className="text-8xl font-bold accent-text">{challengeNumber}</span>
+              <div className="relative w-40 h-40 rounded-3xl glass-card flex items-center justify-center">
+                <span className="text-8xl font-bold text-green-500">{challengeNumber}</span>
               </div>
             </div>
 
@@ -109,7 +109,7 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
             {/* Take Photo button */}
             <button
               onClick={startCamera}
-              className="w-full max-w-xs py-4 rounded-2xl accent-btn text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
+              className="w-full max-w-xs py-4 rounded-2xl btn-done text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -122,8 +122,8 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
 
         {cameraActive && (
           <div className="w-full max-w-md flex flex-col items-center">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Show the number: <span className="accent-text">{challengeNumber}</span></h2>
-            <div className="relative rounded-3xl overflow-hidden bg-black aspect-[3/4] w-full mb-4">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Show the number: <span className="text-green-500 font-bold">{challengeNumber}</span></h2>
+            <div className="relative rounded-3xl overflow-hidden bg-black aspect-[3/4] w-full mb-4 glass-card">
               <video
                 ref={videoRef}
                 autoPlay
@@ -134,7 +134,7 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
             </div>
             <button
               onClick={takePhoto}
-              className="w-full py-4 rounded-2xl accent-btn text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
+              className="w-full py-4 rounded-2xl btn-done text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -148,7 +148,7 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
         {photoTaken && photoData && (
           <div className="w-full max-w-md flex flex-col items-center">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Your proof photo</h2>
-            <div className="relative rounded-3xl overflow-hidden bg-black aspect-[3/4] w-full mb-4">
+            <div className="relative rounded-3xl overflow-hidden bg-black aspect-[3/4] w-full mb-4 glass-card">
               <img
                 src={photoData}
                 alt="Verification photo"
@@ -158,13 +158,13 @@ function VerificationModal({ habitName, onVerified, onCancel }) {
             <div className="flex gap-3 w-full">
               <button
                 onClick={retakePhoto}
-                className="flex-1 py-4 rounded-2xl bg-gray-200 text-gray-700 font-medium active:scale-95 transition-transform"
+                className="flex-1 py-4 rounded-2xl pill-counter text-gray-700 font-medium active:scale-95 transition-transform"
               >
                 Retake
               </button>
               <button
                 onClick={confirmVerification}
-                className="flex-1 py-4 rounded-2xl accent-btn text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
+                className="flex-1 py-4 rounded-2xl btn-done text-white font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

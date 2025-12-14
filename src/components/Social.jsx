@@ -32,28 +32,28 @@ function Social({
   }
 
   return (
-    <div className="h-full flex flex-col bg-[#fcfcfc] px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]">
+    <div className="h-full flex flex-col px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]">
       {/* Top Row: Title */}
       <div className="flex-shrink-0 mb-4 flex items-center">
-        <div className="w-10 h-10 rounded-full accent-chip flex items-center justify-center">
-          <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        <div className="w-11 h-11 rounded-full stat-circle-profile flex items-center justify-center">
+          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
           </svg>
         </div>
-        <span className="ml-3 text-lg font-semibold text-gray-900">Social</span>
+        <span className="ml-3 text-lg font-semibold text-gray-700">Social</span>
       </div>
 
       {/* Leaderboard Card */}
-      <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 mb-4 accent-card">
+      <div className="flex-shrink-0 glass-card rounded-3xl px-6 py-5 mb-4">
         {/* Header with toggle */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-              <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            <div className="w-11 h-11 rounded-full circle-yellow flex items-center justify-center">
+              <svg className="w-5 h-5 text-yellow-700" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
               </svg>
             </div>
-            <span className="text-gray-500 text-sm font-medium">Leaderboard</span>
+            <span className="text-gray-700 text-base font-semibold">Leaderboard</span>
           </div>
           
           {/* Toggle Buttons */}
@@ -169,23 +169,23 @@ function Social({
       </div>
 
       {/* Friends Card */}
-      <div className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 accent-card">
+      <div className="flex-1 glass-card rounded-3xl px-6 py-5 flex flex-col min-h-0">
         {/* Header */}
         <div className="flex items-center justify-between mb-3 flex-shrink-0 w-full">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-              <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            <div className="w-11 h-11 rounded-full circle-green flex items-center justify-center">
+              <svg className="w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
               </svg>
             </div>
-            <span className="text-gray-500 text-sm font-medium">Friends</span>
+            <span className="text-gray-700 text-base font-semibold">Friends</span>
           </div>
           <button 
             onClick={() => setShowAddFriend(true)}
-            className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
+            className="w-11 h-11 rounded-full pill-counter flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
           >
-            <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
           </button>
         </div>
@@ -212,12 +212,12 @@ function Social({
             friends.map((friend, index) => (
               <div
                 key={friend.id || index}
-                className="w-full p-4 rounded-2xl bg-white border border-gray-200 flex items-center justify-between"
+                className="w-full p-4 rounded-2xl habit-item flex items-center justify-between"
               >
                 {/* Friend Avatar & Name */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full accent-chip flex items-center justify-center">
-                    <span className="text-[color:var(--accent-solid)] font-semibold text-sm">
+                  <div className="w-10 h-10 rounded-full stat-circle-profile flex items-center justify-center">
+                    <span className="text-white font-semibold text-sm">
                       {friend.name.charAt(0).toUpperCase()}
                     </span>
                   </div>
@@ -241,8 +241,8 @@ function Social({
 
       {/* Add Friend Modal */}
       {showAddFriend && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-sm accent-card-outline">
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+          <div className="glass-card rounded-3xl p-6 w-full max-w-sm">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Add Friend</h3>
             <input
               type="text"

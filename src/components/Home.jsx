@@ -281,7 +281,7 @@ function Home({
   }
 
   return (
-    <div className={`h-full flex flex-col bg-[#fcfcfc] px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))] ${habitsExpanded ? 'overflow-hidden' : ''}`}>
+    <div className={`h-full flex flex-col px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))] ${habitsExpanded ? 'overflow-hidden' : ''}`}>
       
       {/* Collapsible Top Section */}
       <AnimatePresence>
@@ -298,15 +298,15 @@ function Home({
               const tasksDone = completedToday.length
               const points = tasksDone * 10
               return (
-                <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-6 mb-4 accent-card-outline">
+                <div className="flex-shrink-0 glass-card rounded-3xl px-6 py-6 mb-4">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-                        <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      <div className="w-11 h-11 rounded-full stat-circle-profile flex items-center justify-center">
+                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                         </svg>
                       </div>
-                      <span className="text-gray-500 text-sm font-medium">Your Profile</span>
+                      <span className="text-gray-700 text-base font-semibold">Your Profile</span>
                     </div>
                     
                     {/* 3 Profile Badge Slots */}
@@ -343,9 +343,9 @@ function Home({
                   <div className="flex justify-around items-center py-2">
                     {/* Tasks Done */}
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mb-2 accent-stat">
-                        <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      <div className="w-14 h-14 rounded-full stat-circle-green flex items-center justify-center mb-2">
+                        <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
                       <span className="text-2xl font-bold text-gray-900">{tasksDone}</span>
@@ -354,10 +354,9 @@ function Home({
 
                     {/* Streak */}
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full accent-chip flex items-center justify-center mb-2 accent-stat">
-                        <svg className="w-6 h-6 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                      <div className="w-14 h-14 rounded-full stat-circle-orange flex items-center justify-center mb-2">
+                        <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 23c-1.1 0-1.99-.89-1.99-1.99h3.98c0 1.1-.89 1.99-1.99 1.99zm7-6v-6c0-3.35-2.36-6.15-5.5-6.83V3c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v1.17C7.36 4.85 5 7.65 5 11v6l-2 2v1h18v-1l-2-2z"/>
                         </svg>
                       </div>
                       <span className="text-2xl font-bold text-gray-900">{currentStreak}</span>
@@ -366,9 +365,9 @@ function Home({
 
                     {/* Points */}
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center mb-2 accent-stat">
-                        <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 15a4 4 0 004-4V4H8v7a4 4 0 004 4zm6-11h2a1 1 0 011 1v2a4 4 0 01-3 3.874V10a6 6 0 00-.17-1.418A3 3 0 0018 6V4zM6 4v2a3 3 0 00.17 2.582A6 6 0 006 10v.874A4 4 0 013 7V5a1 1 0 011-1h2zm3 17v-2h6v2a1 1 0 01-1 1h-4a1 1 0 01-1-1z" />
+                      <div className="w-14 h-14 rounded-full stat-circle-yellow flex items-center justify-center mb-2">
+                        <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                         </svg>
                       </div>
                       <span className="text-2xl font-bold text-gray-900">{points}</span>
@@ -380,7 +379,7 @@ function Home({
             })()}
 
             {/* Achievements Card - Collapsible */}
-            <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 accent-card mb-4">
+            <div className="flex-shrink-0 glass-card rounded-3xl px-6 py-5 mb-4">
               {/* Header - Clickable to expand/collapse */}
               <button 
                 onClick={(e) => {
@@ -389,13 +388,16 @@ function Home({
                 }}
                 className="flex items-center gap-3 w-full"
               >
-                <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-                  <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                <div className="w-11 h-11 rounded-full circle-green flex items-center justify-center">
+                  <svg className="w-5 h-5 text-green-700" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-gray-500 text-sm font-medium">Achievements</span>
-                <span className="ml-auto text-xs text-gray-400 mr-2">{unlockedAchievements.length}/{ACHIEVEMENTS.length}</span>
+                <span className="text-gray-700 text-base font-semibold">Achievements</span>
+                <div className="ml-auto pill-counter px-3 py-1.5 rounded-full flex items-center gap-1 mr-2">
+                  <span className="text-sm font-bold text-gray-700">{unlockedAchievements.length}</span>
+                  <span className="text-sm text-gray-400">/{ACHIEVEMENTS.length}</span>
+                </div>
                 <svg 
                   className={`w-4 h-4 text-gray-400 transition-transform ${achievementsExpanded ? 'rotate-180' : ''}`} 
                   fill="none" 
@@ -485,33 +487,11 @@ function Home({
       {/* Today's Habits Card */}
       <motion.div 
         layout
-        className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget accent-card"
+        className="flex-1 glass-card rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget"
         onClick={() => { if (!habitsExpanded) onToggleHabits() }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between mb-3 flex-shrink-0 w-full">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-              <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
-              </svg>
-            </div>
-            <span className="text-gray-500 text-sm font-medium">Today's Habits</span>
-          </div>
-          <button 
-            onClick={(e) => {
-              e.stopPropagation()
-              onAddHabit()
-            }}
-            className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
-          >
-            <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-          </button>
-        </div>
+        {/* Header - hidden when expanded, habits shown inline */}
 
         {/* Habits List */}
         <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
@@ -556,9 +536,9 @@ function Home({
               return (
                 <div
                   key={habit.id}
-                  className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between ${
-                    isResolved ? 'bg-white/50' : 'bg-white'
-                  } border border-gray-200`}
+                  className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between habit-item ${
+                    isResolved ? 'opacity-60' : ''
+                  }`}
                 >
                   {/* Habit Info - Clickable to edit */}
                   <button
@@ -589,10 +569,10 @@ function Home({
                         e.stopPropagation()
                         setVerifyingHabit(habit)
                       }}
-                      className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm active:scale-95 transition-transform"
+                      className="ml-3 px-5 py-2.5 rounded-full btn-done text-white font-semibold text-sm flex items-center gap-1.5 active:scale-95 transition-transform"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                       Done
                     </button>

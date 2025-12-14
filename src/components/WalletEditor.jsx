@@ -17,12 +17,12 @@ function WalletEditor({ wallet, onSave, onBack }) {
   }
 
   return (
-    <div className="max-w-md mx-auto p-5 min-h-full bg-[#fcfcfc]">
+    <div className="max-w-md mx-auto p-5 min-h-full">
       {/* Header */}
       <div className="flex items-center justify-between py-4 mb-6">
         <button 
           onClick={onBack}
-          className="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all active:scale-95"
+          className="w-12 h-12 rounded-full pill-counter flex items-center justify-center transition-all active:scale-95"
         >
           <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -54,14 +54,14 @@ function WalletEditor({ wallet, onSave, onBack }) {
         </div>
 
         {/* Quick Add Buttons */}
-        <div className="bg-white rounded-3xl p-6 border border-gray-200 accent-card">
+        <div className="glass-card rounded-3xl p-6">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-              <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            <div className="w-10 h-10 rounded-full stat-circle-green flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
             </div>
-            <span className="text-gray-500 text-sm font-semibold uppercase tracking-wide">Quick Add</span>
+            <span className="text-gray-700 text-sm font-semibold">Quick Add</span>
           </div>
           <div className="grid grid-cols-4 gap-3">
             {[5, 10, 20, 50].map(val => (
@@ -78,14 +78,14 @@ function WalletEditor({ wallet, onSave, onBack }) {
         </div>
 
         {/* Info */}
-        <div className="bg-white rounded-3xl p-6 border border-gray-200 accent-card">
+        <div className="glass-card rounded-3xl p-6">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-              <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <div className="w-10 h-10 rounded-full stat-circle-yellow flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <span className="text-gray-500 text-sm font-semibold uppercase tracking-wide">How it works</span>
+            <span className="text-gray-700 text-sm font-semibold">How it works</span>
           </div>
           <p className="text-gray-500 text-sm leading-relaxed">
             This is your accountability wallet. Money will be deducted when you skip habits. 
@@ -96,7 +96,7 @@ function WalletEditor({ wallet, onSave, onBack }) {
         {/* Save Button */}
         <button
           type="submit"
-          className="w-full accent-btn text-white py-5 rounded-2xl font-bold text-lg transition-all active:scale-[0.98]"
+          className="w-full btn-done text-white py-5 rounded-2xl font-bold text-lg transition-all active:scale-[0.98]"
         >
           Save Changes
         </button>

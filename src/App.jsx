@@ -362,17 +362,17 @@ function App() {
       
         {/* Global Bottom Nav - Outside all screen transitions */}
         {showMainNav && (
-          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] z-50">
-            <div className="max-w-md mx-auto flex justify-center items-center gap-12">
+          <div className="fixed bottom-0 left-0 right-0 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] z-50">
+            <div className="max-w-md mx-auto flex justify-center items-center gap-10">
               {/* Home */}
               <button 
                 onClick={() => {
                   setScreen('home')
                   setHabitsExpanded(false)
                 }}
-                className={`p-2 ${screen === 'home' && !habitsExpanded ? 'accent-btn w-11 h-11 rounded-full flex items-center justify-center' : ''}`}
+                className={`p-3 rounded-full transition-all ${screen === 'home' && !habitsExpanded ? 'nav-pill-active' : 'bg-white/80 backdrop-blur-sm'}`}
               >
-                <svg className={`w-6 h-6 ${screen === 'home' && !habitsExpanded ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <svg className={`w-6 h-6 ${screen === 'home' && !habitsExpanded ? 'text-white' : 'text-gray-400'}`} fill={screen === 'home' && !habitsExpanded ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </button>
@@ -382,7 +382,7 @@ function App() {
                   setScreen('home')
                   setHabitsExpanded(true)
                 }}
-                className={`p-2 ${screen === 'home' && habitsExpanded ? 'accent-btn w-11 h-11 rounded-full flex items-center justify-center' : ''}`}
+                className={`p-3 rounded-full transition-all ${screen === 'home' && habitsExpanded ? 'nav-pill-active' : 'bg-white/80 backdrop-blur-sm'}`}
               >
                 <svg className={`w-6 h-6 ${screen === 'home' && habitsExpanded ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -392,7 +392,7 @@ function App() {
               {/* Social/Friends */}
               <button 
                 onClick={() => setScreen('social')}
-                className={`p-2 ${screen === 'social' ? 'accent-btn w-11 h-11 rounded-full flex items-center justify-center' : ''}`}
+                className={`p-3 rounded-full transition-all ${screen === 'social' ? 'nav-pill-active' : 'bg-white/80 backdrop-blur-sm'}`}
               >
                 <svg className={`w-6 h-6 ${screen === 'social' ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
