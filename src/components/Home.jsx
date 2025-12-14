@@ -193,10 +193,16 @@ function Home({
   onAddHabit, 
   onEditHabit, 
   onMarkDone,
+  onDeleteHabit,
+  onClearHabitStatus,
   onToggleHabits 
 }) {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [verifyingHabit, setVerifyingHabit] = useState(null)
+  const [swipedHabitId, setSwipedHabitId] = useState(null)
+  const swipeStartXRef = useRef(0)
+  const swipeStartOffsetRef = useRef(0)
+  const [swipeOffsetById, setSwipeOffsetById] = useState({})
   const [selectedHabitsDay, setSelectedHabitsDay] = useState(() => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()])
   const [habitsPage, setHabitsPage] = useState('my')
   const [showHabitsPageMenu, setShowHabitsPageMenu] = useState(false)
@@ -815,60 +821,113 @@ function Home({
                       const isResolved = isDone || isPaid
 
                       return (
-                        <div
-                          key={habit.id}
-                          className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between border ${
-                            isDone
-                              ? 'bg-green-50 border-green-200'
-                              : isPaid
-                                ? 'bg-white/50 border-gray-200'
-                                : 'bg-white border-gray-200'
-                          }`}
-                        >
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              onEditHabit(habit)
-                            }}
-                            className="flex-1 min-w-0 text-left"
-                          >
-                            <span className={`font-semibold text-lg block truncate ${
-                              isDone ? 'text-green-900' : isResolved ? 'text-gray-300' : 'text-gray-900'
-                            }`}>
-                              {habit.name}
-                            </span>
-                            <span className={`text-sm ${
-                              isDone ? 'text-green-700' : isResolved ? 'text-gray-300' : 'text-gray-500'
-                            }`}>
-                              {formatTimeRange(habit)}
-                            </span>
-                          </button>
+                        <div key={habit.id} className="w-full overflow-hidden rounded-2xl">
+                          <div className="relative w-full">
+                            <div className="absolute inset-0 flex justify-end">
+                              {isDone ? (
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    onClearHabitStatus?.(habit.id)
+                                    setSwipedHabitId(null)
+                                    setSwipeOffsetById(prev => ({ ...prev, [habit.id]: 0 }))
+                                  }}
+                                  className="h-full px-5 bg-gray-100 text-gray-700 font-semibold"
+                                >
+                                  Clear
+                                </button>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    onDeleteHabit?.(habit.id)
+                                    setSwipedHabitId(null)
+                                    setSwipeOffsetById(prev => ({ ...prev, [habit.id]: 0 }))
+                                  }}
+                                  className="h-full px-5 bg-rose-500 text-white font-semibold"
+                                >
+                                  Delete
+                                </button>
+                              )}
+                            </div>
 
-                          {isResolved ? (
-                            isPaid ? (
-                              <span className="text-gray-300 text-lg font-medium ml-4">Paid</span>
-                            ) : (
-                              <span className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                                Done
-                              </span>
-                            )
-                          ) : (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setVerifyingHabit(habit)
+                            <div
+                              className={`w-full p-4 transition-transform duration-200 flex items-center justify-between border ${
+                                isDone
+                                  ? 'bg-green-50 border-green-200'
+                                  : isPaid
+                                    ? 'bg-white/50 border-gray-200'
+                                    : 'bg-white border-gray-200'
+                              }`}
+                              style={{ transform: `translateX(${swipeOffsetById[habit.id] || 0}px)` }}
+                              onTouchStart={(e) => {
+                                swipeStartXRef.current = e.touches[0].clientX
+                                swipeStartOffsetRef.current = swipeOffsetById[habit.id] || 0
+                                setSwipedHabitId(habit.id)
                               }}
-                              className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm active:scale-95 transition-transform"
+                              onTouchMove={(e) => {
+                                if (swipedHabitId !== habit.id) return
+                                const dx = e.touches[0].clientX - swipeStartXRef.current
+                                let next = swipeStartOffsetRef.current + dx
+                                if (next > 0) next = 0
+                                if (next < -110) next = -110
+                                setSwipeOffsetById(prev => ({ ...prev, [habit.id]: next }))
+                              }}
+                              onTouchEnd={() => {
+                                const cur = swipeOffsetById[habit.id] || 0
+                                const snap = cur < -55 ? -110 : 0
+                                setSwipeOffsetById(prev => ({ ...prev, [habit.id]: snap }))
+                                if (snap === 0) setSwipedHabitId(null)
+                              }}
                             >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                              </svg>
-                              Done
-                            </button>
-                          )}
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  onEditHabit(habit)
+                                }}
+                                className="flex-1 min-w-0 text-left"
+                              >
+                                <span className={`font-semibold text-lg block truncate ${
+                                  isDone ? 'text-green-900' : isResolved ? 'text-gray-300' : 'text-gray-900'
+                                }`}>
+                                  {habit.name}
+                                </span>
+                                <span className={`text-sm ${
+                                  isDone ? 'text-green-700' : isResolved ? 'text-gray-300' : 'text-gray-500'
+                                }`}>
+                                  {formatTimeRange(habit)}
+                                </span>
+                              </button>
+
+                              {isResolved ? (
+                                isPaid ? (
+                                  <span className="text-gray-300 text-lg font-medium ml-4">Paid</span>
+                                ) : (
+                                  <span className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    Done
+                                  </span>
+                                )
+                              ) : (
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    setVerifyingHabit(habit)
+                                  }}
+                                  className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm active:scale-95 transition-transform"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                  Done
+                                </button>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       )
                     })

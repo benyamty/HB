@@ -208,6 +208,27 @@ function App() {
     }
   }
 
+  const clearHabitStatus = (habitId) => {
+    const today = new Date().toISOString().split('T')[0]
+    setState(prev => {
+      const nextCompletedToday = (prev.completedToday || []).filter(id => id !== habitId)
+      const nextPaidToday = (prev.paidToday || []).filter(id => id !== habitId)
+
+      const prevDates = (prev.habitHistory || {})[habitId] || []
+      const nextDates = prevDates.filter(d => d !== today)
+
+      return {
+        ...prev,
+        completedToday: nextCompletedToday,
+        paidToday: nextPaidToday,
+        habitHistory: {
+          ...(prev.habitHistory || {}),
+          [habitId]: nextDates,
+        },
+      }
+    })
+  }
+
   const markHabitPaid = (habitId) => {
     if (!state.paidToday?.includes(habitId)) {
       setState(prev => ({
@@ -366,6 +387,8 @@ function App() {
                 setScreen('habit-adder')
               }}
               onMarkDone={markHabitDone}
+              onDeleteHabit={deleteHabit}
+              onClearHabitStatus={clearHabitStatus}
               onToggleHabits={() => setHabitsExpanded(!habitsExpanded)}
             />
           </motion.div>
