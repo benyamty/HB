@@ -390,103 +390,92 @@ body {
     0 4px 16px rgba(160, 150, 190, 0.12);
 }
 
-/* ===== SOFT PASTEL STAT CIRCLES ===== */
+/* ===== REFINED 3D SPHERES (MATCHING REFERENCE) ===== */
 
-/* Mint green circle (Tasks Done) - soft pastel */
+/* Base sphere style for shared 3D properties */
+.sphere-3d {
+  position: relative;
+  border-radius: 50%;
+  box-shadow: 
+    0 10px 20px rgba(166, 175, 190, 0.2), /* Soft drop shadow */
+    inset 0 -5px 15px rgba(0,0,0,0.05), /* Bottom shading */
+    inset 0 5px 15px rgba(255,255,255,0.8); /* Top highlight */
+}
+
+/* Tasks Done - Pale Mint Sphere */
 .stat-circle-green {
-  background: linear-gradient(180deg, #c8f7e0 0%, #86efac 40%, #4ade80 100%);
-  box-shadow:
-    0 8px 24px rgba(74, 222, 128, 0.3),
-    inset 0 2px 6px rgba(255, 255, 255, 0.5),
-    inset 0 -4px 10px rgba(34, 197, 94, 0.15);
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 12px 24px rgba(52, 211, 153, 0.25),
+    inset 0 4px 10px rgba(255, 255, 255, 0.9),
+    inset 0 -4px 10px rgba(16, 185, 129, 0.1);
 }
 
-/* Soft orange circle (Streak) */
+/* Streak - Pale Peach Sphere */
 .stat-circle-orange {
-  background: linear-gradient(180deg, #fed7aa 0%, #fdba74 40%, #fb923c 100%);
-  box-shadow:
-    0 8px 24px rgba(251, 146, 60, 0.3),
-    inset 0 2px 6px rgba(255, 255, 255, 0.5),
-    inset 0 -4px 10px rgba(234, 88, 12, 0.15);
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 12px 24px rgba(251, 146, 60, 0.25),
+    inset 0 4px 10px rgba(255, 255, 255, 0.9),
+    inset 0 -4px 10px rgba(249, 115, 22, 0.1);
 }
 
-/* Golden yellow circle (Points) */
+/* Points - Pale Lemon Sphere */
 .stat-circle-yellow {
-  background: linear-gradient(180deg, #fef08a 0%, #fde047 40%, #facc15 100%);
-  box-shadow:
-    0 8px 24px rgba(250, 204, 21, 0.3),
-    inset 0 2px 6px rgba(255, 255, 255, 0.6),
-    inset 0 -4px 10px rgba(202, 138, 4, 0.12);
+  background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 12px 24px rgba(250, 204, 21, 0.25),
+    inset 0 4px 10px rgba(255, 255, 255, 0.9),
+    inset 0 -4px 10px rgba(234, 179, 8, 0.1);
 }
 
-/* Orange profile circle */
+/* Profile - Vibrant Orange Gradient (Reference: Top Left Icon) */
 .stat-circle-profile {
-  background: linear-gradient(180deg, #fed7aa 0%, #fdba74 40%, #fb923c 100%);
-  box-shadow:
-    0 8px 24px rgba(251, 146, 60, 0.3),
-    inset 0 2px 6px rgba(255, 255, 255, 0.5),
-    inset 0 -4px 10px rgba(234, 88, 12, 0.15);
+  background: linear-gradient(135deg, #fbbf24 0%, #fb923c 50%, #f472b6 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 8px 20px rgba(251, 146, 60, 0.4),
+    inset 0 2px 5px rgba(255, 255, 255, 0.4);
 }
 
-/* Pill counter (2/10 style) */
-.pill-counter {
-  background: #f1f5f9;
-  box-shadow: 0 2px 8px rgba(148, 163, 184, 0.15);
+/* ===== UPDATED CARDS ===== */
+.glass-card {
+  background: #ffffff; /* Fully opaque per reference */
+  border-radius: 36px; /* Very rounded */
+  border: none;
+  box-shadow: 
+    0 20px 40px -10px rgba(120, 130, 160, 0.15), /* Deep soft shadow */
+    0 5px 15px -5px rgba(120, 130, 160, 0.05);
 }
 
-/* Achievement circle - unlocked */
-.achievement-unlocked {
-  box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.12),
-    inset 0 2px 4px rgba(255, 255, 255, 0.5),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.08);
-}
-
-/* Achievement circle - locked */
-.achievement-locked {
-  background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
-  box-shadow:
-    0 4px 12px rgba(148, 163, 184, 0.2),
-    inset 0 1px 2px rgba(255, 255, 255, 0.6),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.05);
-}
-
-/* Habit item card inside the glass card */
-.habit-item {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow:
-    0 2px 8px rgba(148, 163, 184, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-/* Soft green done button */
-.btn-done {
-  background: linear-gradient(160deg, #86efac 0%, #4ade80 30%, #22c55e 70%, #16a34a 100%);
-  box-shadow:
-    0 6px 20px rgba(34, 197, 94, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 6px rgba(22, 101, 52, 0.15);
-}
-
-/* Bottom nav - rainbow RING around icon (not filled) */
+/* ===== BOTTOM NAV HOME BUTTON ===== */
+/* Solid gradient sphere with white icon */
 .nav-pill-active {
-  background: white;
-  border: 3px solid transparent;
-  background-image: 
-    linear-gradient(white, white),
-    conic-gradient(from 180deg at 50% 50%, 
-      #ec4899 0deg,
-      #f97316 90deg,
-      #eab308 180deg,
-      #22c55e 270deg,
-      #ec4899 360deg
-    );
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  box-shadow:
-    0 0 20px rgba(236, 72, 153, 0.35),
-    0 0 12px rgba(249, 115, 22, 0.25);
+  background: linear-gradient(135deg, #c084fc 0%, #f472b6 50%, #fb923c 100%);
+  border: 3px solid #ffffff; /* White ring border */
+  box-shadow: 
+    0 10px 25px rgba(244, 114, 182, 0.5),
+    0 5px 10px rgba(244, 114, 182, 0.3);
+  color: white !important; /* Force icon white */
+}
+
+.nav-pill-active svg {
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* ===== CLOUD CLUSTERS ===== */
+.cloud-shape {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  filter: blur(1px); /* Slight softness */
+  box-shadow: 
+    inset 0 -10px 20px rgba(200, 210, 235, 0.4), /* Blueish purple shadow underneath */
+    0 15px 30px rgba(160, 170, 200, 0.15);
 }
 
 /* Small soft colored circles for achievements */
