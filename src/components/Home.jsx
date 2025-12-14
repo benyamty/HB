@@ -577,6 +577,20 @@ function Home({
                   className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-2xl overflow-hidden z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHabitsPage('my')
+                      setInviteFriendId(null)
+                      setShowHabitsPageMenu(false)
+                    }}
+                    className={`w-full px-4 py-3 text-left text-sm font-medium ${
+                      habitsPage === 'my' ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
+                    }`}
+                  >
+                    My Habits
+                  </button>
+
                   {sharedPages.length > 0 && (
                     <div className="py-1">
                       {sharedPages.map((p) => (
