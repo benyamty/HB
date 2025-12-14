@@ -107,31 +107,31 @@ function CheckInModal({ habitName, skipCost, onYes, onNo }) {
 
   // Question view
   return (
-    <div className="fixed inset-0 dreamy-bg flex flex-col items-center justify-center z-50 px-6">
-      <div className="w-16 h-16 rounded-full stat-circle-orange flex items-center justify-center mb-6">
-        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <div className="fixed inset-0 bg-gray-900/95 flex flex-col items-center justify-center z-50 px-6">
+      <div className="w-16 h-16 rounded-full bg-[color:var(--accent-orange)]/20 flex items-center justify-center mb-6">
+        <svg className="w-8 h-8 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
 
-      <h1 className="text-2xl font-bold text-gray-800 mb-2 text-center">
+      <h1 className="text-2xl font-bold text-white mb-2 text-center">
         Did you complete this habit?
       </h1>
-      <p className="text-xl text-orange-500 font-semibold mb-8">
+      <p className="text-xl accent-text font-medium mb-8">
         "{habitName}"
       </p>
 
       <div className="w-full space-y-3">
         <button
           onClick={() => setShowSuccess(true)}
-          className="w-full btn-done text-white font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform"
+          className="w-full bg-green-500 text-white font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform"
         >
           Yes, I did it! ✓
         </button>
         
         <button
           onClick={() => setShowPayment(true)}
-          className="w-full glass-card text-gray-700 font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform"
+          className="w-full bg-white/10 text-white font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform"
         >
           No, I missed it
         </button>

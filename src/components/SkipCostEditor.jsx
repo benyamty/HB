@@ -24,12 +24,12 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
   const presets = [0.25, 0.5, 1, 2, 5, 10]
 
   return (
-    <div className="h-full flex flex-col px-6 pt-[max(1rem,env(safe-area-inset-top))] pb-8">
+    <div className="h-full flex flex-col bg-[#fcfcfc] px-6 pt-[max(1rem,env(safe-area-inset-top))] pb-8">
       {/* Header */}
       <div className="flex items-center gap-4 py-4 mb-4">
         <button 
           onClick={onBack}
-          className="w-10 h-10 rounded-full pill-counter flex items-center justify-center active:scale-95 transition-transform"
+          className="w-10 h-10 rounded-full bg-white flex items-center justify-center active:scale-95 transition-transform"
         >
           <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -41,7 +41,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
       {/* Main Content */}
       <div className="flex-1 space-y-4">
         {/* Current Amount Display */}
-        <div className="glass-card rounded-2xl p-6 text-center">
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 text-center accent-card">
           <p className="text-gray-500 text-sm mb-2">Cost per missed habit</p>
           <div className="flex items-center justify-center">
             <span className="text-4xl font-bold text-gray-900">${parseFloat(amount).toFixed(2)}</span>
@@ -49,14 +49,14 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         </div>
 
         {/* Quick Select */}
-        <div className="glass-card rounded-2xl p-5">
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 accent-card">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 rounded-full stat-circle-orange flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <div className="w-8 h-8 rounded-full accent-chip flex items-center justify-center">
+              <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="text-gray-700 font-semibold">Quick Select</span>
+            <span className="text-gray-900 font-semibold">Quick Select</span>
           </div>
           <div className="grid grid-cols-3 gap-2">
             {presets.map(val => (
@@ -77,14 +77,14 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         </div>
 
         {/* Custom Amount */}
-        <div className="glass-card rounded-2xl p-5">
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 accent-card">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 rounded-full stat-circle-yellow flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            <div className="w-8 h-8 rounded-full accent-chip flex items-center justify-center">
+              <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
             </div>
-            <span className="text-gray-700 font-semibold">Custom Amount</span>
+            <span className="text-gray-900 font-semibold">Custom Amount</span>
           </div>
           
           {showCustom ? (
@@ -129,7 +129,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
         </div>
 
         {/* Tip */}
-        <div className="glass-card rounded-2xl p-4">
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 accent-card">
           <p className="text-gray-500 text-sm text-center">
             💡 Higher stakes = stronger motivation. Start small and increase as you build consistency.
           </p>
@@ -140,7 +140,7 @@ function SkipCostEditor({ skipCost, onSave, onBack }) {
       <button
         type="button"
         onClick={handleSave}
-        className="w-full btn-done text-white font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform mt-6"
+        className="w-full accent-btn text-white font-semibold py-4 rounded-2xl active:scale-[0.98] transition-transform mt-6"
       >
         Save Changes
       </button>

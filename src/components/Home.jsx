@@ -161,16 +161,16 @@ function getBestHabitStreak(habits, habitHistory) {
 
 // Achievement definitions with points requirements
 const ACHIEVEMENTS = [
-  { id: 'starter', name: 'Starter', icon: '🌱', color: 'circle-green', borderColor: 'border-green-400', pointsRequired: 5, description: 'Earn 5 points' },
-  { id: 'rising-star', name: 'Rising Star', icon: '⭐', color: 'circle-yellow', borderColor: 'border-yellow-400', pointsRequired: 10, description: 'Earn 10 points' },
-  { id: 'go-getter', name: 'Go Getter', icon: '💪', color: 'circle-pink', borderColor: 'border-pink-400', pointsRequired: 15, description: 'Earn 15 points' },
-  { id: 'dedicated', name: 'Dedicated', icon: '🎯', color: 'circle-blue', borderColor: 'border-blue-400', pointsRequired: 25, description: 'Earn 25 points' },
-  { id: 'champion', name: 'Champion', icon: '🏆', color: 'circle-yellow', borderColor: 'border-yellow-400', pointsRequired: 40, description: 'Earn 40 points' },
-  { id: 'legend', name: 'Legend', icon: '👑', color: 'circle-purple', borderColor: 'border-purple-400', pointsRequired: 60, description: 'Earn 60 points' },
-  { id: 'master', name: 'Master', icon: '🔥', color: 'circle-orange', borderColor: 'border-orange-400', pointsRequired: 80, description: 'Earn 80 points' },
-  { id: 'elite', name: 'Elite', icon: '💎', color: 'circle-cyan', borderColor: 'border-cyan-400', pointsRequired: 100, description: 'Earn 100 points' },
-  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'circle-indigo', borderColor: 'border-indigo-400', pointsRequired: 150, description: 'Earn 150 points' },
-  { id: 'immortal', name: 'Immortal', icon: '🚀', color: 'circle-purple', borderColor: 'border-purple-400', pointsRequired: 200, description: 'Earn 200 points' },
+  { id: 'starter', name: 'Starter', icon: '🌱', color: 'bg-green-100', borderColor: 'border-green-400', pointsRequired: 5, description: 'Earn 5 points' },
+  { id: 'rising-star', name: 'Rising Star', icon: '⭐', color: 'bg-yellow-100', borderColor: 'border-yellow-400', pointsRequired: 10, description: 'Earn 10 points' },
+  { id: 'go-getter', name: 'Go Getter', icon: '💪', color: 'bg-red-100', borderColor: 'border-red-400', pointsRequired: 15, description: 'Earn 15 points' },
+  { id: 'dedicated', name: 'Dedicated', icon: '🎯', color: 'bg-blue-100', borderColor: 'border-blue-400', pointsRequired: 25, description: 'Earn 25 points' },
+  { id: 'champion', name: 'Champion', icon: '🏆', color: 'accent-chip', borderColor: 'border-[color:var(--accent-solid)]', pointsRequired: 40, description: 'Earn 40 points' },
+  { id: 'legend', name: 'Legend', icon: '👑', color: 'bg-purple-100', borderColor: 'border-purple-400', pointsRequired: 60, description: 'Earn 60 points' },
+  { id: 'master', name: 'Master', icon: '🔥', color: 'bg-amber-100', borderColor: 'border-amber-400', pointsRequired: 80, description: 'Earn 80 points' },
+  { id: 'elite', name: 'Elite', icon: '💎', color: 'bg-cyan-100', borderColor: 'border-cyan-400', pointsRequired: 100, description: 'Earn 100 points' },
+  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'bg-purple-100', borderColor: 'border-purple-400', pointsRequired: 150, description: 'Earn 150 points' },
+  { id: 'immortal', name: 'Immortal', icon: '🚀', color: 'bg-indigo-100', borderColor: 'border-indigo-400', pointsRequired: 200, description: 'Earn 200 points' },
 ]
 
 function Home({ 
@@ -281,7 +281,7 @@ function Home({
   }
 
   return (
-    <div className={`h-full flex flex-col px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))] ${habitsExpanded ? 'overflow-hidden' : ''}`}>
+    <div className={`h-full flex flex-col bg-[#fcfcfc] px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))] ${habitsExpanded ? 'overflow-hidden' : ''}`}>
       
       {/* Collapsible Top Section */}
       <AnimatePresence>
@@ -298,23 +298,21 @@ function Home({
               const tasksDone = completedToday.length
               const points = tasksDone * 10
               return (
-                <div className="flex-shrink-0 glass-card rounded-[36px] px-6 py-6 mb-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-full stat-circle-profile flex items-center justify-center shadow-lg">
-                        <svg className="w-7 h-7 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-6 mb-4 accent-card-outline">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
+                        <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                       </div>
-                      <span className="text-gray-700 text-lg font-bold tracking-tight">Your Profile</span>
+                      <span className="text-gray-500 text-sm font-medium">Your Profile</span>
                     </div>
                     
-                    {/* 3 Profile Badge Slots - Styled as soft 3D buttons */}
-                    <div className="flex items-center gap-3">
+                    {/* 3 Profile Badge Slots */}
+                    <div className="flex items-center gap-2">
                       {profileBadges.map((badgeId, index) => {
                         const badge = badgeId ? getAchievement(badgeId) : null
-                        // Fallback styles for empty slots if needed, or specific colors for badges
-                        // Using a generic soft sphere style for badges
                         return (
                           <button
                             key={index}
@@ -322,16 +320,17 @@ function Home({
                               e.stopPropagation()
                               handleBadgeSlotClick(index)
                             }}
-                            className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform active:scale-95 ${
-                              badge ? `${badge.color} shadow-md` : 'sphere-3d bg-gray-100'
+                            className={`w-11 h-11 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
+                              badge 
+                                ? `${badge.color} ${badge.borderColor} border-solid` 
+                                : 'border-gray-300 bg-gray-50 hover:border-[color:var(--accent-solid)] hover:bg-white'
                             }`}
-                            style={!badge ? { background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' } : {}}
                           >
                             {badge ? (
-                              <span className="text-2xl filter drop-shadow-sm">{badge.icon}</span>
+                              <span className="text-lg">{badge.icon}</span>
                             ) : (
-                              <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                               </svg>
                             )}
                           </button>
@@ -341,39 +340,39 @@ function Home({
                   </div>
                   
                   {/* Stats Row */}
-                  <div className="flex justify-between items-center px-2">
+                  <div className="flex justify-around items-center py-2">
                     {/* Tasks Done */}
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-16 h-16 rounded-full stat-circle-green flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-green-600 drop-shadow-sm" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mb-2 accent-stat">
+                        <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span className="text-3xl font-bold text-gray-700 leading-none">{tasksDone}</span>
-                      <span className="text-sm font-medium text-gray-500">Tasks Done</span>
+                      <span className="text-2xl font-bold text-gray-900">{tasksDone}</span>
+                      <span className="text-xs text-gray-500">Tasks Done</span>
                     </div>
 
                     {/* Streak */}
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-16 h-16 rounded-full stat-circle-orange flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-orange-500 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 rounded-full accent-chip flex items-center justify-center mb-2 accent-stat">
+                        <svg className="w-6 h-6 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
                         </svg>
                       </div>
-                      <span className="text-3xl font-bold text-gray-700 leading-none">{currentStreak}</span>
-                      <span className="text-sm font-medium text-gray-500">Streak</span>
+                      <span className="text-2xl font-bold text-gray-900">{currentStreak}</span>
+                      <span className="text-xs text-gray-500">Streak</span>
                     </div>
 
                     {/* Points */}
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-16 h-16 rounded-full stat-circle-yellow flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-yellow-600 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center mb-2 accent-stat">
+                        <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 15a4 4 0 004-4V4H8v7a4 4 0 004 4zm6-11h2a1 1 0 011 1v2a4 4 0 01-3 3.874V10a6 6 0 00-.17-1.418A3 3 0 0018 6V4zM6 4v2a3 3 0 00.17 2.582A6 6 0 006 10v.874A4 4 0 013 7V5a1 1 0 011-1h2zm3 17v-2h6v2a1 1 0 01-1 1h-4a1 1 0 01-1-1z" />
                         </svg>
                       </div>
-                      <span className="text-3xl font-bold text-gray-700 leading-none">{points}</span>
-                      <span className="text-sm font-medium text-gray-500">Points</span>
+                      <span className="text-2xl font-bold text-gray-900">{points}</span>
+                      <span className="text-xs text-gray-500">Points</span>
                     </div>
                   </div>
                 </div>
@@ -381,7 +380,7 @@ function Home({
             })()}
 
             {/* Achievements Card - Collapsible */}
-            <div className="flex-shrink-0 glass-card rounded-[36px] px-6 py-5 mb-6">
+            <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 accent-card mb-4">
               {/* Header - Clickable to expand/collapse */}
               <button 
                 onClick={(e) => {
@@ -390,16 +389,13 @@ function Home({
                 }}
                 className="flex items-center gap-3 w-full"
               >
-                <div className="w-11 h-11 rounded-full stat-circle-yellow flex items-center justify-center shadow-md">
-                  <svg className="w-6 h-6 text-yellow-700" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-lg font-bold tracking-tight">Achievements</span>
-                <div className="ml-auto pill-counter px-3 py-1.5 rounded-full flex items-center gap-1 mr-2">
-                  <span className="text-sm font-bold text-gray-700">{unlockedAchievements.length}</span>
-                  <span className="text-sm text-gray-400">/{ACHIEVEMENTS.length}</span>
-                </div>
+                <span className="text-gray-500 text-sm font-medium">Achievements</span>
+                <span className="ml-auto text-xs text-gray-400 mr-2">{unlockedAchievements.length}/{ACHIEVEMENTS.length}</span>
                 <svg 
                   className={`w-4 h-4 text-gray-400 transition-transform ${achievementsExpanded ? 'rotate-180' : ''}`} 
                   fill="none" 
@@ -427,11 +423,12 @@ function Home({
                         <div
                           className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-95 ${
                             isUnlocked
-                              ? `${achievement.color} shadow-sm`
-                              : 'circle-gray'
+                              ? `${achievement.color} ${achievement.borderColor} border-solid shadow-sm`
+                              : 'bg-gray-100 border-gray-200 border-dashed opacity-40'
                           }`}
+                          style={{ borderWidth: '2px' }}
                         >
-                          <span className={`text-lg ${isUnlocked ? '' : 'grayscale opacity-50'}`}>
+                          <span className={`text-lg ${isUnlocked ? '' : 'grayscale'}`}>
                             {achievement.icon}
                           </span>
                         </div>
@@ -461,11 +458,12 @@ function Home({
                         <div
                           className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
                             isUnlocked
-                              ? `${achievement.color} shadow-md`
-                              : 'circle-gray'
+                              ? `${achievement.color} ${achievement.borderColor} border-solid shadow-md`
+                              : 'bg-gray-100 border-gray-200 border-dashed opacity-40'
                           }`}
+                          style={{ borderWidth: '3px' }}
                         >
-                          <span className={`text-2xl ${isUnlocked ? '' : 'grayscale opacity-50'}`}>
+                          <span className={`text-2xl ${isUnlocked ? '' : 'grayscale'}`}>
                             {achievement.icon}
                           </span>
                         </div>
@@ -484,34 +482,56 @@ function Home({
         )}
       </AnimatePresence>
 
-      {/* Today's Habits List */}
+      {/* Today's Habits Card */}
       <motion.div 
         layout
-        className="flex-1 flex flex-col min-h-0 cursor-pointer habits-widget"
+        className="flex-1 bg-white border border-gray-200 rounded-3xl px-6 py-5 flex flex-col min-h-0 cursor-pointer habits-widget accent-card"
         onClick={() => { if (!habitsExpanded) onToggleHabits() }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        {/* Header - hidden when expanded, habits shown inline */}
+        {/* Header */}
+        <div className="flex items-center justify-between mb-3 flex-shrink-0 w-full">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
+              <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
+              </svg>
+            </div>
+            <span className="text-gray-500 text-sm font-medium">Today's Habits</span>
+          </div>
+          <button 
+            onClick={(e) => {
+              e.stopPropagation()
+              onAddHabit()
+            }}
+            className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
+          >
+            <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </button>
+        </div>
 
         {/* Habits List */}
-        <div className="flex-1 flex flex-col gap-4 min-h-0 w-full overflow-y-auto px-1 pb-4">
+        <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
           {habits.length === 0 ? (
             <button 
               onClick={(e) => {
                 e.stopPropagation()
                 onAddHabit()
               }}
-              className="flex-1 flex flex-col items-center justify-center w-full glass-card rounded-[36px] py-10"
+              className="flex-1 flex flex-col items-center justify-center w-full"
             >
               {/* Plus Icon Circle */}
-              <div className="w-20 h-20 rounded-full bg-white border border-gray-100 flex items-center justify-center mb-4 shadow-sm">
-                <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-20 h-20 rounded-full bg-white border border-gray-200 flex items-center justify-center mb-4">
+                <svg className="w-10 h-10 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
               </div>
-              <p className="text-gray-400 mb-4 text-center font-medium">No habits yet</p>
-              <div className="bg-gray-100 rounded-full px-8 py-3">
-                <span className="text-gray-500 font-bold">Add Your First Habits</span>
+              <p className="text-gray-500 mb-4 text-center">No habits yet</p>
+              <div className="bg-white rounded-full px-8 py-3 border border-gray-200">
+                <span className="accent-text font-medium">Add Your First Habits</span>
               </div>
             </button>
           ) : (
@@ -536,9 +556,9 @@ function Home({
               return (
                 <div
                   key={habit.id}
-                  className={`w-full p-5 rounded-[32px] transition-all flex items-center justify-between glass-card ${
-                    isResolved ? 'opacity-60 grayscale-[0.2]' : ''
-                  }`}
+                  className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between ${
+                    isResolved ? 'bg-white/50' : 'bg-white'
+                  } border border-gray-200`}
                 >
                   {/* Habit Info - Clickable to edit */}
                   <button
@@ -548,13 +568,13 @@ function Home({
                     }}
                     className="flex-1 min-w-0 text-left"
                   >
-                    <span className={`font-bold text-xl block truncate mb-1 ${
-                      isResolved ? 'text-gray-400' : 'text-gray-800'
+                    <span className={`font-semibold text-lg block truncate ${
+                      isResolved ? 'text-gray-300' : 'text-gray-900'
                     }`}>
                       {habit.name}
                     </span>
-                    <span className={`text-sm font-medium ${
-                      isResolved ? 'text-gray-300' : 'text-gray-400'
+                    <span className={`text-sm ${
+                      isResolved ? 'text-gray-300' : 'text-gray-500'
                     }`}>
                       {formatTimeRange(habit)}
                     </span>
@@ -562,17 +582,17 @@ function Home({
                   
                   {/* Done Button / Status */}
                   {isResolved ? (
-                    <span className="text-gray-300 text-lg font-bold ml-4">{isPaid ? 'Paid' : 'Done'}</span>
+                    <span className="text-gray-300 text-lg font-medium ml-4">{isPaid ? 'Paid' : 'Done'}</span>
                   ) : (
                     <button
                       onClick={(e) => {
                         e.stopPropagation()
                         setVerifyingHabit(habit)
                       }}
-                      className="ml-3 px-6 py-3 rounded-[20px] btn-done text-white font-bold text-sm flex items-center gap-2 active:scale-95 transition-transform"
+                      className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm active:scale-95 transition-transform"
                     >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       Done
                     </button>

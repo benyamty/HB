@@ -249,47 +249,6 @@ function App() {
 
   return (
     <div className="h-full w-full">
-      {/* Puffy Cloud Clusters Background */}
-      <div className="cloud-bg">
-        {/* Top Left Cluster - Framing Profile */}
-        <div className="absolute top-[-2%] left-[-5%] w-72 h-72 z-0">
-          <div className="cloud-shape w-48 h-48 top-8 left-8 z-10"></div>
-          <div className="cloud-shape w-40 h-40 top-0 left-28 z-0"></div>
-          <div className="cloud-shape w-44 h-44 top-28 left-[-10px] z-10"></div>
-        </div>
-
-        {/* Top Right Cluster */}
-        <div className="absolute top-[-5%] right-[-10%] w-72 h-72 z-0">
-          <div className="cloud-shape w-52 h-52 top-0 right-0"></div>
-          <div className="cloud-shape w-40 h-40 top-24 right-24"></div>
-        </div>
-
-        {/* Middle Left Cluster - Framing Card Gap */}
-        <div className="absolute top-[38%] left-[-15%] w-64 h-64 z-0">
-          <div className="cloud-shape w-48 h-48 top-0 left-0"></div>
-          <div className="cloud-shape w-40 h-40 top-24 left-16"></div>
-        </div>
-
-        {/* Middle Right Cluster */}
-        <div className="absolute top-[42%] right-[-12%] w-64 h-64 z-0">
-          <div className="cloud-shape w-56 h-56 top-0 right-0"></div>
-          <div className="cloud-shape w-44 h-44 top-16 right-24"></div>
-        </div>
-
-        {/* Bottom Left Cluster */}
-        <div className="absolute bottom-[-8%] left-[-8%] w-80 h-80 z-0">
-          <div className="cloud-shape w-56 h-56 bottom-10 left-0"></div>
-          <div className="cloud-shape w-48 h-48 bottom-0 left-32"></div>
-          <div className="cloud-shape w-40 h-40 bottom-32 left-10"></div>
-        </div>
-
-        {/* Bottom Right Cluster */}
-        <div className="absolute bottom-[8%] right-[-12%] w-72 h-72 z-0">
-          <div className="cloud-shape w-52 h-52 bottom-0 right-0"></div>
-          <div className="cloud-shape w-44 h-44 bottom-28 right-16"></div>
-        </div>
-      </div>
-      
       <AnimatePresence>
         {screen === 'home' && (
           <motion.div
@@ -298,7 +257,7 @@ function App() {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
-            className="fixed inset-0 z-30"
+            className="fixed inset-0 z-30 bg-gray-50"
           >
             <HomeScreen
               wallet={state.wallet}
@@ -390,7 +349,7 @@ function App() {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
-            className="fixed inset-0 z-40"
+            className="fixed inset-0 z-40 bg-gray-50"
           >
             <SocialScreen
               friends={state.friends || []}
@@ -403,17 +362,17 @@ function App() {
       
         {/* Global Bottom Nav - Outside all screen transitions */}
         {showMainNav && (
-          <div className="fixed bottom-6 left-4 right-4 z-50">
-            <div className="max-w-xs mx-auto bg-white rounded-full shadow-2xl p-2 flex justify-between items-center px-8 border border-gray-100">
+          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] z-50">
+            <div className="max-w-md mx-auto flex justify-center items-center gap-12">
               {/* Home */}
               <button 
                 onClick={() => {
                   setScreen('home')
                   setHabitsExpanded(false)
                 }}
-                className={`p-3 rounded-full transition-all ${screen === 'home' && !habitsExpanded ? 'nav-pill-active transform -translate-y-4 shadow-lg scale-110' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`p-2 ${screen === 'home' && !habitsExpanded ? 'accent-btn w-11 h-11 rounded-full flex items-center justify-center' : ''}`}
               >
-                <svg className={`w-6 h-6 ${screen === 'home' && !habitsExpanded ? 'text-white' : 'currentColor'}`} fill={screen === 'home' && !habitsExpanded ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <svg className={`w-6 h-6 ${screen === 'home' && !habitsExpanded ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </button>
@@ -423,9 +382,9 @@ function App() {
                   setScreen('home')
                   setHabitsExpanded(true)
                 }}
-                className={`p-3 rounded-full transition-all ${screen === 'home' && habitsExpanded ? 'nav-pill-active transform -translate-y-4 shadow-lg scale-110' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`p-2 ${screen === 'home' && habitsExpanded ? 'accent-btn w-11 h-11 rounded-full flex items-center justify-center' : ''}`}
               >
-                <svg className={`w-6 h-6 ${screen === 'home' && habitsExpanded ? 'text-white' : 'currentColor'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <svg className={`w-6 h-6 ${screen === 'home' && habitsExpanded ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
                 </svg>
@@ -433,9 +392,9 @@ function App() {
               {/* Social/Friends */}
               <button 
                 onClick={() => setScreen('social')}
-                className={`p-3 rounded-full transition-all ${screen === 'social' ? 'nav-pill-active transform -translate-y-4 shadow-lg scale-110' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`p-2 ${screen === 'social' ? 'accent-btn w-11 h-11 rounded-full flex items-center justify-center' : ''}`}
               >
-                <svg className={`w-6 h-6 ${screen === 'social' ? 'text-white' : 'currentColor'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <svg className={`w-6 h-6 ${screen === 'social' ? 'text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </button>

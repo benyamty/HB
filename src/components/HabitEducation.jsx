@@ -18,12 +18,12 @@ function HabitEducation({ habit, onDone }) {
   }
 
   return (
-    <div className="h-full flex flex-col px-6 pt-[max(3rem,env(safe-area-inset-top))] pb-8">
+    <div className="h-full flex flex-col bg-[#fcfcfc] px-6 pt-[max(3rem,env(safe-area-inset-top))] pb-8">
       {/* Header - Commitment Locked */}
       <div className="flex flex-col items-center text-center mb-6">
-        <div className="w-14 h-14 rounded-full stat-circle-green flex items-center justify-center mb-3">
-          <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center mb-3">
+          <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
           </svg>
         </div>
         <h1 className="text-xl font-bold text-gray-900 mb-1">
@@ -37,8 +37,8 @@ function HabitEducation({ habit, onDone }) {
       {/* Main Content */}
       <div className="flex-1 space-y-4">
         {/* YOUR CUE - The main focus */}
-        <div className="glass-card rounded-2xl p-5 border-2 border-orange-200">
-          <p className="text-orange-500 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="accent-gradient-soft border-2 border-[color:var(--accent-orange)]/30 rounded-2xl p-5">
+          <p className="text-[color:var(--accent-solid)] text-xs font-bold uppercase tracking-wider mb-2">
             Your Cue
           </p>
           <p className="text-gray-900 text-2xl font-bold mb-1">
@@ -50,17 +50,17 @@ function HabitEducation({ habit, onDone }) {
         </div>
 
         {/* YOUR STAKES */}
-        <div className="glass-card rounded-2xl p-5">
-          <p className="text-gray-700 text-xs font-bold uppercase tracking-wider mb-3">
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 accent-card">
+          <p className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-3">
             Your Stakes
           </p>
           
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full circle-green flex items-center justify-center">
-                  <svg className="w-4 h-4 text-green-700" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <span className="text-gray-700 font-medium">Complete</span>
@@ -97,7 +97,7 @@ function HabitEducation({ habit, onDone }) {
       {/* CTA Button */}
       <button
         onClick={onDone}
-        className="w-full btn-done text-white font-bold py-4 rounded-2xl active:scale-[0.98] transition-transform"
+        className="w-full accent-btn text-white font-bold py-4 rounded-2xl active:scale-[0.98] transition-transform"
       >
         I'm Ready
       </button>
