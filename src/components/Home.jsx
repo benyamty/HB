@@ -817,9 +817,13 @@ function Home({
                       return (
                         <div
                           key={habit.id}
-                          className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between ${
-                            isResolved ? 'bg-white/50' : 'bg-white'
-                          } border border-gray-200`}
+                          className={`w-full p-4 rounded-2xl transition-all flex items-center justify-between border ${
+                            isDone
+                              ? 'bg-green-50 border-green-200'
+                              : isPaid
+                                ? 'bg-white/50 border-gray-200'
+                                : 'bg-white border-gray-200'
+                          }`}
                         >
                           <button
                             onClick={(e) => {
@@ -829,19 +833,30 @@ function Home({
                             className="flex-1 min-w-0 text-left"
                           >
                             <span className={`font-semibold text-lg block truncate ${
-                              isResolved ? 'text-gray-300' : 'text-gray-900'
+                              isDone ? 'text-green-900' : isResolved ? 'text-gray-300' : 'text-gray-900'
                             }`}>
                               {habit.name}
                             </span>
                             <span className={`text-sm ${
-                              isResolved ? 'text-gray-300' : 'text-gray-500'
+                              isDone ? 'text-green-700' : isResolved ? 'text-gray-300' : 'text-gray-500'
                             }`}>
                               {formatTimeRange(habit)}
                             </span>
                           </button>
 
                           {isResolved ? (
-                            <span className="text-gray-300 text-lg font-medium ml-4">{isPaid ? 'Paid' : 'Done'}</span>
+                            <span className={`ml-4 flex items-center gap-2 text-lg font-medium ${
+                              isDone ? 'text-green-700' : 'text-gray-300'
+                            }`}>
+                              {isDone && (
+                                <span className="w-6 h-6 rounded-full bg-green-600 flex items-center justify-center">
+                                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </span>
+                              )}
+                              <span>{isPaid ? 'Paid' : 'Done'}</span>
+                            </span>
                           ) : (
                             <button
                               onClick={(e) => {
