@@ -845,18 +845,16 @@ function Home({
                           </button>
 
                           {isResolved ? (
-                            <span className={`ml-4 flex items-center gap-2 text-lg font-medium ${
-                              isDone ? 'text-green-700' : 'text-gray-300'
-                            }`}>
-                              {isDone && (
-                                <span className="w-6 h-6 rounded-full bg-green-600 flex items-center justify-center">
-                                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                                  </svg>
-                                </span>
-                              )}
-                              <span>{isPaid ? 'Paid' : 'Done'}</span>
-                            </span>
+                            isPaid ? (
+                              <span className="text-gray-300 text-lg font-medium ml-4">Paid</span>
+                            ) : (
+                              <span className="ml-3 px-4 py-2 rounded-full bg-green-500/85 backdrop-blur-sm text-white font-semibold text-sm flex items-center gap-1 border border-white/30 shadow-sm">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                Done
+                              </span>
+                            )
                           ) : (
                             <button
                               onClick={(e) => {
