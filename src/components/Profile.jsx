@@ -266,13 +266,19 @@ export default function Profile({
                         <div className="min-w-0">
                           <div className="font-semibold text-gray-900 truncate">{item.habitName}</div>
                           <div className="text-sm text-[color:var(--accent-solid)] font-semibold">
-                            {item.clearedAt
-                              ? `${new Date(item.clearedAt).toLocaleDateString()} • ${new Date(item.clearedAt).toLocaleTimeString()}`
-                              : item.date}
+                            {item.clearedAt ? (
+                              <span>
+                                {new Date(item.clearedAt).toLocaleDateString()}
+                                <span className="text-gray-900"> • </span>
+                                {new Date(item.clearedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              </span>
+                            ) : (
+                              item.date
+                            )}
                           </div>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="inline-flex items-center gap-1 bg-[color:var(--accent-orange)]/10 text-[color:var(--accent-solid)] px-3 py-1 rounded-full text-xs font-semibold border border-[color:var(--accent-orange)]/20">
+                          <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-semibold border border-green-200">
                             Cleared
                           </span>
                         </div>
