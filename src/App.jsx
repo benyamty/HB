@@ -249,12 +249,14 @@ function App() {
 
   return (
     <div className="h-full w-full">
-      {/* Cloud Background */}
+      {/* Puffy Cloud Background */}
       <div className="cloud-bg">
-        <div className="cloud-layer-1"></div>
-        <div className="cloud-layer-2"></div>
-        <div className="cloud-layer-3"></div>
-        <div className="cloud-layer-4"></div>
+        <div className="puffy-cloud cloud-1"><span></span></div>
+        <div className="puffy-cloud cloud-2"><span></span></div>
+        <div className="puffy-cloud cloud-3"><span></span></div>
+        <div className="puffy-cloud cloud-4"><span></span></div>
+        <div className="puffy-cloud cloud-5"><span></span></div>
+        <div className="puffy-cloud cloud-6"><span></span></div>
       </div>
       
       <AnimatePresence>
