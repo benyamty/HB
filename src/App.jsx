@@ -228,8 +228,7 @@ function App() {
 
       const habitName = (prev.habits || []).find(h => h.id === habitId)?.name || 'Habit'
       const prevCleared = prev.clearedHabitHistory || []
-      const alreadyLogged = prevCleared.some(e => e.habitId === habitId && e.date === today)
-      const nextCleared = (shouldLog && !alreadyLogged)
+      const nextCleared = shouldLog
         ? [
             { id: Date.now(), habitId, habitName, clearedAt: Date.now(), date: today },
             ...prevCleared,

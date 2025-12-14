@@ -266,7 +266,7 @@ export default function Profile({
                         <div className="min-w-0">
                           <div className="font-semibold text-gray-900 truncate">{item.habitName}</div>
                           <div className="text-sm text-gray-500">
-                            {item.date}
+                            {item.clearedAt ? new Date(item.clearedAt).toLocaleString() : item.date}
                           </div>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0">
