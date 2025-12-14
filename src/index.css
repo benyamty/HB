@@ -164,64 +164,64 @@ body {
   100% { opacity: 0; transform: translateY(-20px); }
 }
 
- :root {
-   --accent-pink: #7c3aed;
-   --accent-orange: #ff4d00;
-   --accent-yellow: #ffe600;
-   --accent-solid: #ff4d00;
- }
+:root {
+  --accent-purple: #7c3aed;
+  --accent-orange: #ff4d00;
+  --accent-yellow: #ffe600;
+  --accent-solid: #ff4d00;
+}
 
- .accent-gradient {
-   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
- }
+.accent-gradient {
+  background: linear-gradient(90deg, var(--accent-purple) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
+}
 
- .accent-gradient-soft {
-   background: linear-gradient(90deg,
-     color-mix(in srgb, var(--accent-pink) 6%, white) 0%,
-     color-mix(in srgb, var(--accent-orange) 6%, white) 42%,
-     color-mix(in srgb, var(--accent-yellow) 6%, white) 100%
-   );
- }
+.accent-gradient-soft {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent-purple) 6%, white) 0%,
+    color-mix(in srgb, var(--accent-orange) 6%, white) 42%,
+    color-mix(in srgb, var(--accent-yellow) 6%, white) 100%
+  );
+}
 
- .accent-text {
-   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
-   -webkit-background-clip: text;
-   background-clip: text;
-   color: transparent;
- }
+.accent-text {
+  background: linear-gradient(90deg, var(--accent-purple) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
- .accent-btn {
-   background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
-   box-shadow:
-     0 18px 34px rgba(255, 77, 0, 0.34),
-     0 10px 20px rgba(124, 58, 237, 0.26),
-     0 2px 0 rgba(255, 230, 0, 0.18),
-     inset 0 1px 0 rgba(255, 255, 255, 0.46);
-   position: relative;
-   overflow: hidden;
- }
+.accent-btn {
+  background: linear-gradient(90deg, var(--accent-purple) 0%, var(--accent-orange) 42%, var(--accent-yellow) 100%);
+  box-shadow:
+    0 18px 34px rgba(255, 77, 0, 0.34),
+    0 10px 20px rgba(124, 58, 237, 0.26),
+    0 2px 0 rgba(255, 230, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.46);
+  position: relative;
+  overflow: hidden;
+}
 
- .accent-btn::before {
-   content: '';
-   position: absolute;
-   top: 0;
-   left: 0;
-   right: 0;
-   height: 65%;
-   background: linear-gradient(to bottom, rgba(255,255,255,0.40), rgba(255,255,255,0.14), transparent);
-   pointer-events: none;
- }
+.accent-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.40), rgba(255,255,255,0.14), transparent);
+  pointer-events: none;
+}
 
- .accent-chip {
-   background: linear-gradient(135deg,
-     color-mix(in srgb, var(--accent-pink) 3%, white) 0%,
-     color-mix(in srgb, var(--accent-orange) 3%, white) 55%,
-     color-mix(in srgb, var(--accent-yellow) 3%, white) 100%
-   );
-   box-shadow:
-     0 10px 18px rgba(255, 77, 0, 0.12),
-     inset 0 1px 0 rgba(255,255,255,0.60);
- }
+.accent-chip {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-purple) 3%, white) 0%,
+    color-mix(in srgb, var(--accent-orange) 3%, white) 55%,
+    color-mix(in srgb, var(--accent-yellow) 3%, white) 100%
+  );
+  box-shadow:
+    0 10px 18px rgba(255, 77, 0, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.60);
+}
 
  .accent-card {
    box-shadow:
