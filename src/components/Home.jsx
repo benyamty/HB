@@ -824,7 +824,7 @@ function Home({
                       return (
                         <div key={habit.id} className="w-full overflow-hidden rounded-2xl">
                           <div className="relative w-full">
-                            <div className="absolute inset-0 flex justify-end">
+                            <div className="absolute right-0 top-0 bottom-0 w-[110px]">
                               {isDone ? (
                                 <button
                                   type="button"
@@ -834,7 +834,7 @@ function Home({
                                     setSwipedHabitId(null)
                                     setSwipeOffsetById(prev => ({ ...prev, [habit.id]: 0 }))
                                   }}
-                                  className="h-full px-5 bg-gray-100 text-gray-700 font-semibold"
+                                  className="w-full h-full bg-gray-100 text-gray-700 font-semibold flex items-center justify-center"
                                 >
                                   Clear
                                 </button>
@@ -847,7 +847,7 @@ function Home({
                                     setSwipedHabitId(null)
                                     setSwipeOffsetById(prev => ({ ...prev, [habit.id]: 0 }))
                                   }}
-                                  className="h-full px-5 bg-rose-500 text-white font-semibold"
+                                  className="w-full h-full bg-rose-500 text-white font-semibold flex items-center justify-center"
                                 >
                                   Delete
                                 </button>
