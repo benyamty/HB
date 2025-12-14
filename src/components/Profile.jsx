@@ -155,41 +155,30 @@ export default function Profile({
             )}
           </div>
 
-          <div className="w-full mt-6 bg-white border border-gray-200 rounded-3xl px-6 py-6 accent-card-outline">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl accent-chip flex items-center justify-center">
-                  <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <span className="text-gray-500 text-sm font-medium">Your Profile</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                {profileBadges.map((badgeId, index) => {
-                  const badge = badgeId ? getAchievement(badgeId) : null
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => handleBadgeSlotClick(index)}
-                      className={`w-11 h-11 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
-                        badge
-                          ? `${badge.color} ${badge.borderColor} border-solid`
-                          : 'border-gray-300 bg-gray-50 hover:border-[color:var(--accent-solid)] hover:bg-white'
-                      }`}
-                    >
-                      {badge ? (
-                        <span className="text-lg">{badge.icon}</span>
-                      ) : (
-                        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                      )}
-                    </button>
-                  )
-                })}
-              </div>
+          <div className="w-full mt-6">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              {profileBadges.map((badgeId, index) => {
+                const badge = badgeId ? getAchievement(badgeId) : null
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleBadgeSlotClick(index)}
+                    className={`w-12 h-12 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
+                      badge
+                        ? `${badge.color} ${badge.borderColor} border-solid`
+                        : 'border-gray-300 bg-gray-50 hover:border-[color:var(--accent-solid)] hover:bg-white'
+                    }`}
+                  >
+                    {badge ? (
+                      <span className="text-xl">{badge.icon}</span>
+                    ) : (
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    )}
+                  </button>
+                )
+              })}
             </div>
 
             <div className="flex justify-around items-center py-2">
