@@ -175,6 +175,7 @@ const ACHIEVEMENTS = [
 
 function Home({ 
   wallet, 
+  profileImage,
   habits, 
   completedToday,
   paidToday,
@@ -386,11 +387,17 @@ function Home({
               e.stopPropagation()
               setShowProfileModal(true)
             }}
-            className="w-10 h-10 rounded-full accent-chip flex items-center justify-center active:scale-95 transition-transform"
+            className="w-10 h-10 rounded-full overflow-hidden bg-white border border-gray-200 flex items-center justify-center active:scale-95 transition-transform"
           >
-            <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+            {profileImage ? (
+              <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center accent-chip">
+                <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+            )}
           </button>
         </div>
       )}
@@ -406,10 +413,16 @@ function Home({
           >
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <div className="w-9 h-9 rounded-xl accent-chip flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+                <div className="w-9 h-9 rounded-xl overflow-hidden bg-white border border-gray-200 flex items-center justify-center">
+                  {profileImage ? (
+                    <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center accent-chip">
+                      <svg className="w-4 h-4 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
                 <span className="text-gray-700 text-sm font-semibold">Your Profile</span>
               </div>

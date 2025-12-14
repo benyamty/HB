@@ -328,6 +328,7 @@ function App() {
           >
             <HomeScreen
               wallet={state.wallet}
+              profileImage={state.profileImage}
               habits={state.habits}
               completedToday={state.completedToday}
               paidToday={state.paidToday || []}
