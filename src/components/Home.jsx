@@ -165,12 +165,12 @@ const ACHIEVEMENTS = [
   { id: 'rising-star', name: 'Rising Star', icon: '⭐', color: 'circle-yellow', borderColor: 'border-yellow-400', pointsRequired: 10, description: 'Earn 10 points' },
   { id: 'go-getter', name: 'Go Getter', icon: '💪', color: 'circle-pink', borderColor: 'border-pink-400', pointsRequired: 15, description: 'Earn 15 points' },
   { id: 'dedicated', name: 'Dedicated', icon: '🎯', color: 'circle-blue', borderColor: 'border-blue-400', pointsRequired: 25, description: 'Earn 25 points' },
-  { id: 'champion', name: 'Champion', icon: '🏆', color: 'circle-gray', borderColor: 'border-[color:var(--accent-solid)]', pointsRequired: 40, description: 'Earn 40 points' },
-  { id: 'legend', name: 'Legend', icon: '👑', color: 'circle-gray', borderColor: 'border-purple-400', pointsRequired: 60, description: 'Earn 60 points' },
-  { id: 'master', name: 'Master', icon: '🔥', color: 'circle-gray', borderColor: 'border-amber-400', pointsRequired: 80, description: 'Earn 80 points' },
-  { id: 'elite', name: 'Elite', icon: '💎', color: 'circle-gray', borderColor: 'border-cyan-400', pointsRequired: 100, description: 'Earn 100 points' },
-  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'circle-gray', borderColor: 'border-purple-400', pointsRequired: 150, description: 'Earn 150 points' },
-  { id: 'immortal', name: 'Immortal', icon: '🚀', color: 'circle-gray', borderColor: 'border-indigo-400', pointsRequired: 200, description: 'Earn 200 points' },
+  { id: 'champion', name: 'Champion', icon: '🏆', color: 'circle-yellow', borderColor: 'border-yellow-400', pointsRequired: 40, description: 'Earn 40 points' },
+  { id: 'legend', name: 'Legend', icon: '👑', color: 'circle-purple', borderColor: 'border-purple-400', pointsRequired: 60, description: 'Earn 60 points' },
+  { id: 'master', name: 'Master', icon: '🔥', color: 'circle-orange', borderColor: 'border-orange-400', pointsRequired: 80, description: 'Earn 80 points' },
+  { id: 'elite', name: 'Elite', icon: '💎', color: 'circle-cyan', borderColor: 'border-cyan-400', pointsRequired: 100, description: 'Earn 100 points' },
+  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'circle-indigo', borderColor: 'border-indigo-400', pointsRequired: 150, description: 'Earn 150 points' },
+  { id: 'immortal', name: 'Immortal', icon: '🚀', color: 'circle-purple', borderColor: 'border-purple-400', pointsRequired: 200, description: 'Earn 200 points' },
 ]
 
 function Home({ 
