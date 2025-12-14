@@ -1,4 +1,15 @@
-export default function HabitsPage({ habits, completedToday = [], isClosing, onAddHabit, onEditHabit, onDeleteHabit, onMarkDone, onBack }) {
+import { useMemo, useState } from 'react'
+
+export default function HabitsPage({ habits, completedToday = [], isClosing, onAddHabit, onEditHabit, onDeleteHabit, onMarkDone, onBack, sharedHabits = [] }) {
+  const WEEKDAYS = useMemo(() => (['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']), [])
+
+  const getTodayKey = () => {
+    const idx = new Date().getDay()
+    return WEEKDAYS[idx]
+  }
+
+  const [view, setView] = useState(getTodayKey())
+
   const formatTimeRange = (habit) => {
     if (habit.allDay) return 'All Day'
     const format = (t) => {
@@ -13,6 +24,24 @@ export default function HabitsPage({ habits, completedToday = [], isClosing, onA
   const isHabitDone = (habit) => completedToday.includes(habit.id)
 
   const animationClass = isClosing ? 'animate-sheetDown' : 'animate-sheetUp'
+
+  const headerLabel = view === 'shared' ? 'Shared Habits' : `${view} Habits`
+
+  const displayedHabits = useMemo(() => {
+    if (view === 'shared') {
+      const derivedShared = habits.filter(h => (h.sharedWith?.length || 0) > 0 || h.isShared)
+      const merged = [...derivedShared, ...sharedHabits]
+      const byId = new Map()
+      for (const h of merged) byId.set(h.id ?? `${h.name}-${h.startTime}-${h.endTime}`, h)
+      return Array.from(byId.values())
+    }
+
+    return habits.filter(h => {
+      const d = h.daysOfWeek
+      if (!Array.isArray(d) || d.length === 0) return view === getTodayKey()
+      return d.includes(view)
+    })
+  }, [habits, sharedHabits, view, WEEKDAYS])
 
   return (
     <div className={`fixed inset-0 bg-[#fcfcfc] flex flex-col px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))] z-40 ${animationClass}`}>
@@ -33,21 +62,33 @@ export default function HabitsPage({ habits, completedToday = [], isClosing, onA
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
             </svg>
           </div>
-          <span className="text-gray-500 text-sm font-medium">Today's Habits</span>
+          <span className="text-gray-500 text-sm font-medium">{headerLabel}</span>
         </div>
-        <button 
-          onClick={onAddHabit}
-          className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
-        >
-          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-        </button>
+        <div className="flex items-center gap-2">
+          <select
+            value={view}
+            onChange={(e) => setView(e.target.value)}
+            className="h-9 rounded-full bg-gray-100 text-gray-700 text-sm font-medium px-3 focus:outline-none"
+          >
+            {WEEKDAYS.map(d => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+            <option value="shared">Shared</option>
+          </select>
+          <button 
+            onClick={onAddHabit}
+            className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
+          >
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Habits List - same style as Home */}
       <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
-        {habits.length === 0 ? (
+        {displayedHabits.length === 0 ? (
           <button 
             onClick={onAddHabit}
             className="flex-1 flex flex-col items-center justify-center w-full"
@@ -63,7 +104,7 @@ export default function HabitsPage({ habits, completedToday = [], isClosing, onA
             </div>
           </button>
         ) : (
-          habits.map((habit, index) => {
+          displayedHabits.map((habit, index) => {
             const isDone = isHabitDone(habit)
             const isFirst = index === 0
             
