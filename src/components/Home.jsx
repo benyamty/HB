@@ -327,7 +327,7 @@ function Home({
     if (!sharedPageTitleMeasureRef.current) return
     const text = value && value.length ? value : ' '
     sharedPageTitleMeasureRef.current.textContent = text
-    const w = Math.ceil(sharedPageTitleMeasureRef.current.offsetWidth) + 18
+    const w = Math.ceil(sharedPageTitleMeasureRef.current.offsetWidth) + 36
     setSharedPageTitleInputWidth(w)
   }
 
@@ -608,8 +608,11 @@ function Home({
                               }}
                               onFocus={(e) => {
                                 try {
-                                  e.target.scrollLeft = 0
-                                  e.target.setSelectionRange(0, 0)
+                                  const len = e.target.value?.length || 0
+                                  e.target.setSelectionRange(len, len)
+                                  requestAnimationFrame(() => {
+                                    try { e.target.scrollLeft = 0 } catch (_) {}
+                                  })
                                 } catch (_) {}
                               }}
                               onBlur={() => {
@@ -622,7 +625,7 @@ function Home({
                                 if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
                               }}
                               className="text-sm font-medium text-gray-700 text-left bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
-                              style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 320) }}
+                              style={{ width: Math.min(Math.max(sharedPageTitleInputWidth + 20, 60), 360) }}
                               autoFocus
                             />
                           </span>
