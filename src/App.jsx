@@ -116,13 +116,17 @@ function App() {
     if (!friend) return
 
     setState(prev => {
-      const existing = (prev.sharedPageInvites || []).some(i => i.friendId === friendId)
-      if (existing) return prev
+      const existingPage = (prev.sharedPages || []).some(p => p.friendId === friendId)
+      if (existingPage) return prev
+
+      // Offline mode: auto-accept immediately by creating the shared page
+      const pageId = Date.now()
+      const title = `${friend.name}`
       return {
         ...prev,
-        sharedPageInvites: [
-          ...(prev.sharedPageInvites || []),
-          { id: Date.now(), friendId, friendName: friend.name, createdAt: Date.now() },
+        sharedPages: [
+          ...(prev.sharedPages || []),
+          { id: pageId, friendId, friendName: friend.name, title, createdAt: Date.now() },
         ],
       }
     })

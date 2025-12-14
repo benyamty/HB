@@ -851,6 +851,8 @@ function Home({
                 onClick={() => {
                   if (!inviteFriendId) return
                   onSendSharedPageInvite?.(inviteFriendId)
+                  setHabitsPage('shared')
+                  setShowHabitsPageMenu(false)
                   setShowInviteModal(false)
                 }}
                 className={`px-6 py-3 rounded-full font-semibold text-sm transition-colors ${
