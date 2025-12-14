@@ -590,27 +590,26 @@ function Home({
                   }}
                   className="flex items-center gap-1 text-gray-500 text-sm font-medium"
                 >
-                  Your Habits
+                  {habitsPage === 'shared' && selectedSharedPage ? selectedSharedPage.title : 'Your Habits'}
                   <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
 
-                {habitsPage === 'shared' && selectedSharedPage && (
+                {habitsPage === 'shared' && selectedSharedPage && isEditingSharedPageTitle && (
                   <div className="mt-1">
-                    {isEditingSharedPageTitle ? (
-                      <div className="relative">
-                        <span
-                          ref={sharedPageTitleMeasureRef}
-                          className="absolute -left-[9999px] -top-[9999px] text-sm font-semibold whitespace-pre"
-                        />
-                        <input
-                          value={sharedPageTitleDraft}
-                          onChange={(e) => {
-                            const v = e.target.value
-                            setSharedPageTitleDraft(v)
-                            recalcSharedPageTitleWidth(v)
-                          }}
+                    <div className="relative">
+                      <span
+                        ref={sharedPageTitleMeasureRef}
+                        className="absolute -left-[9999px] -top-[9999px] text-sm font-semibold whitespace-pre"
+                      />
+                      <input
+                        value={sharedPageTitleDraft}
+                        onChange={(e) => {
+                          const v = e.target.value
+                          setSharedPageTitleDraft(v)
+                          recalcSharedPageTitleWidth(v)
+                        }}
                         onBlur={() => {
                           commitSharedPageTitle()
                         }}
@@ -620,16 +619,11 @@ function Home({
                           }
                           if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
                         }}
-                          className="text-sm font-semibold text-gray-800 bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
-                          style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 224) }}
-                          autoFocus
-                        />
-                      </div>
-                    ) : (
-                      <div className="text-xs text-gray-500 font-semibold truncate max-w-[14rem]">
-                        {selectedSharedPage.title}
-                      </div>
-                    )}
+                        className="text-sm font-semibold text-gray-800 bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
+                        style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 224) }}
+                        autoFocus
+                      />
+                    </div>
                   </div>
                 )}
 
