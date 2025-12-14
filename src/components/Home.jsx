@@ -322,8 +322,10 @@ function Home({
                               e.stopPropagation()
                               handleBadgeSlotClick(index)
                             }}
-                            className="w-12 h-12 rounded-full sphere-3d bg-gray-100 flex items-center justify-center transition-transform active:scale-95"
-                            style={badge ? { background: 'linear-gradient(135deg, #fff 0%, #f3f4f6 100%)' } : { background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}
+                            className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform active:scale-95 ${
+                              badge ? `${badge.color} shadow-md` : 'sphere-3d bg-gray-100'
+                            }`}
+                            style={!badge ? { background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' } : {}}
                           >
                             {badge ? (
                               <span className="text-2xl filter drop-shadow-sm">{badge.icon}</span>
@@ -354,8 +356,9 @@ function Home({
                     {/* Streak */}
                     <div className="flex flex-col items-center gap-2">
                       <div className="w-16 h-16 rounded-full stat-circle-orange flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-orange-600 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 23c-1.1 0-1.99-.89-1.99-1.99h3.98c0 1.1-.89 1.99-1.99 1.99zm7-6v-6c0-3.35-2.36-6.15-5.5-6.83V3c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v1.17C7.36 4.85 5 7.65 5 11v6l-2 2v1h18v-1l-2-2z"/>
+                        <svg className="w-8 h-8 text-orange-500 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
                         </svg>
                       </div>
                       <span className="text-3xl font-bold text-gray-700 leading-none">{currentStreak}</span>

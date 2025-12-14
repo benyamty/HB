@@ -248,6 +248,22 @@ body {
 
 /* ===== DREAMY CLOUD UI SYSTEM ===== */
 
+/* ===== BUTTONS & PILLS ===== */
+
+.btn-done {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  box-shadow: 
+    0 4px 12px rgba(34, 197, 94, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.pill-counter {
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(148, 163, 184, 0.1),
+    0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
 /* ===== CLOUD BACKGROUND - MATCHING REFERENCE ===== */
 
 .cloud-bg {
@@ -255,16 +271,13 @@ body {
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  /* Soft lavender/blue/pink gradient base */
+  /* Richer periwinkle/blue sky to contrast with white clouds */
   background: linear-gradient(180deg, 
-    #e8e0f0 0%,
-    #dde8f8 15%,
-    #e8ddf0 30%,
-    #d8e4f8 45%,
-    #e5d8ec 60%,
-    #d5e0f5 75%,
-    #e0d8e8 90%,
-    #dce5f2 100%
+    #dbeafe 0%,
+    #e0e7ff 25%,
+    #ddd6fe 50%,
+    #e9d5ff 75%,
+    #f3e8ff 100%
   );
 }
 
@@ -274,97 +287,74 @@ body {
   border-radius: 100px;
   background: linear-gradient(180deg, 
     #ffffff 0%,
-    #fefefe 30%,
-    #f8f6fc 60%,
-    #f0ecf8 100%
+    #ffffff 40%,
+    #f8fafc 100%
   );
   box-shadow:
-    0 20px 60px rgba(180, 160, 200, 0.25),
-    0 10px 30px rgba(160, 140, 190, 0.15),
-    inset 0 -20px 40px rgba(200, 180, 220, 0.2),
-    inset 0 10px 30px rgba(255, 255, 255, 0.9);
+    0 20px 50px rgba(100, 116, 139, 0.15), /* Soft blue-grey shadow */
+    0 10px 20px rgba(100, 116, 139, 0.05),
+    inset 0 -10px 30px rgba(219, 234, 254, 0.4), /* Blue tint at bottom */
+    inset 0 5px 15px rgba(255, 255, 255, 1);
 }
 
 /* Cloud 1 - Top left - large white/cream */
 .cloud-1 {
-  width: 350px;
+  width: 320px;
   height: 180px;
-  top: -40px;
-  left: -80px;
+  top: -60px;
+  left: -40px;
   border-radius: 90px;
+  z-index: 1;
 }
 
 /* Cloud 2 - Top right */
 .cloud-2 {
-  width: 280px;
-  height: 150px;
-  top: 20px;
+  width: 260px;
+  height: 160px;
+  top: -40px;
   right: -60px;
-  border-radius: 75px;
+  border-radius: 80px;
+  z-index: 1;
 }
 
-/* Cloud 3 - Middle left - pink tinted */
+/* Cloud 3 - Middle left - framing profile card */
 .cloud-3 {
-  width: 380px;
-  height: 200px;
-  top: 30%;
-  left: -100px;
-  border-radius: 100px;
-  background: linear-gradient(180deg, 
-    #ffffff 0%,
-    #fefcff 30%,
-    #f8f0f8 60%,
-    #f0e4f0 100%
-  );
-  box-shadow:
-    0 25px 70px rgba(200, 160, 200, 0.3),
-    0 12px 35px rgba(180, 140, 180, 0.2),
-    inset 0 -25px 50px rgba(220, 180, 210, 0.25),
-    inset 0 12px 35px rgba(255, 255, 255, 0.9);
+  width: 200px;
+  height: 140px;
+  top: 25%;
+  left: -80px;
+  border-radius: 70px;
+  z-index: 1;
 }
 
-/* Cloud 4 - Bottom right - blue tinted */
+/* Cloud 4 - Middle right - framing achievements */
 .cloud-4 {
-  width: 400px;
-  height: 220px;
-  bottom: 5%;
-  right: -120px;
-  border-radius: 110px;
-  background: linear-gradient(180deg, 
-    #ffffff 0%,
-    #fcfeff 30%,
-    #f4f8fc 60%,
-    #e8f0f8 100%
-  );
-  box-shadow:
-    0 25px 70px rgba(160, 180, 210, 0.3),
-    0 12px 35px rgba(140, 160, 200, 0.2),
-    inset 0 -25px 50px rgba(180, 200, 230, 0.25),
-    inset 0 12px 35px rgba(255, 255, 255, 0.9);
+  width: 180px;
+  height: 120px;
+  top: 40%;
+  right: -60px;
+  border-radius: 60px;
+  z-index: 1;
 }
 
 /* Cloud 5 - Bottom left */
 .cloud-5 {
-  width: 320px;
-  height: 170px;
-  bottom: -30px;
-  left: -50px;
-  border-radius: 85px;
+  width: 300px;
+  height: 180px;
+  bottom: -40px;
+  left: -60px;
+  border-radius: 90px;
+  z-index: 1;
 }
 
-/* Cloud 6 - Middle right small */
+/* Cloud 6 - Bottom right */
 .cloud-6 {
-  width: 200px;
-  height: 120px;
-  top: 50%;
-  right: 10px;
-  border-radius: 60px;
-  background: linear-gradient(180deg, 
-    #ffffff 0%,
-    #fefcff 30%,
-    #f6f2f8 60%,
-    #ece4f0 100%
-  );
+  width: 280px;
+  height: 160px;
+  bottom: 80px;
+  right: -80px;
+  border-radius: 80px;
+  z-index: 1;
 }
 
 /* Dreamy bg for modals */
@@ -490,4 +480,14 @@ body {
 .circle-gray {
   background: linear-gradient(160deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
   box-shadow: 0 4px 12px rgba(148, 163, 184, 0.2);
+}
+
+.circle-pink {
+  background: linear-gradient(160deg, #fbcfe8 0%, #f472b6 50%, #db2777 100%);
+  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+}
+
+.circle-blue {
+  background: linear-gradient(160deg, #bae6fd 0%, #60a5fa 50%, #2563eb 100%);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }

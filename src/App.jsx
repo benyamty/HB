@@ -251,42 +251,42 @@ function App() {
     <div className="h-full w-full">
       {/* Puffy Cloud Clusters Background */}
       <div className="cloud-bg">
-        {/* Top Left Cluster */}
-        <div className="absolute top-[-5%] left-[-10%] w-64 h-64 z-0">
-          <div className="cloud-shape w-40 h-40 top-10 left-10 z-10"></div>
-          <div className="cloud-shape w-32 h-32 top-0 left-24 z-0"></div>
-          <div className="cloud-shape w-36 h-36 top-24 left-0 z-10"></div>
+        {/* Top Left Cluster - Framing Profile */}
+        <div className="absolute top-[-2%] left-[-5%] w-72 h-72 z-0 opacity-90">
+          <div className="cloud-shape w-48 h-48 top-8 left-8 z-10"></div>
+          <div className="cloud-shape w-40 h-40 top-0 left-28 z-0"></div>
+          <div className="cloud-shape w-44 h-44 top-28 left-[-10px] z-10"></div>
         </div>
 
         {/* Top Right Cluster */}
-        <div className="absolute top-[-2%] right-[-15%] w-64 h-64 z-0">
-          <div className="cloud-shape w-44 h-44 top-5 right-10"></div>
-          <div className="cloud-shape w-32 h-32 top-20 right-32"></div>
+        <div className="absolute top-[-5%] right-[-10%] w-72 h-72 z-0 opacity-90">
+          <div className="cloud-shape w-52 h-52 top-0 right-0"></div>
+          <div className="cloud-shape w-40 h-40 top-24 right-24"></div>
         </div>
 
-        {/* Middle Left Cluster */}
-        <div className="absolute top-[35%] left-[-12%] w-56 h-56 z-0">
-          <div className="cloud-shape w-40 h-40 top-0 left-0"></div>
-          <div className="cloud-shape w-32 h-32 top-20 left-10"></div>
+        {/* Middle Left Cluster - Framing Card Gap */}
+        <div className="absolute top-[38%] left-[-15%] w-64 h-64 z-0 opacity-80">
+          <div className="cloud-shape w-48 h-48 top-0 left-0"></div>
+          <div className="cloud-shape w-40 h-40 top-24 left-16"></div>
         </div>
 
         {/* Middle Right Cluster */}
-        <div className="absolute top-[45%] right-[-8%] w-64 h-64 z-0">
-          <div className="cloud-shape w-48 h-48 top-10 right-0"></div>
-          <div className="cloud-shape w-36 h-36 top-[-10px] right-20"></div>
+        <div className="absolute top-[42%] right-[-12%] w-64 h-64 z-0 opacity-80">
+          <div className="cloud-shape w-56 h-56 top-0 right-0"></div>
+          <div className="cloud-shape w-44 h-44 top-16 right-24"></div>
         </div>
 
         {/* Bottom Left Cluster */}
-        <div className="absolute bottom-[-5%] left-[-5%] w-72 h-72 z-0">
-          <div className="cloud-shape w-48 h-48 bottom-10 left-0"></div>
-          <div className="cloud-shape w-40 h-40 bottom-0 left-32"></div>
-          <div className="cloud-shape w-32 h-32 bottom-32 left-10"></div>
+        <div className="absolute bottom-[-8%] left-[-8%] w-80 h-80 z-0">
+          <div className="cloud-shape w-56 h-56 bottom-10 left-0"></div>
+          <div className="cloud-shape w-48 h-48 bottom-0 left-32"></div>
+          <div className="cloud-shape w-40 h-40 bottom-32 left-10"></div>
         </div>
 
         {/* Bottom Right Cluster */}
-        <div className="absolute bottom-[10%] right-[-10%] w-60 h-60 z-0">
-          <div className="cloud-shape w-44 h-44 bottom-0 right-0"></div>
-          <div className="cloud-shape w-36 h-36 bottom-24 right-10"></div>
+        <div className="absolute bottom-[8%] right-[-12%] w-72 h-72 z-0">
+          <div className="cloud-shape w-52 h-52 bottom-0 right-0"></div>
+          <div className="cloud-shape w-44 h-44 bottom-28 right-16"></div>
         </div>
       </div>
       
