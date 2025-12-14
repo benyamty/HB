@@ -213,6 +213,24 @@ function Home({
   const WEEKDAYS = useMemo(() => (['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']), [])
   const todayKey = WEEKDAYS[new Date().getDay()]
 
+  const todaysHabits = useMemo(() => {
+    return habits.filter(h => {
+      const d = h.daysOfWeek
+      if (!Array.isArray(d) || d.length === 0) return true
+      return d.includes(todayKey)
+    })
+  }, [habits, todayKey])
+
+  const otherPagesCount = useMemo(() => {
+    const otherDays = habits.reduce((acc, h) => {
+      const d = h.daysOfWeek
+      if (!Array.isArray(d) || d.length === 0) return acc
+      return d.includes(todayKey) ? acc : acc + 1
+    }, 0)
+
+    return otherDays + (sharedPages?.length || 0)
+  }, [habits, sharedPages, todayKey])
+
   const filteredHabits = useMemo(() => {
     if (habitsPage === 'shared') {
       return habits.filter(h => {
@@ -230,6 +248,8 @@ function Home({
       return d.includes(selectedHabitsDay)
     })
   }, [habits, habitsPage, selectedHabitsDay, inviteFriendId])
+
+  const displayedHabits = habitsExpanded ? filteredHabits : todaysHabits
   useEffect(() => {
     isFirstMount.current = false
   }, [])
@@ -555,22 +575,30 @@ function Home({
             </div>
 
             <div className="relative" ref={habitsPageMenuRef}>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  if (!habitsExpanded) return
-                  setShowHabitsPageMenu(!showHabitsPageMenu)
-                }}
-                className="flex items-center gap-1 text-gray-500 text-sm font-medium"
-              >
-                Your Habits
-                {habitsExpanded && (
+              {habitsExpanded ? (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setShowHabitsPageMenu(!showHabitsPageMenu)
+                  }}
+                  className="flex items-center gap-1 text-gray-500 text-sm font-medium"
+                >
+                  Your Habits
                   <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
-                )}
-              </button>
+                </button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-500 text-sm font-medium">Today's Habits</span>
+                  {otherPagesCount > 0 && (
+                    <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">
+                      +{otherPagesCount}
+                    </span>
+                  )}
+                </div>
+              )}
 
               {habitsExpanded && showHabitsPageMenu && (
                 <div
@@ -676,7 +704,14 @@ function Home({
 
         {/* Habits List */}
         <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
-          {habits.length === 0 ? (
+          {displayedHabits.length === 0 && habits.length > 0 && !habitsExpanded ? (
+            <div className="flex-1 flex flex-col items-center justify-center w-full text-center">
+              <p className="text-gray-500 font-medium">No habits for today</p>
+              {otherPagesCount > 0 && (
+                <p className="text-gray-400 text-sm mt-1">You have {otherPagesCount} habit{otherPagesCount === 1 ? '' : 's'} on other pages.</p>
+              )}
+            </div>
+          ) : habits.length === 0 ? (
             <button 
               onClick={(e) => {
                 e.stopPropagation()
@@ -697,7 +732,7 @@ function Home({
             </button>
           ) : (
             // Sort habits: by time, then done habits go to bottom
-            [...filteredHabits]
+            [...displayedHabits]
               .sort((a, b) => {
                 const aDone = isHabitDone(a)
                 const bDone = isHabitDone(b)
