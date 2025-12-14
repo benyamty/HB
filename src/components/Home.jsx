@@ -395,7 +395,7 @@ function Home({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-base font-semibold">Achievements</span>
+                <span className="text-gray-700 text-lg font-bold tracking-tight">Achievements</span>
                 <div className="ml-auto pill-counter px-3 py-1.5 rounded-full flex items-center gap-1 mr-2">
                   <span className="text-sm font-bold text-gray-700">{unlockedAchievements.length}</span>
                   <span className="text-sm text-gray-400">/{ACHIEVEMENTS.length}</span>
