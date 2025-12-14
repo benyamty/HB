@@ -20,6 +20,7 @@ const loadState = () => {
         habits: [],
     completedToday: [], // habit IDs completed today
     paidToday: [], // habit IDs paid for today
+    clearedToday: [], // habit IDs hidden for today after user clears them
     lastCheckedDate: new Date().toDateString(),
     currentStreak: 0,
     longestStreak: 0,
@@ -67,6 +68,7 @@ function App() {
           ...prev,
           completedToday: [],
           paidToday: [],
+          clearedToday: [],
           lastCheckedDate: today,
           currentStreak: newStreak,
           longestStreak: Math.max(prev.longestStreak, newStreak),
@@ -200,6 +202,7 @@ function App() {
         return {
           ...prev,
           completedToday: [...prev.completedToday, habitId],
+          clearedToday: (prev.clearedToday || []).filter(id => id !== habitId),
           habitHistory: {
             ...prev.habitHistory,
             [habitId]: updatedDates,
@@ -218,6 +221,7 @@ function App() {
 
       const nextCompletedToday = (prev.completedToday || []).filter(id => id !== habitId)
       const nextPaidToday = (prev.paidToday || []).filter(id => id !== habitId)
+      const nextClearedToday = Array.from(new Set([...(prev.clearedToday || []), habitId]))
 
       const prevDates = (prev.habitHistory || {})[habitId] || []
       const nextDates = prevDates.filter(d => d !== today)
@@ -234,6 +238,7 @@ function App() {
         ...prev,
         completedToday: nextCompletedToday,
         paidToday: nextPaidToday,
+        clearedToday: nextClearedToday,
         habitHistory: {
           ...(prev.habitHistory || {}),
           [habitId]: nextDates,
@@ -377,6 +382,7 @@ function App() {
               habits={state.habits}
               completedToday={state.completedToday}
               paidToday={state.paidToday || []}
+              clearedToday={state.clearedToday || []}
               friends={state.friends || []}
               sharedPages={state.sharedPages || []}
               onSendSharedPageInvite={sendSharedPageInvite}

@@ -179,6 +179,7 @@ function Home({
   habits, 
   completedToday,
   paidToday,
+  clearedToday = [],
   friends = [],
   sharedPages = [],
   onSendSharedPageInvite,
@@ -243,13 +244,16 @@ function Home({
     return { daysOfWeek: [selectedHabitsDay] }
   }
 
+  const isHabitCleared = (habit) => (clearedToday || []).includes(habit.id)
+
   const todaysHabits = useMemo(() => {
     return habits.filter(h => {
+      if (isHabitCleared(h)) return false
       const d = h.daysOfWeek
       if (!Array.isArray(d) || d.length === 0) return true
       return d.includes(todayKey)
     })
-  }, [habits, todayKey])
+  }, [habits, todayKey, clearedToday])
 
   const otherPagesCount = useMemo(() => {
     const otherDays = habits.reduce((acc, h) => {
@@ -264,6 +268,7 @@ function Home({
   const filteredHabits = useMemo(() => {
     if (habitsPage === 'shared') {
       return habits.filter(h => {
+        if (isHabitCleared(h)) return false
         const isAnyShared = (h.sharedWith?.length || 0) > 0 || h.isShared
         if (!isAnyShared) return false
         if (!inviteFriendId) return true
@@ -273,11 +278,12 @@ function Home({
     }
 
     return habits.filter(h => {
+      if (isHabitCleared(h)) return false
       const d = h.daysOfWeek
       if (!Array.isArray(d) || d.length === 0) return true
       return d.includes(selectedHabitsDay)
     })
-  }, [habits, habitsPage, selectedHabitsDay, inviteFriendId])
+  }, [habits, habitsPage, selectedHabitsDay, inviteFriendId, clearedToday])
 
   const displayedHabits = habitsExpanded ? filteredHabits : todaysHabits
   useEffect(() => {
