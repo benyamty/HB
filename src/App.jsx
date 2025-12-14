@@ -428,49 +428,38 @@ function App() {
           onBack={() => setScreen('home')}
         />
       )}
-      <AnimatePresence>
-        {screen === 'social' && (
+      <AnimatePresence mode="wait" initial={false}>
+        {(screen === 'social' || screen === 'profile') && (
           <motion.div
-            key="social-screen"
+            key={screen}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'tween', duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 bg-gray-50"
           >
-            <SocialScreen
-              friends={state.friends || []}
-              sharedPageInvites={state.sharedPageInvites || []}
-              onAcceptSharedPageInvite={acceptSharedPageInvite}
-              onDeclineSharedPageInvite={declineSharedPageInvite}
-              onAddFriend={addFriend}
-              onRemoveFriend={removeFriend}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {screen === 'profile' && (
-          <motion.div
-            key="profile-screen"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'tween', duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-gray-50"
-          >
-            <ProfileScreen
-              userId={state.userId}
-              profileImage={state.profileImage}
-              completedToday={state.completedToday}
-              currentStreak={state.currentStreak || 0}
-              unlockedAchievements={state.unlockedAchievements || []}
-              profileBadges={state.profileBadges || [null, null, null]}
-              onSetProfileBadge={setProfileBadge}
-              onUpdateUserId={updateUserId}
-              onUpdateProfileImage={updateProfileImage}
-            />
+            {screen === 'social' ? (
+              <SocialScreen
+                friends={state.friends || []}
+                sharedPageInvites={state.sharedPageInvites || []}
+                onAcceptSharedPageInvite={acceptSharedPageInvite}
+                onDeclineSharedPageInvite={declineSharedPageInvite}
+                onAddFriend={addFriend}
+                onRemoveFriend={removeFriend}
+              />
+            ) : (
+              <ProfileScreen
+                userId={state.userId}
+                profileImage={state.profileImage}
+                completedToday={state.completedToday}
+                currentStreak={state.currentStreak || 0}
+                unlockedAchievements={state.unlockedAchievements || []}
+                profileBadges={state.profileBadges || [null, null, null]}
+                onSetProfileBadge={setProfileBadge}
+                onUpdateUserId={updateUserId}
+                onUpdateProfileImage={updateProfileImage}
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
