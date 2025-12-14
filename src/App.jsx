@@ -24,6 +24,8 @@ const loadState = () => {
     longestStreak: 0,
     habitHistory: {}, // { habitId: ['2024-12-08', '2024-12-09', ...] }
     friends: [], // { id, name }
+    sharedPageInvites: [], // { id, friendId, friendName, createdAt }
+    sharedPages: [], // { id, friendId, friendName, title, createdAt }
     unlockedAchievements: [], // achievement IDs that user has earned
     profileBadges: [null, null, null], // 3 slots for displaying badges on profile
   }
@@ -106,6 +108,49 @@ function App() {
     setState(prev => ({
       ...prev,
       habits: [...prev.habits, { ...habit, id: Date.now() }],
+    }))
+  }
+
+  const sendSharedPageInvite = (friendId) => {
+    const friend = (state.friends || []).find(f => f.id === friendId)
+    if (!friend) return
+
+    setState(prev => {
+      const existing = (prev.sharedPageInvites || []).some(i => i.friendId === friendId)
+      if (existing) return prev
+      return {
+        ...prev,
+        sharedPageInvites: [
+          ...(prev.sharedPageInvites || []),
+          { id: Date.now(), friendId, friendName: friend.name, createdAt: Date.now() },
+        ],
+      }
+    })
+  }
+
+  const acceptSharedPageInvite = (inviteId) => {
+    setState(prev => {
+      const invite = (prev.sharedPageInvites || []).find(i => i.id === inviteId)
+      if (!invite) return prev
+
+      const pageId = Date.now()
+      const title = `${invite.friendName}`
+
+      return {
+        ...prev,
+        sharedPageInvites: (prev.sharedPageInvites || []).filter(i => i.id !== inviteId),
+        sharedPages: [
+          ...(prev.sharedPages || []),
+          { id: pageId, friendId: invite.friendId, friendName: invite.friendName, title, createdAt: Date.now() },
+        ],
+      }
+    })
+  }
+
+  const declineSharedPageInvite = (inviteId) => {
+    setState(prev => ({
+      ...prev,
+      sharedPageInvites: (prev.sharedPageInvites || []).filter(i => i.id !== inviteId),
     }))
   }
 
@@ -265,6 +310,8 @@ function App() {
               completedToday={state.completedToday}
               paidToday={state.paidToday || []}
               friends={state.friends || []}
+              sharedPages={state.sharedPages || []}
+              onSendSharedPageInvite={sendSharedPageInvite}
               currentStreak={state.currentStreak || 0}
               longestStreak={state.longestStreak || 0}
               habitHistory={state.habitHistory || {}}
@@ -354,6 +401,9 @@ function App() {
           >
             <SocialScreen
               friends={state.friends || []}
+              sharedPageInvites={state.sharedPageInvites || []}
+              onAcceptSharedPageInvite={acceptSharedPageInvite}
+              onDeclineSharedPageInvite={declineSharedPageInvite}
               onAddFriend={addFriend}
               onRemoveFriend={removeFriend}
             />

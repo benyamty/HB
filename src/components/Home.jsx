@@ -179,6 +179,8 @@ function Home({
   completedToday,
   paidToday,
   friends = [],
+  sharedPages = [],
+  onSendSharedPageInvite,
   currentStreak,
   longestStreak,
   habitHistory,
@@ -198,8 +200,6 @@ function Home({
   const [showHabitsPageMenu, setShowHabitsPageMenu] = useState(false)
   const [showInviteModal, setShowInviteModal] = useState(false)
   const [inviteFriendId, setInviteFriendId] = useState(null)
-  const [pendingSharedInvites, setPendingSharedInvites] = useState([])
-  const [sharedPages, setSharedPages] = useState([])
   const [showBadgePicker, setShowBadgePicker] = useState(false)
   const [selectedSlot, setSelectedSlot] = useState(null)
   const [achievementsExpanded, setAchievementsExpanded] = useState(false)
@@ -620,7 +620,7 @@ function Home({
                     }}
                     className="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 flex items-center justify-between"
                   >
-                    <span>Create shared page</span>
+                    <span>Shared page</span>
                     <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
                       <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -814,14 +814,8 @@ function Home({
                 type="button"
                 disabled={!inviteFriendId}
                 onClick={() => {
-                  const friend = friends.find(f => f.id === inviteFriendId)
-                  if (!friend) return
-
-                  setPendingSharedInvites(prev => {
-                    if (prev.some(i => i.friendId === friend.id)) return prev
-                    return [...prev, { id: Date.now(), friendId: friend.id, friendName: friend.name }]
-                  })
-
+                  if (!inviteFriendId) return
+                  onSendSharedPageInvite?.(inviteFriendId)
                   setShowInviteModal(false)
                 }}
                 className={`px-6 py-3 rounded-full font-semibold text-sm transition-colors ${

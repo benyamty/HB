@@ -16,12 +16,16 @@ const WORLD_LEADERBOARD = [
 
 function Social({ 
   friends,
+  sharedPageInvites = [],
+  onAcceptSharedPageInvite,
+  onDeclineSharedPageInvite,
   onAddFriend,
   onRemoveFriend
 }) {
   const [showAddFriend, setShowAddFriend] = useState(false)
   const [friendName, setFriendName] = useState('')
   const [leaderboardTab, setLeaderboardTab] = useState('friends') // 'friends' or 'world'
+  const [showNotifications, setShowNotifications] = useState(false)
 
   const handleAddFriend = () => {
     if (friendName.trim()) {
@@ -34,14 +38,84 @@ function Social({
   return (
     <div className="h-full flex flex-col bg-[#fcfcfc] px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]">
       {/* Top Row: Title */}
-      <div className="flex-shrink-0 mb-4 flex items-center">
-        <div className="w-10 h-10 rounded-full accent-chip flex items-center justify-center">
-          <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
+      <div className="flex-shrink-0 mb-4 flex items-center justify-between">
+        <div className="flex items-center">
+          <div className="w-10 h-10 rounded-full accent-chip flex items-center justify-center">
+            <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <span className="ml-3 text-lg font-semibold text-gray-900">Social</span>
         </div>
-        <span className="ml-3 text-lg font-semibold text-gray-900">Social</span>
+
+        <button
+          type="button"
+          onClick={() => setShowNotifications(true)}
+          className="w-10 h-10 rounded-full accent-chip flex items-center justify-center relative active:scale-95 transition-transform"
+        >
+          <svg className="w-5 h-5 text-[color:var(--accent-solid)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+          {sharedPageInvites.length > 0 && (
+            <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[color:var(--accent-solid)] text-white text-[10px] font-bold flex items-center justify-center">
+              {sharedPageInvites.length}
+            </span>
+          )}
+        </button>
       </div>
+
+      {showNotifications && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4" onClick={() => setShowNotifications(false)}>
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900">Notifications</h3>
+              <button
+                type="button"
+                onClick={() => setShowNotifications(false)}
+                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center"
+              >
+                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {sharedPageInvites.length === 0 ? (
+              <div className="text-center py-10">
+                <p className="text-gray-500 font-medium">No notifications</p>
+                <p className="text-gray-400 text-sm mt-1">You’re all caught up.</p>
+              </div>
+            ) : (
+              <div className="space-y-3 max-h-72 overflow-y-auto">
+                {sharedPageInvites.map((inv) => (
+                  <div key={inv.id} className="p-4 rounded-2xl bg-gray-50 border border-gray-200">
+                    <div className="font-semibold text-gray-900">Shared page invite</div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      {inv.friendName} wants to create a shared habit page.
+                    </div>
+                    <div className="mt-3 flex justify-end gap-2">
+                      <button
+                        type="button"
+                        onClick={() => onDeclineSharedPageInvite?.(inv.id)}
+                        className="px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-semibold text-sm"
+                      >
+                        Decline
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onAcceptSharedPageInvite?.(inv.id)}
+                        className="px-4 py-2 rounded-full accent-btn text-white font-semibold text-sm"
+                      >
+                        Accept
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Leaderboard Card */}
       <div className="flex-shrink-0 bg-white border border-gray-200 rounded-3xl px-6 py-5 mb-4 accent-card">
