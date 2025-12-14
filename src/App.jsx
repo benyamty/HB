@@ -249,6 +249,14 @@ function App() {
 
   return (
     <div className="h-full w-full">
+      {/* Cloud Background */}
+      <div className="cloud-bg">
+        <div className="cloud-layer-1"></div>
+        <div className="cloud-layer-2"></div>
+        <div className="cloud-layer-3"></div>
+        <div className="cloud-layer-4"></div>
+      </div>
+      
       <AnimatePresence>
         {screen === 'home' && (
           <motion.div
@@ -257,7 +265,7 @@ function App() {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
-            className="fixed inset-0 z-30 bg-gray-50"
+            className="fixed inset-0 z-30"
           >
             <HomeScreen
               wallet={state.wallet}
@@ -349,7 +357,7 @@ function App() {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
-            className="fixed inset-0 z-40 bg-gray-50"
+            className="fixed inset-0 z-40"
           >
             <SocialScreen
               friends={state.friends || []}

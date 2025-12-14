@@ -25,14 +25,7 @@ html, body, #root {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
-  background: linear-gradient(180deg, 
-    #e8d5f0 0%,
-    #d4e5f7 25%,
-    #f0e6f5 50%,
-    #dbe8f4 75%,
-    #e8d5f0 100%
-  );
-  background-attachment: fixed;
+  background: #c9dff7;
   overscroll-behavior: none;
 }
 
@@ -255,77 +248,219 @@ body {
 
 /* ===== DREAMY CLOUD UI SYSTEM ===== */
 
-/* Dreamy pastel cloud background */
+/* ===== CLOUDY DREAMY BACKGROUND ===== */
+
+/* Cloud background wrapper - add to main container */
+.cloud-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, 
+    #d8c8e8 0%,
+    #c4d8f0 30%,
+    #e8d0e8 50%,
+    #b8d0f0 70%,
+    #d0c0e0 100%
+  );
+}
+
+/* Animated cloud blobs */
+.cloud-bg::before,
+.cloud-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.9;
+}
+
+.cloud-bg::before {
+  width: 300px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.95) 0%, rgba(230,210,240,0.7) 50%, transparent 70%);
+  top: 5%;
+  left: -5%;
+  animation: floatCloud1 20s ease-in-out infinite;
+}
+
+.cloud-bg::after {
+  width: 350px;
+  height: 220px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, rgba(200,220,250,0.6) 50%, transparent 70%);
+  top: 60%;
+  right: -10%;
+  animation: floatCloud2 25s ease-in-out infinite;
+}
+
+/* Extra cloud layers via child elements */
+.cloud-layer-1 {
+  position: absolute;
+  width: 280px;
+  height: 180px;
+  background: radial-gradient(ellipse, rgba(255,240,250,0.9) 0%, rgba(240,200,230,0.5) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(50px);
+  top: 25%;
+  right: 10%;
+  animation: floatCloud3 18s ease-in-out infinite;
+}
+
+.cloud-layer-2 {
+  position: absolute;
+  width: 320px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.85) 0%, rgba(180,210,250,0.5) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(55px);
+  bottom: 15%;
+  left: 5%;
+  animation: floatCloud4 22s ease-in-out infinite;
+}
+
+.cloud-layer-3 {
+  position: absolute;
+  width: 250px;
+  height: 160px;
+  background: radial-gradient(ellipse, rgba(250,230,255,0.9) 0%, rgba(220,190,240,0.5) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(45px);
+  top: 45%;
+  left: 30%;
+  animation: floatCloud5 15s ease-in-out infinite;
+}
+
+.cloud-layer-4 {
+  position: absolute;
+  width: 200px;
+  height: 140px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.95) 0%, rgba(200,230,255,0.6) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  bottom: 35%;
+  right: 20%;
+  animation: floatCloud1 17s ease-in-out infinite reverse;
+}
+
+@keyframes floatCloud1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, 20px) scale(1.05); }
+  66% { transform: translate(-20px, 10px) scale(0.95); }
+}
+
+@keyframes floatCloud2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, -30px) scale(1.1); }
+}
+
+@keyframes floatCloud3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(25px, -25px); }
+}
+
+@keyframes floatCloud4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 20px) scale(1.08); }
+}
+
+@keyframes floatCloud5 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-15px, 15px); }
+  66% { transform: translate(20px, -10px); }
+}
+
+/* Dreamy bg class for modals etc */
 .dreamy-bg {
   background: linear-gradient(180deg, 
-    #e8d5f0 0%,
-    #d4e5f7 25%,
-    #f0e6f5 50%,
-    #dbe8f4 75%,
-    #e8d5f0 100%
+    #d8c8e8 0%,
+    #c4d8f0 30%,
+    #e8d0e8 50%,
+    #b8d0f0 70%,
+    #d0c0e0 100%
   );
   min-height: 100%;
 }
 
-/* Frosted glass card */
+/* ===== FROSTED GLASS CARDS ===== */
+
+/* Frosted glass card - more prominent */
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
   box-shadow:
-    0 8px 32px rgba(180, 160, 200, 0.25),
-    0 4px 16px rgba(150, 180, 220, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 15px 35px rgba(150, 130, 180, 0.2),
+    0 8px 20px rgba(130, 160, 200, 0.15),
+    0 3px 10px rgba(180, 150, 200, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* 3D circular stat icon - green (Tasks Done) */
+/* ===== 3D BUBBLE STAT CIRCLES ===== */
+
+/* 3D circular stat icon - green (Tasks Done) - bubble style */
 .stat-circle-green {
-  background: linear-gradient(145deg, #a8f0c0 0%, #4ade80 50%, #22c55e 100%);
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.9) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 40%),
+    linear-gradient(180deg, #6ee7b7 0%, #34d399 30%, #10b981 60%, #059669 100%);
   box-shadow:
-    0 8px 20px rgba(34, 197, 94, 0.35),
-    0 4px 8px rgba(34, 197, 94, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.5),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    0 12px 30px rgba(16, 185, 129, 0.5),
+    0 6px 15px rgba(16, 185, 129, 0.3),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 4px 8px rgba(255, 255, 255, 0.4);
 }
 
-/* 3D circular stat icon - orange (Streak) */
+/* 3D circular stat icon - orange (Streak) - bubble style */
 .stat-circle-orange {
-  background: linear-gradient(145deg, #ffd4a8 0%, #fb923c 50%, #f97316 100%);
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.9) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 40%),
+    linear-gradient(180deg, #fdba74 0%, #fb923c 30%, #f97316 60%, #ea580c 100%);
   box-shadow:
-    0 8px 20px rgba(249, 115, 22, 0.35),
-    0 4px 8px rgba(249, 115, 22, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.5),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    0 12px 30px rgba(249, 115, 22, 0.5),
+    0 6px 15px rgba(249, 115, 22, 0.3),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 4px 8px rgba(255, 255, 255, 0.4);
 }
 
-/* 3D circular stat icon - yellow (Points) */
+/* 3D circular stat icon - yellow (Points) - bubble style */
 .stat-circle-yellow {
-  background: linear-gradient(145deg, #fef3a0 0%, #facc15 50%, #eab308 100%);
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.95) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 30% 30%, rgba(255,255,255,0.7) 0%, transparent 40%),
+    linear-gradient(180deg, #fde047 0%, #facc15 30%, #eab308 60%, #ca8a04 100%);
   box-shadow:
-    0 8px 20px rgba(234, 179, 8, 0.35),
-    0 4px 8px rgba(234, 179, 8, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.5),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    0 12px 30px rgba(234, 179, 8, 0.5),
+    0 6px 15px rgba(234, 179, 8, 0.3),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.12),
+    inset 0 4px 8px rgba(255, 255, 255, 0.5);
 }
 
-/* 3D circular icon - purple/pink profile */
+/* 3D circular icon - orange profile - bubble style */
 .stat-circle-profile {
-  background: linear-gradient(145deg, #fdc8a0 0%, #fb923c 50%, #ea580c 100%);
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.9) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 40%),
+    linear-gradient(180deg, #fdba74 0%, #fb923c 30%, #f97316 60%, #ea580c 100%);
   box-shadow:
-    0 8px 20px rgba(234, 88, 12, 0.35),
-    0 4px 8px rgba(234, 88, 12, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.5),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    0 12px 30px rgba(234, 88, 12, 0.5),
+    0 6px 15px rgba(234, 88, 12, 0.3),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 4px 8px rgba(255, 255, 255, 0.4);
 }
 
-/* Small 3D pill button (like the 2/10 counter) */
+/* Small 3D pill button (like the 2/10 counter) - neumorphic bubble */
 .pill-counter {
-  background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+  background: 
+    radial-gradient(ellipse 90% 60% at 50% 15%, rgba(255,255,255,0.95) 0%, transparent 50%),
+    linear-gradient(180deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
   box-shadow:
-    0 4px 12px rgba(148, 163, 184, 0.25),
-    inset 0 1px 2px rgba(255, 255, 255, 0.8),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+    0 8px 20px rgba(148, 163, 184, 0.35),
+    0 4px 10px rgba(148, 163, 184, 0.2),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
 }
 
 /* Achievement circle - unlocked */
@@ -354,40 +489,62 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-/* Green done button */
+/* Green done button - 3D bubble style */
 .btn-done {
-  background: linear-gradient(145deg, #86efac 0%, #22c55e 50%, #16a34a 100%);
+  background: 
+    radial-gradient(ellipse 90% 50% at 50% 15%, rgba(255,255,255,0.7) 0%, transparent 50%),
+    linear-gradient(180deg, #6ee7b7 0%, #34d399 25%, #22c55e 50%, #16a34a 100%);
   box-shadow:
-    0 6px 16px rgba(22, 163, 74, 0.35),
-    0 3px 6px rgba(22, 163, 74, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    0 10px 25px rgba(22, 163, 74, 0.45),
+    0 5px 12px rgba(22, 163, 74, 0.25),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 3px 6px rgba(255, 255, 255, 0.5);
 }
 
-/* Bottom nav gradient pill */
+/* Bottom nav gradient pill - rainbow bubble with glow ring */
 .nav-pill-active {
-  background: linear-gradient(135deg, 
-    #f472b6 0%,
-    #fb923c 35%,
-    #fbbf24 70%,
-    #a3e635 100%
-  );
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.6) 0%, transparent 50%),
+    conic-gradient(from 180deg at 50% 50%, 
+      #f472b6 0deg,
+      #fb923c 90deg,
+      #fbbf24 180deg,
+      #a3e635 270deg,
+      #f472b6 360deg
+    );
   box-shadow:
-    0 8px 24px rgba(251, 146, 60, 0.4),
-    0 4px 12px rgba(244, 114, 182, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+    0 0 30px rgba(251, 146, 60, 0.6),
+    0 0 20px rgba(244, 114, 182, 0.5),
+    0 10px 25px rgba(251, 146, 60, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
-/* Small colored circle icons for achievements */
+/* Small colored circle icons for achievements - bubble style */
 .circle-green {
-  background: linear-gradient(145deg, #bbf7d0 0%, #4ade80 100%);
-  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.8) 0%, transparent 50%),
+    linear-gradient(180deg, #bbf7d0 0%, #4ade80 50%, #22c55e 100%);
+  box-shadow: 
+    0 8px 18px rgba(74, 222, 128, 0.4), 
+    inset 0 -3px 6px rgba(0,0,0,0.1),
+    inset 0 2px 4px rgba(255,255,255,0.7);
 }
 .circle-yellow {
-  background: linear-gradient(145deg, #fef08a 0%, #facc15 100%);
-  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.85) 0%, transparent 50%),
+    linear-gradient(180deg, #fef08a 0%, #facc15 50%, #eab308 100%);
+  box-shadow: 
+    0 8px 18px rgba(250, 204, 21, 0.4), 
+    inset 0 -3px 6px rgba(0,0,0,0.08),
+    inset 0 2px 4px rgba(255,255,255,0.8);
 }
 .circle-gray {
-  background: linear-gradient(145deg, #f1f5f9 0%, #cbd5e1 100%);
-  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.2), inset 0 1px 2px rgba(255,255,255,0.5);
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(255,255,255,0.9) 0%, transparent 50%),
+    linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
+  box-shadow: 
+    0 6px 14px rgba(148, 163, 184, 0.3), 
+    inset 0 -2px 4px rgba(0,0,0,0.05),
+    inset 0 2px 4px rgba(255,255,255,0.9);
 }
