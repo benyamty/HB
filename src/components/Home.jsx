@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import VerificationModal from './VerificationModal'
 
@@ -192,6 +192,8 @@ function Home({
 }) {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [verifyingHabit, setVerifyingHabit] = useState(null)
+  const [selectedHabitsDay, setSelectedHabitsDay] = useState(() => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()])
+  const [showSharedHabits, setShowSharedHabits] = useState(false)
   const [showBadgePicker, setShowBadgePicker] = useState(false)
   const [selectedSlot, setSelectedSlot] = useState(null)
   const [achievementsExpanded, setAchievementsExpanded] = useState(false)
@@ -199,6 +201,21 @@ function Home({
 
   // Track if it's the first mount to avoid initial animation
   const isFirstMount = useRef(true)
+
+  const WEEKDAYS = useMemo(() => (['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']), [])
+  const todayKey = WEEKDAYS[new Date().getDay()]
+
+  const filteredHabits = useMemo(() => {
+    if (showSharedHabits) {
+      return habits.filter(h => (h.sharedWith?.length || 0) > 0 || h.isShared)
+    }
+
+    return habits.filter(h => {
+      const d = h.daysOfWeek
+      if (!Array.isArray(d) || d.length === 0) return true
+      return d.includes(selectedHabitsDay)
+    })
+  }, [habits, selectedHabitsDay, showSharedHabits])
   useEffect(() => {
     isFirstMount.current = false
   }, [])
@@ -498,7 +515,9 @@ function Home({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
               </svg>
             </div>
-            <span className="text-gray-500 text-sm font-medium">Today's Habits</span>
+            <span className="text-gray-500 text-sm font-medium">
+              {habitsExpanded ? (showSharedHabits ? 'Shared Habits' : `${selectedHabitsDay} Habits`) : "Today's Habits"}
+            </span>
           </div>
           <button 
             onClick={(e) => {
@@ -513,9 +532,62 @@ function Home({
           </button>
         </div>
 
+        {habitsExpanded && (
+          <div className="flex items-center justify-between gap-3 mb-4 flex-shrink-0 w-full" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-1.5 bg-gray-100 rounded-full p-1">
+              {WEEKDAYS.map((d) => {
+                const isActive = !showSharedHabits && selectedHabitsDay === d
+                const isToday = todayKey === d
+                return (
+                  <button
+                    key={d}
+                    type="button"
+                    onClick={() => {
+                      setShowSharedHabits(false)
+                      setSelectedHabitsDay(d)
+                    }}
+                    className={`relative px-2.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                      isActive ? 'bg-white text-gray-900' : 'text-gray-500'
+                    }`}
+                  >
+                    {d}
+                    {isToday && (
+                      <span className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full ${
+                        isActive ? 'bg-[color:var(--accent-solid)]' : 'bg-gray-400'
+                      }`} />
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowSharedHabits(!showSharedHabits)}
+              className={`px-3 py-2 rounded-full text-xs font-semibold border transition-colors ${
+                showSharedHabits
+                  ? 'bg-white border-[color:var(--accent-solid)] text-[color:var(--accent-solid)]'
+                  : 'bg-gray-100 border-transparent text-gray-600'
+              }`}
+            >
+              Shared
+            </button>
+          </div>
+        )}
+
         {/* Habits List */}
         <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
-          {habits.length === 0 ? (
+          {showSharedHabits && filteredHabits.length === 0 ? (
+            <div className="flex-1 flex flex-col items-center justify-center w-full text-center">
+              <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+                <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <p className="text-gray-500 mb-2 font-medium">No shared habits yet</p>
+              <p className="text-gray-400 text-sm">You’ll be able to open a shared habit page with a friend later.</p>
+            </div>
+          ) : habits.length === 0 ? (
             <button 
               onClick={(e) => {
                 e.stopPropagation()
@@ -536,7 +608,7 @@ function Home({
             </button>
           ) : (
             // Sort habits: by time, then done habits go to bottom
-            [...habits]
+            [...filteredHabits]
               .sort((a, b) => {
                 const aDone = isHabitDone(a)
                 const bDone = isHabitDone(b)
