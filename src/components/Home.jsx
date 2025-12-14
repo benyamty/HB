@@ -193,7 +193,8 @@ function Home({
   const [currentTime, setCurrentTime] = useState(new Date())
   const [verifyingHabit, setVerifyingHabit] = useState(null)
   const [selectedHabitsDay, setSelectedHabitsDay] = useState(() => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()])
-  const [showSharedHabits, setShowSharedHabits] = useState(false)
+  const [habitsPage, setHabitsPage] = useState('my')
+  const [showHabitsPageMenu, setShowHabitsPageMenu] = useState(false)
   const [showBadgePicker, setShowBadgePicker] = useState(false)
   const [selectedSlot, setSelectedSlot] = useState(null)
   const [achievementsExpanded, setAchievementsExpanded] = useState(false)
@@ -206,7 +207,7 @@ function Home({
   const todayKey = WEEKDAYS[new Date().getDay()]
 
   const filteredHabits = useMemo(() => {
-    if (showSharedHabits) {
+    if (habitsPage === 'shared') {
       return habits.filter(h => (h.sharedWith?.length || 0) > 0 || h.isShared)
     }
 
@@ -215,7 +216,7 @@ function Home({
       if (!Array.isArray(d) || d.length === 0) return true
       return d.includes(selectedHabitsDay)
     })
-  }, [habits, selectedHabitsDay, showSharedHabits])
+  }, [habits, habitsPage, selectedHabitsDay])
   useEffect(() => {
     isFirstMount.current = false
   }, [])
@@ -515,13 +516,63 @@ function Home({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.121 14.121L16.5 11.743m0 0l1.378-1.378a1 1 0 00-1.414-1.414L15.086 10.33m1.414 1.414l-4.95 4.95a1 1 0 01-.39.242l-1.83.61.61-1.83a1 1 0 01.242-.39l4.95-4.95" />
               </svg>
             </div>
-            <span className="text-gray-500 text-sm font-medium">
-              {habitsExpanded ? (showSharedHabits ? 'Shared Habits' : `${selectedHabitsDay} Habits`) : "Today's Habits"}
-            </span>
+
+            <div className="relative">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  if (!habitsExpanded) return
+                  setShowHabitsPageMenu(!showHabitsPageMenu)
+                }}
+                className="flex items-center gap-1 text-gray-500 text-sm font-medium"
+              >
+                Your Habits
+                {habitsExpanded && (
+                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </button>
+
+              {habitsExpanded && showHabitsPageMenu && (
+                <div
+                  className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-2xl overflow-hidden z-50"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHabitsPage('my')
+                      setShowHabitsPageMenu(false)
+                    }}
+                    className={`w-full px-4 py-3 text-left text-sm font-medium ${
+                      habitsPage === 'my' ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
+                    }`}
+                  >
+                    My Habits
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHabitsPage('shared')
+                      setShowHabitsPageMenu(false)
+                    }}
+                    className={`w-full px-4 py-3 text-left text-sm font-medium ${
+                      habitsPage === 'shared' ? 'text-gray-900 bg-gray-50' : 'text-gray-600'
+                    }`}
+                  >
+                    Shared Habits
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
+
           <button 
             onClick={(e) => {
               e.stopPropagation()
+              setShowHabitsPageMenu(false)
               onAddHabit()
             }}
             className="w-10 h-10 rounded-full accent-chip flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
@@ -532,52 +583,37 @@ function Home({
           </button>
         </div>
 
-        {habitsExpanded && (
-          <div className="flex items-center justify-between gap-3 mb-4 flex-shrink-0 w-full" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center gap-1.5 bg-gray-100 rounded-full p-1">
-              {WEEKDAYS.map((d) => {
-                const isActive = !showSharedHabits && selectedHabitsDay === d
-                const isToday = todayKey === d
-                return (
-                  <button
-                    key={d}
-                    type="button"
-                    onClick={() => {
-                      setShowSharedHabits(false)
-                      setSelectedHabitsDay(d)
-                    }}
-                    className={`relative px-2.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
-                      isActive ? 'bg-white text-gray-900' : 'text-gray-500'
-                    }`}
-                  >
-                    {d}
-                    {isToday && (
-                      <span className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full ${
-                        isActive ? 'bg-[color:var(--accent-solid)]' : 'bg-gray-400'
-                      }`} />
-                    )}
-                  </button>
-                )
-              })}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setShowSharedHabits(!showSharedHabits)}
-              className={`px-3 py-2 rounded-full text-xs font-semibold border transition-colors ${
-                showSharedHabits
-                  ? 'bg-white border-[color:var(--accent-solid)] text-[color:var(--accent-solid)]'
-                  : 'bg-gray-100 border-transparent text-gray-600'
-              }`}
-            >
-              Shared
-            </button>
+        {habitsExpanded && habitsPage === 'my' && (
+          <div className="flex items-center gap-1.5 bg-gray-100 rounded-full p-1 mb-4 flex-shrink-0 w-full overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {WEEKDAYS.map((d) => {
+              const isActive = selectedHabitsDay === d
+              const isToday = todayKey === d
+              return (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => {
+                    setSelectedHabitsDay(d)
+                  }}
+                  className={`relative px-2.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                    isActive ? 'bg-white text-gray-900' : 'text-gray-500'
+                  }`}
+                >
+                  {d}
+                  {isToday && (
+                    <span className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full ${
+                      isActive ? 'bg-[color:var(--accent-solid)]' : 'bg-gray-400'
+                    }`} />
+                  )}
+                </button>
+              )
+            })}
           </div>
         )}
 
         {/* Habits List */}
         <div className="flex-1 flex flex-col gap-2 min-h-0 w-full overflow-y-auto">
-          {showSharedHabits && filteredHabits.length === 0 ? (
+          {habitsPage === 'shared' && filteredHabits.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center w-full text-center">
               <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
                 <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
