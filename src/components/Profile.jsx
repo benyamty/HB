@@ -98,7 +98,7 @@ export default function Profile({
             <button
               type="button"
               onClick={() => setShowHabitHistory(true)}
-              className="text-sm font-semibold text-[color:var(--accent-solid)] bg-[color:var(--accent-orange)]/15 border border-[color:var(--accent-orange)]/25 px-3 py-1.5 rounded-full active:scale-95 transition-transform"
+              className="text-sm font-semibold text-[color:var(--accent-solid)] bg-white border border-[color:var(--accent-orange)]/25 px-3 py-1.5 rounded-full shadow-sm active:scale-95 transition-transform"
             >
               Habits History
             </button>
