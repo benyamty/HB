@@ -179,6 +179,7 @@ function App() {
   }
 
   const deleteHabit = (habitId) => {
+    if (!window.confirm('Are you sure you want to delete this task?')) return
     setState(prev => ({
       ...prev,
       habits: prev.habits.filter(h => h.id !== habitId),
