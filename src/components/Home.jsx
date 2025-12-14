@@ -400,7 +400,7 @@ function Home({
           onClick={() => setShowProfileModal(false)}
         >
           <div
-            className="w-full max-w-sm bg-white border border-gray-200 rounded-3xl p-4"
+            className="w-full max-w-md bg-white border border-gray-200 rounded-3xl p-5"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-3">
@@ -436,14 +436,14 @@ function Home({
                         handleBadgeSlotClick(index)
                         setShowProfileModal(false)
                       }}
-                      className={`w-9 h-9 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
+                      className={`w-10 h-10 rounded-full border-2 border-dashed flex items-center justify-center transition-all active:scale-95 ${
                         badge
                           ? `${badge.color} ${badge.borderColor} border-solid`
                           : 'border-gray-300 bg-gray-50 hover:border-[color:var(--accent-solid)] hover:bg-white'
                       }`}
                     >
                       {badge ? (
-                        <span className="text-base">{badge.icon}</span>
+                        <span className="text-lg">{badge.icon}</span>
                       ) : (
                         <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
