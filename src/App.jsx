@@ -329,9 +329,9 @@ function App() {
         {screen === 'home' && (
           <motion.div
             key="home-screen"
-            initial={{ y: 0 }}
+            initial={{ y: '100%' }}
             animate={{ y: 0 }}
-            exit={{ y: '100%' }}
+            exit={{ y: '-100%' }}
             transition={{ type: 'tween', duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-30 bg-gray-50"
           >
@@ -428,13 +428,13 @@ function App() {
           onBack={() => setScreen('home')}
         />
       )}
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence initial={false}>
         {(screen === 'social' || screen === 'profile') && (
           <motion.div
             key={screen}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
-            exit={{ y: '100%' }}
+            exit={{ y: '-100%' }}
             transition={{ type: 'tween', duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 bg-gray-50"
           >
