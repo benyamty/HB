@@ -565,7 +565,7 @@ function Home({
             key="habits-expanded"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
-            exit={{ y: '-100%' }}
+            exit={{ y: '100%' }}
             transition={{ type: 'tween', duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 bg-gray-50 px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]"
           >
