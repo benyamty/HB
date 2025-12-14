@@ -18,6 +18,7 @@ export default function Profile({
   profileImage,
   completedToday = [],
   currentStreak = 0,
+  clearedHabitHistory = [],
   unlockedAchievements = [],
   profileBadges = [null, null, null],
   onSetProfileBadge,
@@ -30,6 +31,7 @@ export default function Profile({
   const [selectedSlot, setSelectedSlot] = useState(null)
   const [selectedAchievement, setSelectedAchievement] = useState(null)
   const [returnToBadgePicker, setReturnToBadgePicker] = useState(false)
+  const [showHabitHistory, setShowHabitHistory] = useState(false)
 
   const fileInputRef = useRef(null)
 
@@ -213,9 +215,92 @@ export default function Profile({
                 <span className="text-xs text-gray-500">Points</span>
               </div>
             </div>
+
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={() => setShowHabitHistory(true)}
+                className="w-full bg-white border border-gray-200 rounded-2xl px-4 py-4 flex items-center justify-between active:scale-[0.99] transition-transform"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6" />
+                    </svg>
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-gray-900 truncate">Habit History</div>
+                    <div className="text-sm text-gray-500 truncate">Cleared habits you undid</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="text-sm text-gray-400 font-semibold">{clearedHabitHistory.length}</span>
+                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {showHabitHistory && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4" onClick={() => setShowHabitHistory(false)}>
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm max-h-[80vh] overflow-hidden flex flex-col" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-xl font-bold text-gray-900">Habit History</h3>
+              <button
+                type="button"
+                onClick={() => setShowHabitHistory(false)}
+                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center active:scale-95 transition-transform"
+              >
+                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <p className="text-sm text-gray-500 mb-4">Shows habits you cleared (undid) after completing.</p>
+
+            <div className="flex-1 overflow-y-auto">
+              {clearedHabitHistory.length === 0 ? (
+                <div className="py-10 text-center">
+                  <div className="w-16 h-16 rounded-full bg-gray-100 mx-auto flex items-center justify-center mb-4">
+                    <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6" />
+                    </svg>
+                  </div>
+                  <div className="font-semibold text-gray-900">No history yet</div>
+                  <div className="text-sm text-gray-500 mt-1">Clear a done habit to see it here.</div>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {clearedHabitHistory.map((item) => (
+                    <div key={item.id} className="w-full p-4 rounded-2xl border border-gray-200 bg-gray-50">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="font-semibold text-gray-900 truncate">{item.habitName}</div>
+                          <div className="text-sm text-gray-500">
+                            {item.date}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          <span className="inline-flex items-center gap-1 bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">
+                            Cleared
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {selectedAchievement && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">

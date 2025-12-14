@@ -24,6 +24,7 @@ const loadState = () => {
     currentStreak: 0,
     longestStreak: 0,
     habitHistory: {}, // { habitId: ['2024-12-08', '2024-12-09', ...] }
+    clearedHabitHistory: [], // { id, habitId, habitName, clearedAt, date }
     friends: [], // { id, name }
     sharedPageInvites: [], // { id, friendId, friendName, createdAt }
     sharedPages: [], // { id, friendId, friendName, title, createdAt }
@@ -211,11 +212,23 @@ function App() {
   const clearHabitStatus = (habitId) => {
     const today = new Date().toISOString().split('T')[0]
     setState(prev => {
+      const wasCompleted = (prev.completedToday || []).includes(habitId)
+      const wasPaid = (prev.paidToday || []).includes(habitId)
+      const shouldLog = wasCompleted || wasPaid
+
       const nextCompletedToday = (prev.completedToday || []).filter(id => id !== habitId)
       const nextPaidToday = (prev.paidToday || []).filter(id => id !== habitId)
 
       const prevDates = (prev.habitHistory || {})[habitId] || []
       const nextDates = prevDates.filter(d => d !== today)
+
+      const habitName = (prev.habits || []).find(h => h.id === habitId)?.name || 'Habit'
+      const nextCleared = shouldLog
+        ? [
+            { id: Date.now(), habitId, habitName, clearedAt: Date.now(), date: today },
+            ...(prev.clearedHabitHistory || []),
+          ]
+        : (prev.clearedHabitHistory || [])
 
       return {
         ...prev,
@@ -225,6 +238,7 @@ function App() {
           ...(prev.habitHistory || {}),
           [habitId]: nextDates,
         },
+        clearedHabitHistory: nextCleared,
       }
     })
   }
@@ -477,6 +491,7 @@ function App() {
                 profileImage={state.profileImage}
                 completedToday={state.completedToday}
                 currentStreak={state.currentStreak || 0}
+                clearedHabitHistory={state.clearedHabitHistory || []}
                 unlockedAchievements={state.unlockedAchievements || []}
                 profileBadges={state.profileBadges || [null, null, null]}
                 onSetProfileBadge={setProfileBadge}
