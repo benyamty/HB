@@ -166,10 +166,10 @@ const ACHIEVEMENTS = [
   { id: 'go-getter', name: 'Go Getter', icon: '💪', color: 'bg-red-100', borderColor: 'border-red-400', pointsRequired: 15, description: 'Earn 15 points' },
   { id: 'dedicated', name: 'Dedicated', icon: '🎯', color: 'bg-blue-100', borderColor: 'border-blue-400', pointsRequired: 25, description: 'Earn 25 points' },
   { id: 'champion', name: 'Champion', icon: '🏆', color: 'accent-chip', borderColor: 'border-[color:var(--accent-solid)]', pointsRequired: 40, description: 'Earn 40 points' },
-  { id: 'legend', name: 'Legend', icon: '👑', color: 'bg-purple-100', borderColor: 'border-purple-400', pointsRequired: 60, description: 'Earn 60 points' },
+  { id: 'legend', name: 'Legend', icon: '👑', color: 'bg-orange-100', borderColor: 'border-orange-400', pointsRequired: 60, description: 'Earn 60 points' },
   { id: 'master', name: 'Master', icon: '🔥', color: 'bg-amber-100', borderColor: 'border-amber-400', pointsRequired: 80, description: 'Earn 80 points' },
   { id: 'elite', name: 'Elite', icon: '💎', color: 'bg-cyan-100', borderColor: 'border-cyan-400', pointsRequired: 100, description: 'Earn 100 points' },
-  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'bg-purple-100', borderColor: 'border-purple-400', pointsRequired: 150, description: 'Earn 150 points' },
+  { id: 'mythic', name: 'Mythic', icon: '🌟', color: 'bg-orange-100', borderColor: 'border-orange-400', pointsRequired: 150, description: 'Earn 150 points' },
   { id: 'immortal', name: 'Immortal', icon: '🚀', color: 'bg-indigo-100', borderColor: 'border-indigo-400', pointsRequired: 200, description: 'Earn 200 points' },
 ]
 
@@ -658,7 +658,7 @@ function Home({
             <div className="bg-gray-50 rounded-2xl p-4 mb-4">
               <p className="text-sm text-gray-500 mb-1">Requirement</p>
               <p className="text-lg font-semibold text-gray-900">{selectedAchievement.description}</p>
-              <p className="text-sm text-purple-600 mt-2 font-medium">
+              <p className="text-sm text-orange-600 mt-2 font-medium">
                 {selectedAchievement.pointsRequired.toLocaleString()} points needed
               </p>
             </div>

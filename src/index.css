@@ -165,13 +165,14 @@ body {
 }
 
 :root {
-  --accent-purple: #5b21b6;
+  --deep-purple: #5b21b6;
+  --accent-purple: #ff4d00;
   --accent-orange: #ff4d00;
   --accent-yellow: #ffe600;
-  --accent-solid: #5b21b6;
+  --accent-solid: #ff4d00;
 
-  --black-purple-black: linear-gradient(135deg, #000000 0%, var(--accent-purple) 55%, #000000 100%);
-  --black-purple: linear-gradient(135deg, #000000 0%, var(--accent-purple) 100%);
+  --black-purple-black: linear-gradient(135deg, #000000 0%, var(--deep-purple) 55%, #000000 100%);
+  --black-purple: linear-gradient(135deg, #000000 0%, var(--deep-purple) 100%);
 }
 
 .accent-gradient {

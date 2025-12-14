@@ -146,8 +146,8 @@ function Social({
                 </div>
                 
                 {/* Avatar */}
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
-                  <span className="text-purple-600 font-semibold text-xs">
+                <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                  <span className="text-orange-600 font-semibold text-xs">
                     {player.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
