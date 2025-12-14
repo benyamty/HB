@@ -200,6 +200,8 @@ function Home({
   const [achievementsExpanded, setAchievementsExpanded] = useState(false)
   const [selectedAchievement, setSelectedAchievement] = useState(null)
 
+  const habitsPageMenuRef = useRef(null)
+
   // Track if it's the first mount to avoid initial animation
   const isFirstMount = useRef(true)
 
@@ -226,6 +228,24 @@ function Home({
     const interval = setInterval(() => setCurrentTime(new Date()), 30000) // every 30 seconds
     return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    if (!showHabitsPageMenu) return
+
+    const handleOutside = (e) => {
+      if (!habitsPageMenuRef.current) return
+      if (!habitsPageMenuRef.current.contains(e.target)) {
+        setShowHabitsPageMenu(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutside)
+    document.addEventListener('touchstart', handleOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleOutside)
+      document.removeEventListener('touchstart', handleOutside)
+    }
+  }, [showHabitsPageMenu])
 
   const formatTimeRange = (habit) => {
     if (habit.allDay) return 'All Day'
@@ -517,7 +537,7 @@ function Home({
               </svg>
             </div>
 
-            <div className="relative">
+            <div className="relative" ref={habitsPageMenuRef}>
               <button
                 type="button"
                 onClick={(e) => {
