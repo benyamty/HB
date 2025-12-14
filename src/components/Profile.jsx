@@ -261,16 +261,18 @@ export default function Profile({
               ) : (
                 <div className="space-y-2">
                   {clearedHabitHistory.map((item) => (
-                    <div key={item.id} className="w-full p-4 rounded-2xl border border-gray-200 bg-gray-50">
+                    <div key={item.id} className="w-full p-4 rounded-2xl border border-gray-200 bg-white">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
                           <div className="font-semibold text-gray-900 truncate">{item.habitName}</div>
-                          <div className="text-sm text-gray-500">
-                            {item.clearedAt ? new Date(item.clearedAt).toLocaleString() : item.date}
+                          <div className="text-sm text-[color:var(--accent-solid)] font-semibold">
+                            {item.clearedAt
+                              ? `${new Date(item.clearedAt).toLocaleDateString()} • ${new Date(item.clearedAt).toLocaleTimeString()}`
+                              : item.date}
                           </div>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="inline-flex items-center gap-1 bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">
+                          <span className="inline-flex items-center gap-1 bg-[color:var(--accent-orange)]/10 text-[color:var(--accent-solid)] px-3 py-1 rounded-full text-xs font-semibold border border-[color:var(--accent-orange)]/20">
                             Cleared
                           </span>
                         </div>
