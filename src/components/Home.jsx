@@ -603,6 +603,15 @@ function Home({
                             const v = e.target.value
                             setSharedPageTitleDraft(v)
                             recalcSharedPageTitleWidth(v)
+                            requestAnimationFrame(() => {
+                              try { e.target.scrollLeft = 0 } catch (_) {}
+                            })
+                          }}
+                          onFocus={(e) => {
+                            try {
+                              e.target.scrollLeft = 0
+                              e.target.setSelectionRange(0, 0)
+                            } catch (_) {}
                           }}
                           onBlur={() => {
                             commitSharedPageTitle()
@@ -613,8 +622,8 @@ function Home({
                             }
                             if (e.key === 'Escape') setIsEditingSharedPageTitle(false)
                           }}
-                          className="text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
-                          style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 224) }}
+                          className="text-sm font-medium text-gray-700 text-left bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1 focus:outline-none"
+                          style={{ width: Math.min(Math.max(sharedPageTitleInputWidth, 60), 320) }}
                           autoFocus
                         />
                       </span>
